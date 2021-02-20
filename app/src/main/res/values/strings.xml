@@ -3,4 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="naming_origin">Origine</string>
+    <string name="naming_imported_country">Pays importé</string>
+    <string name="naming_quantity">Quantité</string>
+    <string name="naming_nutri_score">Nutri score</string>
 </resources>
