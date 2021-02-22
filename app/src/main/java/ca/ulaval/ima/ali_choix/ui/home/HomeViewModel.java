@@ -6,14 +6,21 @@ import androidx.lifecycle.ViewModel;
 
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<String> middleText;
+    private MutableLiveData<String> bottomText;
 
     public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("Alimentation saine, durable, en toute simplicité!");
+        middleText = new MutableLiveData<>();
+        middleText.setValue("Alimentation saine, durable, en toute simplicité!");
+        bottomText = new MutableLiveData<>();
+        bottomText.setValue("Recherchez vos produits dès maintenant!");
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<String> getMiddleText() {
+        return middleText;
+    }
+
+    public LiveData<String> getBottomText() {
+        return bottomText;
     }
 }
