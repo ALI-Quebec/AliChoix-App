@@ -58,7 +58,7 @@
                     android:maxHeight="120dp"
                     android:padding="20dp"
                     android:textAlignment="center"
-                    android:background="#40C4C4C4"
+                    android:background="@color/text_black_background_25_opacity"
                     android:textColor="@color/black"/>
             </RelativeLayout>
 
