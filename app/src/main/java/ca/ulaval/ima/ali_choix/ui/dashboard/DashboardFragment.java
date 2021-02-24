@@ -2,90 +2,97 @@ package ca.ulaval.ima.ali_choix.ui.dashboard;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.hardware.Camera;
 import android.os.Bundle;
-import android.util.Size;
 import android.view.LayoutInflater;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-import java.util.List;
+import com.budiyev.android.codescanner.CodeScanner;
+import com.budiyev.android.codescanner.CodeScannerView;
+import com.budiyev.android.codescanner.DecodeCallback;
+import com.google.zxing.Result;
 
 import ca.ulaval.ima.ali_choix.R;
 
 public class DashboardFragment extends Fragment {
+    private static final int CAMERA_PERMISSION_CODE = 5050;
+    private CodeScanner codeScanner;
+    private CodeScannerView scannerView;
+    private View root;
 
-    private DashboardViewModel dashboardViewModel;
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-    private SurfaceView cameraRollPreview;
-    private static final int MY_CAMERA_PERMISSION_CODE = 007;
-    private Camera camera;
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_DENIED){
+            requestPermissions(new String[] {Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+        } else {
+            initiateScanner();
+        }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        this.cameraRollPreview = (SurfaceView)root.findViewById(R.id.cameraPreview);
-
-        requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
-
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-    {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == MY_CAMERA_PERMISSION_CODE)
+        if (requestCode == CAMERA_PERMISSION_CODE)
         {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
             {
-                openCamera();
-                setCamera();
+                initiateScanner();
             }
         }
     }
 
-    private boolean openCamera() {
-        try {
-            camera = Camera.open();
-            return camera != null;
-        } catch (Exception e) {
-            return false;
-        }
-    }
+    private void initiateScanner(){
+        final Activity activity = getActivity();
 
-    private void setCamera() {
-        if (camera != null) {
-            try {
-                camera.setPreviewDisplay(cameraRollPreview.getHolder());
-            } catch (Exception e) {
-                e.printStackTrace();
+        scannerView = root.findViewById(R.id.scanner_view);
+        codeScanner = new CodeScanner(activity, scannerView);
+        codeScanner.setDecodeCallback(new DecodeCallback() {
+            @Override
+            public void onDecoded(@NonNull final Result result) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
+        });
+        scannerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                codeScanner.startPreview();
+            }
+        });
+    }
 
-            camera.startPreview();
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(codeScanner != null){
+            codeScanner.startPreview();
         }
     }
 
+    @Override
+    public void onPause() {
+        if(codeScanner != null){
+            codeScanner.releaseResources();
+        }
+        super.onPause();
+    }
 }
