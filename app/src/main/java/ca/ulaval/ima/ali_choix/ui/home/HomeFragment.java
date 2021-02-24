@@ -23,14 +23,14 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView middleText = root.findViewById(R.id.text_home);
+        final TextView middleText = root.findViewById(R.id.home_middle_text);
         homeViewModel.getMiddleText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 middleText.setText(s);
             }
         });
-        final TextView bottomText = root.findViewById(R.id.text_home2);
+        final TextView bottomText = root.findViewById(R.id.home_bottom_text);
         homeViewModel.getBottomText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
