@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="ca.ulaval.ima.ali_choix.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_scanned_product"
+        android:name="ca.ulaval.ima.ali_choix.ui.scannedproduct.ScannedProductFragment"
+        android:label="@string/title_scanned_product"
+        tools:layout="@layout/fragment_scanned_product" />
 </navigation>

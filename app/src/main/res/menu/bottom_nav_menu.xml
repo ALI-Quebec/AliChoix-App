@@ -12,8 +12,8 @@
         android:title="@string/title_dashboard" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_notifications" />
+        android:id="@+id/navigation_scanned_product"
+        android:icon="@drawable/ic_baseline_food_bank_24"
+        android:title="@string/title_scanned_product" />
 
 </menu>
