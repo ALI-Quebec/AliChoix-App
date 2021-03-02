@@ -1,9 +1,11 @@
 package ca.ulaval.ima.ali_choix.ui.scannedproduct;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,9 +14,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.squareup.picasso.Picasso;
+
 import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.ui.domain.Global;
 import ca.ulaval.ima.ali_choix.ui.domain.OpenFoodFactScannedProduct;
+import ca.ulaval.ima.ali_choix.ui.domain.Product;
 import ca.ulaval.ima.ali_choix.ui.jsonresponse.JSONResponseElasticSearch;
 import ca.ulaval.ima.ali_choix.ui.jsonresponse.JSONResponseOpenFactFood;
 import ca.ulaval.ima.ali_choix.ui.network.ElasticSearchRestClient;
@@ -27,11 +34,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ScannedProductFragment extends Fragment {
     private OpenFoodFactScannedProduct openFoodFactScannedProduct;
+    private Product product;
+    private ImageView scannedProductImage;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_scanned_product, container, false);
+        scannedProductImage = root.findViewById(R.id.scanned_product_image);
         TextView scannedProductDescription = root.findViewById(R.id.scanned_product_description);
         scannedProductDescription.setText("This is the scanned product description");
 
@@ -41,9 +51,13 @@ public class ScannedProductFragment extends Fragment {
     }
 
     private void getInformationsWithOpendFactFood() {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Global.openFoodFactBaseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         OpenFoodFactRestClient openFoodFactRestClient = retrofit.create(OpenFoodFactRestClient.class);
         Call<JSONResponseOpenFactFood> call = openFoodFactRestClient.getFoodWithId("737628064502");
@@ -51,11 +65,12 @@ public class ScannedProductFragment extends Fragment {
             @Override
             public void onResponse(Call<JSONResponseOpenFactFood> call, Response<JSONResponseOpenFactFood> response) {
                 openFoodFactScannedProduct = response.body().getContent();
+                showInformations();
             }
 
             @Override
             public void onFailure(Call<JSONResponseOpenFactFood> call, Throwable t) {
-
+                Log.e("Error", t.getMessage());
             }
         });
     }
@@ -76,5 +91,11 @@ public class ScannedProductFragment extends Fragment {
 
             }
         });
+    }
+
+    private void showInformations() {
+        String url_front = product.getImage();
+        Log.e("url", url_front);
+        Picasso.get().load(url_front).into(scannedProductImage);
     }
 }

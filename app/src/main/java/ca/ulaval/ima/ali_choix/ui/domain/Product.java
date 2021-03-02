@@ -1,7 +1,13 @@
 package ca.ulaval.ima.ali_choix.ui.domain;
 
 public class Product {
-    private String id;
-    private String image_front_thumb_url;
-    private NutriscoreData nutriscoreData;
+    private String image_thumb_url;
+
+    public Product(String image_thumb_url) {
+        this.image_thumb_url = image_thumb_url;
+    }
+
+    public String getImage() {
+        return image_thumb_url;
+    }
 }
