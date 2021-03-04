@@ -27,14 +27,16 @@ public class DashboardFragment extends Fragment {
     private CodeScanner codeScanner;
     private CodeScannerView scannerView;
     private View root;
+    private Activity activity;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        activity = getActivity();
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_DENIED){
             requestPermissions(new String[] {Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
         } else {
@@ -57,8 +59,6 @@ public class DashboardFragment extends Fragment {
     }
 
     private void initiateScanner(){
-        final Activity activity = getActivity();
-
         scannerView = root.findViewById(R.id.scanner_view);
         codeScanner = new CodeScanner(activity, scannerView);
         codeScanner.setDecodeCallback(new DecodeCallback() {
@@ -75,7 +75,7 @@ public class DashboardFragment extends Fragment {
         scannerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                codeScanner.startPreview();
+                //codeScanner.startPreview();
             }
         });
     }
@@ -84,7 +84,7 @@ public class DashboardFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if(codeScanner != null){
-            codeScanner.startPreview();
+            //codeScanner.startPreview();
         }
     }
 
