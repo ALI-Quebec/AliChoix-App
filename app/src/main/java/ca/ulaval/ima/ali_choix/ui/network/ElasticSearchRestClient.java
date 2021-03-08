@@ -1,12 +1,39 @@
 package ca.ulaval.ima.ali_choix.ui.network;
 
-import ca.ulaval.ima.ali_choix.ui.jsonresponse.JSONResponseElasticSearch;
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
+import com.loopj.android.http.*;
 
-public interface ElasticSearchRestClient {
+import ca.ulaval.ima.ali_choix.ui.domain.Global;
+import cz.msebera.android.httpclient.Header;
 
- @GET("/foods_enriched/_search?q=food_code:{code}")
- Call<JSONResponseElasticSearch> getFoodWithCode(@Path("code") String code);
+public class ElasticSearchRestClient {
+ private static AsyncHttpClient client;
+
+ public ElasticSearchRestClient(){
+  this.client = new AsyncHttpClient();
+//  this.client.setBasicAuth("aissa","aissa123");
+ }
+
+ // PUBLIC - GET, POST, PUT, DELETE
+
+ public void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+  client.get(getAbsoluteUrl(url), params, responseHandler);
+ }
+
+ public void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+  client.post(getAbsoluteUrl(url), params, responseHandler);
+ }
+
+ public void put(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+  client.post(getAbsoluteUrl(url), params, responseHandler);
+ }
+
+ public void delete(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+  client.post(getAbsoluteUrl(url), params, responseHandler);
+ }
+
+ // PRIVATE
+
+ private String getAbsoluteUrl(String relativeUrl) {
+  return Global.elasticsearchBaseUrl + relativeUrl;
+ }
 }
