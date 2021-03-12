@@ -15,23 +15,23 @@ import com.squareup.picasso.Picasso;
 
 import cz.msebera.android.httpclient.Header;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.ui.domain.OpenFoodFactScannedProduct;
-import ca.ulaval.ima.ali_choix.ui.domain.Product;
 import ca.ulaval.ima.ali_choix.ui.network.OpenFoodFactRestClient;
 
 public class ScannedProductFragment extends Fragment {
-    private Product product;
+    private OpenFoodFactScannedProduct openFoodFactScannedProduct;
     private ImageView scannedProductImage;
+    private TextView scannedProductOriginText;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_scanned_product, container, false);
         scannedProductImage = root.findViewById(R.id.scanned_product_image);
+        scannedProductOriginText = root.findViewById(R.id.scanned_product_origin);
         TextView scannedProductDescription = root.findViewById(R.id.scanned_product_description);
         scannedProductDescription.setText("This is the scanned product description");
 
@@ -45,19 +45,15 @@ public class ScannedProductFragment extends Fragment {
         OFFClient.get("737628064502" , null, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject dataObject) {
-                try {
-                    JSONObject productJson = (JSONObject) dataObject.get("product");
-                    product = Product.fromJson(productJson);
-                    showInformations();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                openFoodFactScannedProduct = OpenFoodFactScannedProduct.fromJson(dataObject);
+                showInformations();
             }
         });
     }
 
     private void showInformations() {
-        String url_front = product.getImage();
+        String url_front = openFoodFactScannedProduct.getProduct().getImage();
         Picasso.get().load(url_front).into(scannedProductImage);
+
     }
 }

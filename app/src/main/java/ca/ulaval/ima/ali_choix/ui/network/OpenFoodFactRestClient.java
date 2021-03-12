@@ -6,7 +6,7 @@ import com.loopj.android.http.RequestParams;
 
 import ca.ulaval.ima.ali_choix.ui.domain.Global;
 
-public class OpenFoodFactRestClient {
+public class OpenFoodFactRestClient implements ScannedProduct {
     private static AsyncHttpClient client = new AsyncHttpClient();
 
     // PUBLIC - GET, POST, PUT, DELETE

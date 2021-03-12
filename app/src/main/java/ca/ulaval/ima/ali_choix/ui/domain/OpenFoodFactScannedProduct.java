@@ -1,20 +1,30 @@
 package ca.ulaval.ima.ali_choix.ui.domain;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class OpenFoodFactScannedProduct {
-    private String status_verbose;
-    private int status;
     private String code;
     private Product product;
 
-    public OpenFoodFactScannedProduct(String status_verbose, int status, String code, Product product) {
-        this.status_verbose = status_verbose;
-        this.status = status;
-        this.code = code;
-        this.product = product;
+    public String getCode() {
+        return code;
     }
 
-    public Product getProduct() {
-        return product;
+    public Product getProduct() { return product; }
+
+    public static OpenFoodFactScannedProduct fromJson(JSONObject jsonObject) {
+        OpenFoodFactScannedProduct b = new OpenFoodFactScannedProduct();
+        // Deserialize json into object fields
+        try {
+            b.code = jsonObject.getString("code");
+            b.product = Product.fromJson(jsonObject.getJSONObject("product"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        // Return new object
+        return b;
     }
 
 }
