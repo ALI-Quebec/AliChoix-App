@@ -19,7 +19,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ca.ulaval.ima.ali_choix.R;
-import ca.ulaval.ima.ali_choix.ui.domain.OpenFoodFactScannedProduct;
 import ca.ulaval.ima.ali_choix.ui.domain.Product;
 import ca.ulaval.ima.ali_choix.ui.network.OpenFoodFactRestClient;
 
@@ -35,12 +34,12 @@ public class ScannedProductFragment extends Fragment {
         TextView scannedProductDescription = root.findViewById(R.id.scanned_product_description);
         scannedProductDescription.setText("This is the scanned product description");
 
-        getInformationsWithOpendFactFood();
+        getInformationsWithOpenFoodFact();
 
         return root;
     }
 
-    private void getInformationsWithOpendFactFood() {
+    private void getInformationsWithOpenFoodFact() {
         OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
         OFFClient.get("737628064502" , null, new JsonHttpResponseHandler(){
             @Override

@@ -2,8 +2,7 @@ package ca.ulaval.ima.ali_choix.ui.network;
 
 import com.loopj.android.http.*;
 
-import ca.ulaval.ima.ali_choix.ui.domain.Global;
-import cz.msebera.android.httpclient.Header;
+import ca.ulaval.ima.ali_choix.ui.domain.GlobalConstant;
 
 public class ElasticSearchRestClient {
  private static AsyncHttpClient client;
@@ -34,6 +33,6 @@ public class ElasticSearchRestClient {
  // PRIVATE
 
  private String getAbsoluteUrl(String relativeUrl) {
-  return Global.elasticsearchBaseUrl + relativeUrl;
+  return GlobalConstant.ELASTIC_SEARCH_BASE_URL + relativeUrl;
  }
 }

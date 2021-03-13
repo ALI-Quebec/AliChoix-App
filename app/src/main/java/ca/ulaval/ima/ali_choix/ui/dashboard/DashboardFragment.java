@@ -59,6 +59,7 @@ public class DashboardFragment extends Fragment {
     }
 
     private void initiateScanner(){
+        activity = getActivity();
         scannerView = root.findViewById(R.id.scanner_view);
         codeScanner = new CodeScanner(activity, scannerView);
         codeScanner.setDecodeCallback(new DecodeCallback() {
@@ -75,7 +76,7 @@ public class DashboardFragment extends Fragment {
         scannerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //codeScanner.startPreview();
+                codeScanner.startPreview();
             }
         });
     }
@@ -84,7 +85,7 @@ public class DashboardFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if(codeScanner != null){
-            //codeScanner.startPreview();
+            codeScanner.startPreview();
         }
     }
 
