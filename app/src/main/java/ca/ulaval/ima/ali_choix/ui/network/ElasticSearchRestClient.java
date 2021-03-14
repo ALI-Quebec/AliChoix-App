@@ -4,6 +4,9 @@ import com.loopj.android.http.*;
 
 import ca.ulaval.ima.ali_choix.ui.domain.GlobalConstant;
 
+//Code de l'application précédente
+//TODO doit être réusiner
+
 public class ElasticSearchRestClient {
  private static AsyncHttpClient client;
 
