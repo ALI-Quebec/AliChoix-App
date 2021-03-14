@@ -68,7 +68,7 @@ public class DashboardFragment extends Fragment {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
