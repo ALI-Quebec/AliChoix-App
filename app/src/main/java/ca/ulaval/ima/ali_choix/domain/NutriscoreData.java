@@ -1,7 +1,7 @@
 package ca.ulaval.ima.ali_choix.domain;
 
 public class NutriscoreData {
-    //TODO Faudrait-tu mettre sa public a la place?
+    //TODO Faudrait-tu mettre sa public a la place? un réusinage sera peut-être nécessaire lors de l'utilisation du nutriScoreData
     private int fruitsVegetablesNutsColzaWalnutOliveOilsPoints;
     private int isFat;
     private int fiberPoints;
