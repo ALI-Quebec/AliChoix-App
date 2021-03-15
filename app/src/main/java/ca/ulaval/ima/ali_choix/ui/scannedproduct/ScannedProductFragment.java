@@ -74,10 +74,9 @@ public class ScannedProductFragment extends Fragment {
     }
 
 
-
     private void getInformationsWithOpenFoodFact() {
         OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
-        OFFClient.get("737628064502" , null, new JsonHttpResponseHandler(){
+        OFFClient.get("737628064502", null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject dataObject) {
                 try {
@@ -101,13 +100,13 @@ public class ScannedProductFragment extends Fragment {
         scannedProductName.setText(product.getName());
     }
 
-    private void toggle_contents(View v){
-        upArrow.setVisibility( upArrow.isShown()
+    private void toggle_contents(View v) {
+        upArrow.setVisibility(upArrow.isShown()
                 ? View.GONE
-                : View.VISIBLE );
+                : View.VISIBLE);
         nutriScoreDrawable.setVisibility(nutriScoreDrawable.isShown()
                 ? View.GONE
-                : View.VISIBLE );
-        downArrow.setVisibility( downArrow.isShown() ? View.GONE : View.VISIBLE);
+                : View.VISIBLE);
+        downArrow.setVisibility(downArrow.isShown() ? View.GONE : View.VISIBLE);
     }
 }

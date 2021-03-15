@@ -37,8 +37,8 @@ public class DashboardFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_DENIED){
-            requestPermissions(new String[] {Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+                == PackageManager.PERMISSION_DENIED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
         } else {
             initiateScanner();
         }
@@ -49,16 +49,14 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CAMERA_PERMISSION_CODE)
-        {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            {
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 initiateScanner();
             }
         }
     }
 
-    private void initiateScanner(){
+    private void initiateScanner() {
         activity = getActivity();
         scannerView = root.findViewById(R.id.scanner_view);
         codeScanner = new CodeScanner(activity, scannerView);
@@ -84,14 +82,14 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(codeScanner != null){
+        if (codeScanner != null) {
             codeScanner.startPreview();
         }
     }
 
     @Override
     public void onPause() {
-        if(codeScanner != null){
+        if (codeScanner != null) {
             codeScanner.releaseResources();
         }
         super.onPause();

@@ -8,34 +8,34 @@ import ca.ulaval.ima.ali_choix.ui.domain.GlobalConstant;
 //TODO doit être réusiner
 
 public class ElasticSearchRestClient {
- private static AsyncHttpClient client;
+    private static AsyncHttpClient client;
 
- public ElasticSearchRestClient(){
-  this.client = new AsyncHttpClient();
+    public ElasticSearchRestClient() {
+        this.client = new AsyncHttpClient();
 //  this.client.setBasicAuth("aissa","aissa123");
- }
+    }
 
- // PUBLIC - GET, POST, PUT, DELETE
+    // PUBLIC - GET, POST, PUT, DELETE
 
- public void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-  client.get(getAbsoluteUrl(url), params, responseHandler);
- }
+    public void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        client.get(getAbsoluteUrl(url), params, responseHandler);
+    }
 
- public void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-  client.post(getAbsoluteUrl(url), params, responseHandler);
- }
+    public void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        client.post(getAbsoluteUrl(url), params, responseHandler);
+    }
 
- public void put(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-  client.post(getAbsoluteUrl(url), params, responseHandler);
- }
+    public void put(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        client.post(getAbsoluteUrl(url), params, responseHandler);
+    }
 
- public void delete(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-  client.post(getAbsoluteUrl(url), params, responseHandler);
- }
+    public void delete(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        client.post(getAbsoluteUrl(url), params, responseHandler);
+    }
 
- // PRIVATE
+    // PRIVATE
 
- private String getAbsoluteUrl(String relativeUrl) {
-  return GlobalConstant.ELASTIC_SEARCH_BASE_URL + relativeUrl;
- }
+    private String getAbsoluteUrl(String relativeUrl) {
+        return GlobalConstant.ELASTIC_SEARCH_BASE_URL + relativeUrl;
+    }
 }
