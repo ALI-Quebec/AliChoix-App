@@ -4,8 +4,8 @@ import com.loopj.android.http.*;
 
 import ca.ulaval.ima.ali_choix.domain.GlobalConstant;
 
-//Code de l'application précédente
-//TODO doit être réusiner
+//Cette classe provient de l'application précédente
+//TODO doit être réusiné
 
 public class ElasticSearchRestClient {
     private static AsyncHttpClient client;
@@ -14,8 +14,6 @@ public class ElasticSearchRestClient {
         this.client = new AsyncHttpClient();
 //  this.client.setBasicAuth("aissa","aissa123");
     }
-
-    // PUBLIC - GET, POST, PUT, DELETE
 
     public void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get(getAbsoluteUrl(url), params, responseHandler);
@@ -32,8 +30,6 @@ public class ElasticSearchRestClient {
     public void delete(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.post(getAbsoluteUrl(url), params, responseHandler);
     }
-
-    // PRIVATE
 
     private String getAbsoluteUrl(String relativeUrl) {
         return GlobalConstant.ELASTIC_SEARCH_BASE_URL + relativeUrl;

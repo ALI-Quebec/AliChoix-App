@@ -142,8 +142,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <include layout="@layout/item_collapsible"/>
-
+                    <include layout="@layout/collapsible_section"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

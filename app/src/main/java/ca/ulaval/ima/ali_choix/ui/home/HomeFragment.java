@@ -21,11 +21,6 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        TextView middleText = root.findViewById(R.id.home_middle_text);
-        TextView bottomText = root.findViewById(R.id.home_bottom_text);
-
-        middleText.setText("Alimentation saine, durable, en toute simplicité!");
-        bottomText.setText("Recherchez vos produits dès maintenant!");
 
         return root;
     }

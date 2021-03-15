@@ -31,7 +31,6 @@ public class ScannedProductFragment extends Fragment {
     private TextView scannedProductCountryImported;
     private TextView scannedProductQuantity;
     private TextView scannedProductName;
-    private TextView itemCollapsedHeaderTitle;
     private ImageView downArrow;
     private ImageView upArrow;
     private ImageView nutriScoreDrawable;
@@ -46,8 +45,7 @@ public class ScannedProductFragment extends Fragment {
         scannedProductCountryImported = root.findViewById(R.id.scanned_product_imported_country);
         scannedProductQuantity = root.findViewById(R.id.scanned_product_quantity);
         scannedProductName = root.findViewById(R.id.scanned_product_name);
-        itemCollapsedHeaderTitle = root.findViewById(R.id.item_collapsible_header_title);
-        itemCollapsible = root.findViewById(R.id.nutri_score_collapsed_section);
+        itemCollapsible = root.findViewById(R.id.collapsible_section);
         downArrow = root.findViewById(R.id.down_arrow);
         upArrow = root.findViewById(R.id.up_arrow);
         nutriScoreDrawable = root.findViewById(R.id.nutri_score_drawable);
@@ -58,7 +56,7 @@ public class ScannedProductFragment extends Fragment {
         itemCollapsible.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toggle_contents(v);
+                toggleCollapsibleSection(v);
             }
         });
 
@@ -94,7 +92,7 @@ public class ScannedProductFragment extends Fragment {
         scannedProductName.setText(product.getName());
     }
 
-    private void toggle_contents(View v) {
+    private void toggleCollapsibleSection(View v) {
         upArrow.setVisibility(upArrow.isShown()
                 ? View.GONE
                 : View.VISIBLE);
