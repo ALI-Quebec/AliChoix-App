@@ -1,16 +1,10 @@
 package ca.ulaval.ima.ali_choix.ui.scannedproduct;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -27,8 +21,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ca.ulaval.ima.ali_choix.R;
-import ca.ulaval.ima.ali_choix.ui.domain.Product;
-import ca.ulaval.ima.ali_choix.ui.network.OpenFoodFactRestClient;
+import ca.ulaval.ima.ali_choix.domain.Product;
+import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
 
 public class ScannedProductFragment extends Fragment {
     private Product product;

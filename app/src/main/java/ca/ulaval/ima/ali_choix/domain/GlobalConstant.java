@@ -1,4 +1,4 @@
-package ca.ulaval.ima.ali_choix.ui.domain;
+package ca.ulaval.ima.ali_choix.domain;
 
 public class GlobalConstant {
     public final static String ELASTIC_SEARCH_BASE_URL = "http://51.210.181.177:9200/";

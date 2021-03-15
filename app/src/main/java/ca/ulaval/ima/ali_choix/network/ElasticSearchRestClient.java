@@ -1,8 +1,8 @@
-package ca.ulaval.ima.ali_choix.ui.network;
+package ca.ulaval.ima.ali_choix.network;
 
 import com.loopj.android.http.*;
 
-import ca.ulaval.ima.ali_choix.ui.domain.GlobalConstant;
+import ca.ulaval.ima.ali_choix.domain.GlobalConstant;
 
 //Code de l'application précédente
 //TODO doit être réusiner

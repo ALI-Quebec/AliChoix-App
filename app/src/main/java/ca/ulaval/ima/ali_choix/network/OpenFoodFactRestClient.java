@@ -1,10 +1,10 @@
-package ca.ulaval.ima.ali_choix.ui.network;
+package ca.ulaval.ima.ali_choix.network;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import ca.ulaval.ima.ali_choix.ui.domain.GlobalConstant;
+import ca.ulaval.ima.ali_choix.domain.GlobalConstant;
 
 public class OpenFoodFactRestClient implements ClientAPI {
     private static final AsyncHttpClient client = new AsyncHttpClient();

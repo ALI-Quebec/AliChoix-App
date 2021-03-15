@@ -1,4 +1,4 @@
-package ca.ulaval.ima.ali_choix.ui.domain;
+package ca.ulaval.ima.ali_choix.domain;
 
 import org.json.JSONException;
 import org.json.JSONObject;

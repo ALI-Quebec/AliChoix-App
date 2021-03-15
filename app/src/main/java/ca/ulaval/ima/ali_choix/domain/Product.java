@@ -1,4 +1,4 @@
-package ca.ulaval.ima.ali_choix.ui.domain;
+package ca.ulaval.ima.ali_choix.domain;
 
 public class Product {
     private String image_front_url;

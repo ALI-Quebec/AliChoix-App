@@ -1,4 +1,4 @@
-package ca.ulaval.ima.ali_choix.ui.network;
+package ca.ulaval.ima.ali_choix.network;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
