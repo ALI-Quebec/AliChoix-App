@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Ali-Choix</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_scanned_product">Scanned product</string>
+    <string name="naming_origin">Origine</string>
+    <string name="naming_imported_country">Pays importé</string>
+    <string name="naming_quantity">Quantité</string>
+    <string name="naming_nutri_score">Nutri score</string>
+    <string name="home_page_middle_text">Alimentation saine, durable, en toute simplicité!</string>
+    <string name="home_page_bottom_text">Recherchez vos produits dès maintenant!</string>
+</resources>
