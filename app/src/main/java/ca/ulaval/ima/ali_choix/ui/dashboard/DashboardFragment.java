@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -37,8 +36,8 @@ public class DashboardFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_DENIED){
-            requestPermissions(new String[] {Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+                == PackageManager.PERMISSION_DENIED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
         } else {
             initiateScanner();
         }
@@ -49,16 +48,15 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CAMERA_PERMISSION_CODE)
-        {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            {
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 initiateScanner();
             }
         }
     }
 
-    private void initiateScanner(){
+    private void initiateScanner() {
+        activity = getActivity();
         scannerView = root.findViewById(R.id.scanner_view);
         codeScanner = new CodeScanner(activity, scannerView);
         codeScanner.setDecodeCallback(new DecodeCallback() {
@@ -67,7 +65,7 @@ public class DashboardFragment extends Fragment {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -75,7 +73,7 @@ public class DashboardFragment extends Fragment {
         scannerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //codeScanner.startPreview();
+                codeScanner.startPreview();
             }
         });
     }
@@ -83,14 +81,14 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(codeScanner != null){
-            //codeScanner.startPreview();
+        if (codeScanner != null) {
+            codeScanner.startPreview();
         }
     }
 
     @Override
     public void onPause() {
-        if(codeScanner != null){
+        if (codeScanner != null) {
             codeScanner.releaseResources();
         }
         super.onPause();

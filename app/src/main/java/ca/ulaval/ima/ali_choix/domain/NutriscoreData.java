@@ -1,6 +1,7 @@
-package ca.ulaval.ima.ali_choix.ui.domain;
+package ca.ulaval.ima.ali_choix.domain;
 
 public class NutriscoreData {
+    //TODO Faudrait-tu mettre sa public a la place? un réusinage sera peut-être nécessaire lors de l'utilisation du nutriScoreData
     private int fruitsVegetablesNutsColzaWalnutOliveOilsPoints;
     private int isFat;
     private int fiberPoints;
@@ -35,7 +36,16 @@ public class NutriscoreData {
     private int energy;
 
 
-    public NutriscoreData(int fruitsVegetablesNutsColzaWalnutOliveOilsPoints, int isFat, int fiberPoints, int saturatedFatValue, int positivePoints, int negativePoints, int saturatedFatRatioPoints, int fiber, int fiberValue, int sugars, int saturatedFatRatio, int saturatedFat, int sugarsPoints, int saturatedFatPoints, int score, int proteinsValue, int energyPoints, int isBeverage, int energyValue, int isWater, int sodiumValue, int sugarsValue, String grade, int saturatedFatRatioValue, int isCheese, int proteinsPoints, int fruitsVegetablesNutsColzaWalnutOliveOils, int sodium, int fruitsVegetablesNutsColzaWalnutOliveOilsValue, int sodiumPoints, int proteins, int energy) {
+    public NutriscoreData(int fruitsVegetablesNutsColzaWalnutOliveOilsPoints, int isFat,
+                          int fiberPoints, int saturatedFatValue, int positivePoints,
+                          int negativePoints, int saturatedFatRatioPoints, int fiber,
+                          int fiberValue, int sugars, int saturatedFatRatio, int saturatedFat,
+                          int sugarsPoints, int saturatedFatPoints, int score, int proteinsValue,
+                          int energyPoints, int isBeverage, int energyValue, int isWater,
+                          int sodiumValue, int sugarsValue, String grade, int saturatedFatRatioValue,
+                          int isCheese, int proteinsPoints, int fruitsVegetablesNutsColzaWalnutOliveOils,
+                          int sodium, int fruitsVegetablesNutsColzaWalnutOliveOilsValue,
+                          int sodiumPoints, int proteins, int energy) {
         this.fruitsVegetablesNutsColzaWalnutOliveOilsPoints = fruitsVegetablesNutsColzaWalnutOliveOilsPoints;
         this.isFat = isFat;
         this.fiberPoints = fiberPoints;
