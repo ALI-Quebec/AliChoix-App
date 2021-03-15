@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="120dp"
         android:layout_alignParentLeft="true"
         android:background="@android:color/white">
 
