@@ -2,13 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="24dp"
+    android:layout_marginTop="24dp"
+     android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp"
+    android:layout_marginBottom="12dp"
     android:padding="16dp"
     android:background="@color/item_collapsible_header"
-    android:id="@+id/collapsible_section">
+    android:id="@+id/collapsible_nutri_score_section">
 
     <TextView
-        android:id="@+id/item_collapsible_header_title"
+        android:id="@+id/nutri_score_collapsible_header_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/naming_nutri_score"
@@ -18,13 +21,19 @@
 
 <!--    Hide when not collapsed -->
     <ImageView
-        android:id="@+id/down_arrow"
+        android:id="@+id/nutri_score_down_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
         android:layout_alignParentRight="true" />
 
 <!--    Content to hide and show -->
+    <RelativeLayout
+        android:id="@+id/nutri_score_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nutri_score_collapsible_header_title">
+
     <ImageView
         android:id="@+id/nutri_score_drawable"
         android:layout_width="152dp"
@@ -37,11 +46,12 @@
         android:textColor="#FFFFFF"
         android:textSize="42sp"
         android:textStyle="bold"
-        android:layout_below="@+id/item_collapsible_header_title"
         android:layout_marginTop="30dp"/>
 
+    </RelativeLayout>
+
     <ImageView
-        android:id="@+id/up_arrow"
+        android:id="@+id/nutri_score_up_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
