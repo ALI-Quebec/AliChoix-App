@@ -22,6 +22,7 @@ import cz.msebera.android.httpclient.Header;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.Product;
@@ -53,6 +54,7 @@ public class ScannedProductFragment extends Fragment {
     private ImageView nutrientLevelsDownArrow;
     private ImageView nutrientLevelsUpArrow;
 //    private ProductService productService;
+    private TextView nutriScoreDescription;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class ScannedProductFragment extends Fragment {
 
         nutriScoreCollapsible = root.findViewById(R.id.collapsible_nutri_score_section);
         nutriScoreDrawable = root.findViewById(R.id.nutri_score_drawable);
+        nutriScoreDescription = root.findViewById(R.id.nutri_score_description);
         nutriScoreLayout = root.findViewById(R.id.nutri_score_layout);
         nutriScoreDownArrow = root.findViewById(R.id.nutri_score_down_arrow);
         nutriScoreUpArrow = root.findViewById(R.id.nutri_score_up_arrow);
@@ -153,8 +156,10 @@ public class ScannedProductFragment extends Fragment {
         }
 
         NutriScoreGrade nutriScoreGrade = get(product.getNutriScoreGrade());
-
         nutriScoreDrawable.setBackground(getNutriScoreGradeDrawable(nutriScoreGrade));
+
+        String nutriScoreDescriptionFound = nutriScoreGrade.getDescription();
+        nutriScoreDescription.setText(nutriScoreDescriptionFound);
     }
 
     private void toggleCollapsibleSection(View v, ImageView upArrow, ImageView downArrow, RelativeLayout relativeLayout) {

@@ -6,13 +6,14 @@ import java.util.Map;
 import ca.ulaval.ima.ali_choix.domain.exceptions.InvalidNutriScoreGradeException;
 
 public enum NutriScoreGrade {
-    A("a"),
-    B("b"),
-    C("c"),
-    D("d"),
-    E("e");
+    A("a", "Très bonne qualité nutritionnelle"),
+    B("b", "Bonne qualité nutritionnelle"),
+    C("c", "Qualité nutritionnelle moyenne"),
+    D("d", "Mauvaise qualité nutritionnelle"),
+    E("e", "Très mauvaise qualité nutritionnelle");
 
-    private String nutriScoreValue;
+    private String grade;
+    private String description;
     private static final Map<String, NutriScoreGrade> lookup = new HashMap<>();
 
     static {
@@ -21,20 +22,23 @@ public enum NutriScoreGrade {
         }
     }
 
-    NutriScoreGrade(String nutriScoreValue) {
-        this.nutriScoreValue = nutriScoreValue;
+    NutriScoreGrade(String grade, String description) {
+        this.grade = grade;
+        this.description = description;
     };
 
     @Override
     public String toString() {
-        return nutriScoreValue;
+        return grade;
     }
 
-    public static NutriScoreGrade get(String nutriScoreValue) {
-        if (nutriScoreValue == null) throw new InvalidNutriScoreGradeException();
+    public static NutriScoreGrade get(String grade) {
+        if (grade == null) throw new InvalidNutriScoreGradeException();
 
-        NutriScoreGrade nutriScoreGradeFound = lookup.get(nutriScoreValue.toLowerCase());
+        NutriScoreGrade nutriScoreGradeFound = lookup.get(grade.toLowerCase());
 
         return nutriScoreGradeFound;
     }
+
+    public String getDescription() { return description; }
 }
