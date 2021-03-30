@@ -6,62 +6,62 @@ import static org.junit.Assert.*;
 
 public class NutrientLevelsAlgorithmsTest {
     @Test
-    public void lowFatLevel() {
-        assertEquals(TrafficLights.GREEN, NutrientLevelsAlgorithms.evaluateFat(1.1f));
+    public void givenLowFatLevel_whenEvaluatingFat_thenReturnGoodNutrientQualities() {
+        assertEquals(NutrientQualities.GOOD, NutrientLevelsAlgorithms.evaluateFat(1.1f));
     }
 
     @Test
-    public void mediumFatLevel() {
-        assertEquals(TrafficLights.YELLOW, NutrientLevelsAlgorithms.evaluateFat(6f));
+    public void givenMediumFatLevel_whenEvaluatingFat_thenReturnModerateNutrientQualities() {
+        assertEquals(NutrientQualities.MODERATE, NutrientLevelsAlgorithms.evaluateFat(6f));
     }
 
     @Test
-    public void highFatLevel() {
-        assertEquals(TrafficLights.RED, NutrientLevelsAlgorithms.evaluateFat(25f));
+    public void givenHighFatLevel_whenEvaluatingFat_thenReturnBadNutrientQualities() {
+        assertEquals(NutrientQualities.BAD, NutrientLevelsAlgorithms.evaluateFat(25f));
     }
 
     @Test
-    public void lowSaturatedFatLevel() {
-        assertEquals(TrafficLights.GREEN, NutrientLevelsAlgorithms.evaluateSaturatedFat(1f));
+    public void givenLowSaturatedFatLevel_whenEvaluatingSaturatedFat_thenReturnGoodNutrientQualities() {
+        assertEquals(NutrientQualities.GOOD, NutrientLevelsAlgorithms.evaluateSaturatedFat(1f));
     }
 
     @Test
-    public void mediumSaturatedFatLevel() {
-        assertEquals(TrafficLights.YELLOW, NutrientLevelsAlgorithms.evaluateSaturatedFat(4.5f));
+    public void givenMediumSaturatedFatLevel_whenEvaluatingSaturatedFat_thenReturnModerateNutrientQualities() {
+        assertEquals(NutrientQualities.MODERATE, NutrientLevelsAlgorithms.evaluateSaturatedFat(4.5f));
     }
 
     @Test
-    public void highSaturatedFatLevel() {
-        assertEquals(TrafficLights.RED, NutrientLevelsAlgorithms.evaluateSaturatedFat(10f));
+    public void givenHighSaturatedFatLevel_whenEvaluatingSaturatedFat_thenReturnBadNutrientQualities() {
+        assertEquals(NutrientQualities.BAD, NutrientLevelsAlgorithms.evaluateSaturatedFat(10f));
     }
 
     @Test
-    public void lowSugarLevel() {
-        assertEquals(TrafficLights.GREEN, NutrientLevelsAlgorithms.evaluateSugar(4f));
+    public void givenLowSugarLevel_whenEvaluatingSugar_thenReturnGoodNutrientQualities() {
+        assertEquals(NutrientQualities.GOOD, NutrientLevelsAlgorithms.evaluateSugar(4f));
     }
 
     @Test
-    public void mediumSugarLevel() {
-        assertEquals(TrafficLights.YELLOW, NutrientLevelsAlgorithms.evaluateSugar(9.5f));
+    public void givenMediumSugarLevel_whenEvaluatingSugar_thenReturnModerateNutrientQualities() {
+        assertEquals(NutrientQualities.MODERATE, NutrientLevelsAlgorithms.evaluateSugar(9.5f));
     }
 
     @Test
-    public void highSugarLevel() {
-        assertEquals(TrafficLights.RED, NutrientLevelsAlgorithms.evaluateSugar(13f));
+    public void givenHighSugarLevel_whenEvaluatingSugar_thenReturnBadNutrientQualities() {
+        assertEquals(NutrientQualities.BAD, NutrientLevelsAlgorithms.evaluateSugar(13f));
     }
 
     @Test
-    public void lowSaltLevel() {
-        assertEquals(TrafficLights.GREEN, NutrientLevelsAlgorithms.evaluateSalt(0.3f));
+    public void givenLowSaltLevel_whenEvaluatingSalt_thenReturnGoodNutrientQualities() {
+        assertEquals(NutrientQualities.GOOD, NutrientLevelsAlgorithms.evaluateSalt(0.3f));
     }
 
     @Test
-    public void mediumSaltLevel() {
-        assertEquals(TrafficLights.YELLOW, NutrientLevelsAlgorithms.evaluateSalt(1.4f));
+    public void givenMediumSaltLevel_whenEvaluatingSalt_thenReturnModerateNutrientQualities() {
+        assertEquals(NutrientQualities.MODERATE, NutrientLevelsAlgorithms.evaluateSalt(1.4f));
     }
 
     @Test
-    public void highSaltLevel() {
-        assertEquals(TrafficLights.RED, NutrientLevelsAlgorithms.evaluateSalt(2f));
+    public void givenHighSaltLevel_whenEvaluatingSalt_thenReturnBadNutrientQualities() {
+        assertEquals(NutrientQualities.BAD, NutrientLevelsAlgorithms.evaluateSalt(2f));
     }
 }
