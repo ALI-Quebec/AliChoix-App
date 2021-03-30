@@ -15,7 +15,7 @@
     <string name="naming_saturated_fat_quantity">Gras saturés</string>
     <string name="naming_sugars_quantity">Sucres</string>
     <string name="naming_salt_quantity">Sel</string>
-    <string name="naming_nutrient_levels">Niveaux de nutriments</string>
+    <string name="naming_nutrient_levels">Niveaux de nutriments pour 100g</string>
     <string name="home_page_middle_text">Alimentation saine, durable, en toute simplicité!</string>
     <string name="home_page_bottom_text">Recherchez vos produits dès maintenant!</string>
 </resources>

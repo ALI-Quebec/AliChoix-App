@@ -1,5 +1,7 @@
 package ca.ulaval.ima.ali_choix.ui.scannedproduct;
 
+import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
+import ca.ulaval.ima.ali_choix.domain.NutriScoreGrade;
 import cz.msebera.android.httpclient.Header;
 
 import org.json.JSONException;
@@ -23,6 +26,8 @@ import org.json.JSONObject;
 import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.Product;
 import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
+
+import static ca.ulaval.ima.ali_choix.domain.NutriScoreGrade.*;
 
 public class ScannedProductFragment extends Fragment {
     private Product product;
@@ -35,6 +40,7 @@ public class ScannedProductFragment extends Fragment {
     private ImageView nutriScoreUpArrow;
     private RelativeLayout nutriScoreCollapsible;
     private RelativeLayout nutriScoreLayout;
+    private ImageView nutriScoreDrawable;
     private RelativeLayout ingredientsAnalysisCollapsible;
     private ImageView ingredientAnalysisDownArrow;
     private ImageView ingredientAnalysisUpArrow;
@@ -46,6 +52,7 @@ public class ScannedProductFragment extends Fragment {
     private RelativeLayout nutrientLevelsLayout;
     private ImageView nutrientLevelsDownArrow;
     private ImageView nutrientLevelsUpArrow;
+//    private ProductService productService;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -58,6 +65,7 @@ public class ScannedProductFragment extends Fragment {
         scannedProductName = root.findViewById(R.id.scanned_product_name);
 
         nutriScoreCollapsible = root.findViewById(R.id.collapsible_nutri_score_section);
+        nutriScoreDrawable = root.findViewById(R.id.nutri_score_drawable);
         nutriScoreLayout = root.findViewById(R.id.nutri_score_layout);
         nutriScoreDownArrow = root.findViewById(R.id.nutri_score_down_arrow);
         nutriScoreUpArrow = root.findViewById(R.id.nutri_score_up_arrow);
@@ -113,7 +121,7 @@ public class ScannedProductFragment extends Fragment {
 
     private void getInformationsWithOpenFoodFact() {
         OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
-        OFFClient.get("8076809513388", null, new JsonHttpResponseHandler() {
+        OFFClient.get("0677210090246", null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject dataObject) {
                 try {
@@ -128,6 +136,7 @@ public class ScannedProductFragment extends Fragment {
         });
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void showInformations() {
         String englishName = product.getEnglishName();
         String frenchName = product.getFrenchName();
@@ -135,13 +144,17 @@ public class ScannedProductFragment extends Fragment {
         Picasso.get().load(url_front).into(scannedProductImage);
         scannedProductOrigin.setText(product.getOrigin());
         scannedProductCountryImported.setText(product.getCountryImported());
-        scannedProductQuantity.setText(product.getQuantity());
-        if (englishName != null || !englishName.trim().equals("")) {
+        scannedProductQuantity.setText(product.getQuantity()+'g');
+        if (englishName != null && !englishName.trim().equals("")) {
             scannedProductName.setText(englishName);
         }
-        if (frenchName != null || !frenchName.trim().equals("")){
+        if (frenchName != null && !frenchName.trim().equals("")){
             scannedProductName.setText(frenchName);
         }
+
+        NutriScoreGrade nutriScoreGrade = get(product.getNutriScoreGrade());
+
+        nutriScoreDrawable.setBackground(getNutriScoreGradeDrawable(nutriScoreGrade));
     }
 
     private void toggleCollapsibleSection(View v, ImageView upArrow, ImageView downArrow, RelativeLayout relativeLayout) {
@@ -152,5 +165,25 @@ public class ScannedProductFragment extends Fragment {
                 ? View.GONE
                 : View.VISIBLE);
         downArrow.setVisibility(downArrow.isShown() ? View.GONE : View.VISIBLE);
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private Drawable getNutriScoreGradeDrawable(NutriScoreGrade nutriScoreGrade) {
+        switch (nutriScoreGrade) {
+            case A:
+                return getResources().getDrawable(R.drawable.ic_nutriscore_a);
+            case B:
+                return getResources().getDrawable(R.drawable.ic_nutriscore_b);
+            case C:
+                return getResources().getDrawable(R.drawable.ic_nutriscore_c);
+            case D:
+                return getResources().getDrawable(R.drawable.ic_nutriscore_d);
+            case E:
+                return getResources().getDrawable(R.drawable.ic_nutriscore_e);
+            default:
+                break;
+        }
+
+        return null;
     }
 }

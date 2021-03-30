@@ -1,14 +1,19 @@
 package ca.ulaval.ima.ali_choix;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.IBinder;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import ca.ulaval.ima.ali_choix.services.ProductService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,3 +33,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
+
+// Pour appeler le service à partir d'une fragment
+//    ProductService productService = new ProductService(getContext()) {
+//        @Nullable
+//        @Override
+//        public IBinder onBind(Intent intent) {
+//            return null;
+//        }
+//    };
