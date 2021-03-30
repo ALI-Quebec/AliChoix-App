@@ -1,6 +1,6 @@
 package ca.ulaval.ima.ali_choix.domain;
 
-public enum NutrientQualities {
+public enum NutrientQuality {
     BAD,
     MODERATE,
     GOOD
