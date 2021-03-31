@@ -3,7 +3,6 @@ package ca.ulaval.ima.ali_choix.domain;
 import java.util.HashMap;
 import java.util.Map;
 
-import ca.ulaval.ima.ali_choix.domain.exceptions.InvalidNutriScoreGradeException;
 import ca.ulaval.ima.ali_choix.domain.exceptions.InvalidNutrientLevelsQuantityException;
 
 public enum NutrientLevelsQuantity {

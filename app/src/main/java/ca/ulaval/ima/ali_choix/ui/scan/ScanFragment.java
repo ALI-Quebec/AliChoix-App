@@ -1,4 +1,4 @@
-package ca.ulaval.ima.ali_choix.ui.dashboard;
+package ca.ulaval.ima.ali_choix.ui.scan;
 
 import android.Manifest;
 import android.app.Activity;
@@ -21,7 +21,7 @@ import com.google.zxing.Result;
 
 import ca.ulaval.ima.ali_choix.R;
 
-public class DashboardFragment extends Fragment {
+public class ScanFragment extends Fragment {
     private static final int CAMERA_PERMISSION_CODE = 5050;
     private CodeScanner codeScanner;
     private CodeScannerView scannerView;
@@ -33,7 +33,7 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         activity = getActivity();
-        root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        root = inflater.inflate(R.layout.fragment_scan, container, false);
 
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_DENIED) {
