@@ -22,4 +22,10 @@
         android:name="ca.ulaval.ima.ali_choix.ui.scannedproduct.ScannedProductFragment"
         android:label="@string/title_scanned_product"
         tools:layout="@layout/fragment_scanned_product" />
+
+    <fragment
+        android:id="@+id/navigation_options"
+        android:name="ca.ulaval.ima.ali_choix.ui.options.OptionsFragment"
+        android:label="@string/title_options"
+        tools:layout="@layout/fragment_options" />
 </navigation>

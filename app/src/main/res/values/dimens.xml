@@ -5,4 +5,5 @@
 
     <!-- Default text font size -->
     <dimen name="text_font_size">14dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>
