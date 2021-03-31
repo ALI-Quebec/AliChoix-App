@@ -1,43 +1,43 @@
 package ca.ulaval.ima.ali_choix.domain;
 
 public class NutrientLevelsAlgorithms {
-    public static NutrientQuality evaluateFat(Float fatPer100g) {
+    public static NutrientLevelsQuantity evaluateFat(Float fatPer100g) {
         if (fatPer100g <= 3f) {
-            return NutrientQuality.GOOD;
+            return NutrientLevelsQuantity.LOW;
         } else if (fatPer100g <= 20f) {
-            return NutrientQuality.MODERATE;
+            return NutrientLevelsQuantity.MODERATE;
         } else {
-            return NutrientQuality.BAD;
+            return NutrientLevelsQuantity.HIGH;
         }
     }
 
-    public static NutrientQuality evaluateSaturatedFat(Float saturatedFatPer100g) {
+    public static NutrientLevelsQuantity evaluateSaturatedFat(Float saturatedFatPer100g) {
         if (saturatedFatPer100g <= 1.5f) {
-            return NutrientQuality.GOOD;
+            return NutrientLevelsQuantity.LOW;
         } else if (saturatedFatPer100g <= 5f) {
-            return NutrientQuality.MODERATE;
+            return NutrientLevelsQuantity.MODERATE;
         } else {
-            return NutrientQuality.BAD;
+            return NutrientLevelsQuantity.HIGH;
         }
     }
 
-    public static NutrientQuality evaluateSugar(Float sugarPer100g) {
+    public static NutrientLevelsQuantity evaluateSugar(Float sugarPer100g) {
         if (sugarPer100g <= 5f) {
-            return NutrientQuality.GOOD;
+            return NutrientLevelsQuantity.LOW;
         } else if (sugarPer100g <= 12.5f) {
-            return NutrientQuality.MODERATE;
+            return NutrientLevelsQuantity.MODERATE;
         } else {
-            return NutrientQuality.BAD;
+            return NutrientLevelsQuantity.HIGH;
         }
     }
 
-    public static NutrientQuality evaluateSalt(Float saltPer100g) {
+    public static NutrientLevelsQuantity evaluateSalt(Float saltPer100g) {
         if (saltPer100g <= 0.3f) {
-            return NutrientQuality.GOOD;
+            return NutrientLevelsQuantity.LOW;
         } else if (saltPer100g <= 1.5f) {
-            return NutrientQuality.MODERATE;
+            return NutrientLevelsQuantity.MODERATE;
         } else {
-            return NutrientQuality.BAD;
+            return NutrientLevelsQuantity.HIGH;
         }
     }
 }

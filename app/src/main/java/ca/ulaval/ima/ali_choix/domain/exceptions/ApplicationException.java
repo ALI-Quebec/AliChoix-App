@@ -7,7 +7,6 @@ import androidx.annotation.RequiresApi;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.stream.Collectors;
 
 import ca.ulaval.ima.ali_choix.domain.ErrorCode;
 

@@ -6,62 +6,62 @@ import static org.junit.Assert.*;
 
 public class NutrientLevelsAlgorithmsTest {
     @Test
-    public void givenLowFatLevel_whenEvaluatingFat_thenReturnGoodNutrientQuality() {
-        assertEquals(NutrientQuality.GOOD, NutrientLevelsAlgorithms.evaluateFat(1.1f));
+    public void givenLowFatLevel_whenEvaluatingFat_thenReturnLowNutrientLevelsQuantity() {
+        assertEquals(NutrientLevelsQuantity.LOW, NutrientLevelsAlgorithms.evaluateFat(1.1f));
     }
 
     @Test
-    public void givenMediumFatLevel_whenEvaluatingFat_thenReturnModerateNutrientQuality() {
-        assertEquals(NutrientQuality.MODERATE, NutrientLevelsAlgorithms.evaluateFat(6f));
+    public void givenMediumFatLevel_whenEvaluatingFat_thenReturnModerateNutrientLevelsQuantity() {
+        assertEquals(NutrientLevelsQuantity.MODERATE, NutrientLevelsAlgorithms.evaluateFat(6f));
     }
 
     @Test
-    public void givenHighFatLevel_whenEvaluatingFat_thenReturnBadNutrientQuality() {
-        assertEquals(NutrientQuality.BAD, NutrientLevelsAlgorithms.evaluateFat(25f));
+    public void givenHighFatLevel_whenEvaluatingFat_thenReturnHighNutrientLevelsQuantity() {
+        assertEquals(NutrientLevelsQuantity.HIGH, NutrientLevelsAlgorithms.evaluateFat(25f));
     }
 
     @Test
-    public void givenLowSaturatedFatLevel_whenEvaluatingSaturatedFat_thenReturnGoodNutrientQuality() {
-        assertEquals(NutrientQuality.GOOD, NutrientLevelsAlgorithms.evaluateSaturatedFat(1f));
+    public void givenLowSaturatedFatLevel_whenEvaluatingSaturatedFat_thenReturnLowNutrientLevelsQuantity() {
+        assertEquals(NutrientLevelsQuantity.LOW, NutrientLevelsAlgorithms.evaluateSaturatedFat(1f));
     }
 
     @Test
-    public void givenMediumSaturatedFatLevel_whenEvaluatingSaturatedFat_thenReturnModerateNutrientQuality() {
-        assertEquals(NutrientQuality.MODERATE, NutrientLevelsAlgorithms.evaluateSaturatedFat(4.5f));
+    public void givenMediumSaturatedFatLevel_whenEvaluatingSaturatedFat_thenReturnModerateNutrientLevelsQuantity() {
+        assertEquals(NutrientLevelsQuantity.MODERATE, NutrientLevelsAlgorithms.evaluateSaturatedFat(4.5f));
     }
 
     @Test
-    public void givenHighSaturatedFatLevel_whenEvaluatingSaturatedFat_thenReturnBadNutrientQuality() {
-        assertEquals(NutrientQuality.BAD, NutrientLevelsAlgorithms.evaluateSaturatedFat(10f));
+    public void givenHighSaturatedFatLevel_whenEvaluatingSaturatedFat_thenReturnHighNutrientLevelsQuantity() {
+        assertEquals(NutrientLevelsQuantity.HIGH, NutrientLevelsAlgorithms.evaluateSaturatedFat(10f));
     }
 
     @Test
-    public void givenLowSugarLevel_whenEvaluatingSugar_thenReturnGoodNutrientQuality() {
-        assertEquals(NutrientQuality.GOOD, NutrientLevelsAlgorithms.evaluateSugar(4f));
+    public void givenLowSugarLevel_whenEvaluatingSugar_thenReturnLowNutrientLevelsQuantity() {
+        assertEquals(NutrientLevelsQuantity.LOW, NutrientLevelsAlgorithms.evaluateSugar(4f));
     }
 
     @Test
-    public void givenMediumSugarLevel_whenEvaluatingSugar_thenReturnModerateNutrientQuality() {
-        assertEquals(NutrientQuality.MODERATE, NutrientLevelsAlgorithms.evaluateSugar(9.5f));
+    public void givenMediumSugarLevel_whenEvaluatingSugar_thenReturnModerateNutrientLevelsQuantity() {
+        assertEquals(NutrientLevelsQuantity.MODERATE, NutrientLevelsAlgorithms.evaluateSugar(9.5f));
     }
 
     @Test
-    public void givenHighSugarLevel_whenEvaluatingSugar_thenReturnBadNutrientQuality() {
-        assertEquals(NutrientQuality.BAD, NutrientLevelsAlgorithms.evaluateSugar(13f));
+    public void givenHighSugarLevel_whenEvaluatingSugar_thenReturnHighNutrientLevelsQuantity() {
+        assertEquals(NutrientLevelsQuantity.HIGH, NutrientLevelsAlgorithms.evaluateSugar(13f));
     }
 
     @Test
-    public void givenLowSaltLevel_whenEvaluatingSalt_thenReturnGoodNutrientQuality() {
-        assertEquals(NutrientQuality.GOOD, NutrientLevelsAlgorithms.evaluateSalt(0.3f));
+    public void givenLowSaltLevel_whenEvaluatingSalt_thenReturnLowNutrientLevelsQuantity() {
+        assertEquals(NutrientLevelsQuantity.LOW, NutrientLevelsAlgorithms.evaluateSalt(0.3f));
     }
 
     @Test
-    public void givenMediumSaltLevel_whenEvaluatingSalt_thenReturnModerateNutrientQuality() {
-        assertEquals(NutrientQuality.MODERATE, NutrientLevelsAlgorithms.evaluateSalt(1.4f));
+    public void givenMediumSaltLevel_whenEvaluatingSalt_thenReturnModerateNutrientLevelsQuantity() {
+        assertEquals(NutrientLevelsQuantity.MODERATE, NutrientLevelsAlgorithms.evaluateSalt(1.4f));
     }
 
     @Test
-    public void givenHighSaltLevel_whenEvaluatingSalt_thenReturnBadNutrientQuality() {
-        assertEquals(NutrientQuality.BAD, NutrientLevelsAlgorithms.evaluateSalt(2f));
+    public void givenHighSaltLevel_whenEvaluatingSalt_thenReturnHighNutrientLevelsQuantity() {
+        assertEquals(NutrientLevelsQuantity.HIGH, NutrientLevelsAlgorithms.evaluateSalt(2f));
     }
 }

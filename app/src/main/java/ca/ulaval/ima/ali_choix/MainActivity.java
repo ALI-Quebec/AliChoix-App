@@ -33,13 +33,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-
-
-// Pour appeler le service à partir d'une fragment
-//    ProductService productService = new ProductService(getContext()) {
-//        @Nullable
-//        @Override
-//        public IBinder onBind(Intent intent) {
-//            return null;
-//        }
-//    };

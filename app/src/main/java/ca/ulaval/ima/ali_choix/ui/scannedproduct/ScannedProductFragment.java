@@ -1,8 +1,10 @@
 package ca.ulaval.ima.ali_choix.ui.scannedproduct;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,24 +13,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
-import ca.ulaval.ima.ali_choix.domain.NutriScoreGrade;
+import ca.ulaval.ima.ali_choix.services.ProductService;
 import cz.msebera.android.httpclient.Header;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.Product;
 import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
-
-import static ca.ulaval.ima.ali_choix.domain.NutriScoreGrade.*;
 
 public class ScannedProductFragment extends Fragment {
     private Product product;
@@ -53,8 +53,8 @@ public class ScannedProductFragment extends Fragment {
     private RelativeLayout nutrientLevelsLayout;
     private ImageView nutrientLevelsDownArrow;
     private ImageView nutrientLevelsUpArrow;
-//    private ProductService productService;
     private TextView nutriScoreDescription;
+    private String scannedProductNutriScoreGrade;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -141,6 +141,14 @@ public class ScannedProductFragment extends Fragment {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private void showInformations() {
+        ProductService productService = new ProductService() {
+            @Nullable
+            @Override
+            public IBinder onBind(Intent intent) {
+                return null;
+            }
+        };
+
         String englishName = product.getEnglishName();
         String frenchName = product.getFrenchName();
         String url_front = product.getImage();
@@ -155,11 +163,29 @@ public class ScannedProductFragment extends Fragment {
             scannedProductName.setText(frenchName);
         }
 
-        NutriScoreGrade nutriScoreGrade = get(product.getNutriScoreGrade());
-        nutriScoreDrawable.setBackground(getNutriScoreGradeDrawable(nutriScoreGrade));
+        scannedProductNutriScoreGrade = product.getNutriScoreGrade();
+        nutriScoreDrawable.setBackground(getNutriScoreGradeDrawable(scannedProductNutriScoreGrade.toLowerCase()));
+        nutriScoreDescription.setText(productService.getNutriScoreDescription(scannedProductNutriScoreGrade.toLowerCase()));
+    }
 
-        String nutriScoreDescriptionFound = nutriScoreGrade.getDescription();
-        nutriScoreDescription.setText(nutriScoreDescriptionFound);
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private Drawable getNutriScoreGradeDrawable(String grade) {
+        switch (grade) {
+            case "a":
+                return getResources().getDrawable(R.drawable.ic_nutriscore_a);
+            case "b":
+                return getResources().getDrawable(R.drawable.ic_nutriscore_b);
+            case "c":
+                return getResources().getDrawable(R.drawable.ic_nutriscore_c);
+            case "d":
+                return getResources().getDrawable(R.drawable.ic_nutriscore_d);
+            case "e":
+                return getResources().getDrawable(R.drawable.ic_nutriscore_e);
+            default:
+                break;
+        }
+
+        return null;
     }
 
     private void toggleCollapsibleSection(View v, ImageView upArrow, ImageView downArrow, RelativeLayout relativeLayout) {
@@ -170,25 +196,5 @@ public class ScannedProductFragment extends Fragment {
                 ? View.GONE
                 : View.VISIBLE);
         downArrow.setVisibility(downArrow.isShown() ? View.GONE : View.VISIBLE);
-    }
-
-    @SuppressLint("UseCompatLoadingForDrawables")
-    private Drawable getNutriScoreGradeDrawable(NutriScoreGrade nutriScoreGrade) {
-        switch (nutriScoreGrade) {
-            case A:
-                return getResources().getDrawable(R.drawable.ic_nutriscore_a);
-            case B:
-                return getResources().getDrawable(R.drawable.ic_nutriscore_b);
-            case C:
-                return getResources().getDrawable(R.drawable.ic_nutriscore_c);
-            case D:
-                return getResources().getDrawable(R.drawable.ic_nutriscore_d);
-            case E:
-                return getResources().getDrawable(R.drawable.ic_nutriscore_e);
-            default:
-                break;
-        }
-
-        return null;
     }
 }

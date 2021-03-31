@@ -37,6 +37,8 @@ public enum NutriScoreGrade {
 
         NutriScoreGrade nutriScoreGradeFound = lookup.get(grade.toLowerCase());
 
+        if (nutriScoreGradeFound == null) throw new InvalidNutriScoreGradeException();
+
         return nutriScoreGradeFound;
     }
 
