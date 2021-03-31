@@ -6,6 +6,8 @@ public class Product {
     private String countries_imported;
     private String product_quantity;
     private String product_name_en;
+    private String product_name_fr;
+    private String nutriscore_grade;
 
     public String getImage() {
         return image_front_url;
@@ -39,11 +41,23 @@ public class Product {
         this.product_quantity = product_quantity;
     }
 
-    public String getName() {
+    public String getEnglishName() {
         return product_name_en;
     }
 
-    public void setName() {
+    public void setEnglishName() {
         this.product_name_en = product_name_en;
     }
+
+    public String getFrenchName() {
+        return product_name_fr;
+    }
+
+    public void setFrenchName() {
+        this.product_name_fr = product_name_fr;
+    }
+
+    public String getNutriScoreGrade() { return nutriscore_grade;}
+
+    public void setNutriScoreGrade() { this.nutriscore_grade = nutriscore_grade; }
 }

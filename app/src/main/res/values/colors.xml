@@ -8,5 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="item_collapsible_header">#F4EFDD</color>
-    <color name="text_black_background_25_opacity">#40C4C4C4</color>
+    <color name="text_black_background_25_opacity">#80000000</color>
 </resources>
