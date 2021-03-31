@@ -1,10 +1,19 @@
 package ca.ulaval.ima.ali_choix.domain;
 
 public class NutrientLevelsAlgorithms {
+    private static final Float LOW_FAT_VALUE = 3f;
+    private static final Float MODERATE_FAT_VALUE = 20f;
+    private static final Float LOW_SATURATED_FAT_VALUE = 1.5f;
+    private static final Float MODERATE_SATURATED_FAT_VALUE = 5f;
+    private static final Float LOW_SUGAR_VALUE = 5f;
+    private static final Float MODERATE_SUGAR_VALUE = 12.5f;
+    private static final Float LOW_SALT_VALUE = 0.3f;
+    private static final Float MODERATE_SALT_VALUE = 1.5f;
+
     public static NutrientLevelsQuantity evaluateFat(Float fatPer100g) {
-        if (fatPer100g <= 3f) {
+        if (fatPer100g <= LOW_FAT_VALUE) {
             return NutrientLevelsQuantity.LOW;
-        } else if (fatPer100g <= 20f) {
+        } else if (fatPer100g <= MODERATE_FAT_VALUE) {
             return NutrientLevelsQuantity.MODERATE;
         } else {
             return NutrientLevelsQuantity.HIGH;
@@ -12,9 +21,9 @@ public class NutrientLevelsAlgorithms {
     }
 
     public static NutrientLevelsQuantity evaluateSaturatedFat(Float saturatedFatPer100g) {
-        if (saturatedFatPer100g <= 1.5f) {
+        if (saturatedFatPer100g <= LOW_SATURATED_FAT_VALUE) {
             return NutrientLevelsQuantity.LOW;
-        } else if (saturatedFatPer100g <= 5f) {
+        } else if (saturatedFatPer100g <= MODERATE_SATURATED_FAT_VALUE) {
             return NutrientLevelsQuantity.MODERATE;
         } else {
             return NutrientLevelsQuantity.HIGH;
@@ -22,9 +31,9 @@ public class NutrientLevelsAlgorithms {
     }
 
     public static NutrientLevelsQuantity evaluateSugar(Float sugarPer100g) {
-        if (sugarPer100g <= 5f) {
+        if (sugarPer100g <= LOW_SUGAR_VALUE) {
             return NutrientLevelsQuantity.LOW;
-        } else if (sugarPer100g <= 12.5f) {
+        } else if (sugarPer100g <= MODERATE_SUGAR_VALUE) {
             return NutrientLevelsQuantity.MODERATE;
         } else {
             return NutrientLevelsQuantity.HIGH;
@@ -32,9 +41,9 @@ public class NutrientLevelsAlgorithms {
     }
 
     public static NutrientLevelsQuantity evaluateSalt(Float saltPer100g) {
-        if (saltPer100g <= 0.3f) {
+        if (saltPer100g <= LOW_SALT_VALUE) {
             return NutrientLevelsQuantity.LOW;
-        } else if (saltPer100g <= 1.5f) {
+        } else if (saltPer100g <= MODERATE_SALT_VALUE) {
             return NutrientLevelsQuantity.MODERATE;
         } else {
             return NutrientLevelsQuantity.HIGH;
