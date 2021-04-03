@@ -20,15 +20,22 @@ import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
+import ca.ulaval.ima.ali_choix.domain.NutrientLevelsQuantity;
+import ca.ulaval.ima.ali_choix.domain.Nutriments;
 import ca.ulaval.ima.ali_choix.services.ProductService;
 import cz.msebera.android.httpclient.Header;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.Product;
 import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
+
+import static ca.ulaval.ima.ali_choix.domain.NutrientLevelsQuantity.*;
 
 public class ScannedProductFragment extends Fragment {
     private Product product;
@@ -55,6 +62,10 @@ public class ScannedProductFragment extends Fragment {
     private ImageView nutrientLevelsUpArrow;
     private TextView nutriScoreDescription;
     private String scannedProductNutriScoreGrade;
+    private ImageView fatQuantityIndicator;
+    private ImageView saturatedFatQuantityIndicator;
+    private ImageView sugarQuantityIndicator;
+    private ImageView saltQuantityIndicator;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -116,6 +127,11 @@ public class ScannedProductFragment extends Fragment {
             }
         });
 
+        fatQuantityIndicator = root.findViewById(R.id.fat_quantity_indicator);
+        saturatedFatQuantityIndicator = root.findViewById(R.id.saturated_fat_quantity_indicator);
+        sugarQuantityIndicator = root.findViewById(R.id.sugars_indicator);
+        saltQuantityIndicator = root.findViewById(R.id.salt_indicator);
+
         getInformationsWithOpenFoodFact();
 
         return root;
@@ -124,7 +140,7 @@ public class ScannedProductFragment extends Fragment {
 
     private void getInformationsWithOpenFoodFact() {
         OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
-        OFFClient.get("0677210090246", null, new JsonHttpResponseHandler() {
+        OFFClient.get("3229820100234", null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject dataObject) {
                 try {
@@ -152,10 +168,15 @@ public class ScannedProductFragment extends Fragment {
         String englishName = product.getEnglishName();
         String frenchName = product.getFrenchName();
         String url_front = product.getImage();
+        String origin = product.getOrigin();
+        String countryImported = product.getCountryImported();
+        String quantity = product.getQuantity();
+        Nutriments nutriments = product.getNutriments();
+
         Picasso.get().load(url_front).into(scannedProductImage);
-        scannedProductOrigin.setText(product.getOrigin());
-        scannedProductCountryImported.setText(product.getCountryImported());
-        scannedProductQuantity.setText(product.getQuantity()+'g');
+        scannedProductOrigin.setText( origin == null || origin.isEmpty() ? "No results found" : origin);
+        scannedProductCountryImported.setText(countryImported == null || countryImported.isEmpty()  ? "No results found" : countryImported);
+        scannedProductQuantity.setText(quantity == null || quantity.isEmpty() ? "No results found" : quantity+'g');
         if (englishName != null && !englishName.trim().equals("")) {
             scannedProductName.setText(englishName);
         }
@@ -166,6 +187,13 @@ public class ScannedProductFragment extends Fragment {
         scannedProductNutriScoreGrade = product.getNutriScoreGrade();
         nutriScoreDrawable.setBackground(getNutriScoreGradeDrawable(scannedProductNutriScoreGrade.toLowerCase()));
         nutriScoreDescription.setText(productService.getNutriScoreDescription(scannedProductNutriScoreGrade.toLowerCase()));
+
+        HashMap nutrientLevels = productService.getNutrientLevelsQuantity(nutriments);
+        //TODO est-ce qu'il ne faudrait pas ici mettre un interface pour pas que le UI soit dépendant du naming du service ?
+        fatQuantityIndicator.setBackground(getNutrientLevelsQuantityDrawable((NutrientLevelsQuantity) Objects.requireNonNull(nutrientLevels.get("fatNutrientLevelsQuantity"))));
+        saturatedFatQuantityIndicator.setBackground(getNutrientLevelsQuantityDrawable((NutrientLevelsQuantity) Objects.requireNonNull(nutrientLevels.get("saturatedFatNutrientLevelsQuantity"))));
+        sugarQuantityIndicator.setBackground(getNutrientLevelsQuantityDrawable((NutrientLevelsQuantity) Objects.requireNonNull(nutrientLevels.get("sugarNutrientLevelsQuantity"))));
+        saltQuantityIndicator.setBackground(getNutrientLevelsQuantityDrawable((NutrientLevelsQuantity) Objects.requireNonNull(nutrientLevels.get("saltNutrientLevelsQuantity"))));
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -181,6 +209,22 @@ public class ScannedProductFragment extends Fragment {
                 return getResources().getDrawable(R.drawable.ic_nutriscore_d);
             case "e":
                 return getResources().getDrawable(R.drawable.ic_nutriscore_e);
+            default:
+                break;
+        }
+
+        return null;
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private Drawable getNutrientLevelsQuantityDrawable(NutrientLevelsQuantity nutrientLevelsQuantity) {
+        switch (nutrientLevelsQuantity) {
+            case LOW:
+                return getResources().getDrawable(R.drawable.green_circle);
+            case MODERATE:
+                return getResources().getDrawable(R.drawable.orange_circle);
+            case HIGH:
+                return getResources().getDrawable(R.drawable.red_circle);
             default:
                 break;
         }

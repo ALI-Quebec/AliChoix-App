@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.ulaval.ima.ali_choix.domain.NutriScoreGrade;
 import ca.ulaval.ima.ali_choix.domain.exceptions.InvalidNutriScoreGradeException;
 
 public class ProductServiceTest {
@@ -18,7 +17,7 @@ public class ProductServiceTest {
 
     @Before
     public void setUp() {
-        productService = new ProductService() {
+        productService = new ProductService(nutrientLevelsAlgorithms) {
             @Nullable
             @Override
             public IBinder onBind(Intent intent) {

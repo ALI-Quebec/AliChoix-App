@@ -8,6 +8,7 @@ public class Product {
     private String product_name_en;
     private String product_name_fr;
     private String nutriscore_grade;
+    private Nutriments nutriments;
 
     public String getImage() {
         return image_front_url;
@@ -60,4 +61,8 @@ public class Product {
     public String getNutriScoreGrade() { return nutriscore_grade;}
 
     public void setNutriScoreGrade() { this.nutriscore_grade = nutriscore_grade; }
+
+    public Nutriments getNutriments() { return nutriments;}
+
+    public void setNutriments() {  this.nutriments = nutriments; }
 }

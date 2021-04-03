@@ -25,4 +25,5 @@
 <!--    Home fragment naming-->
     <string name="home_page_middle_text">Alimentation saine, durable, en toute simplicité!</string>
     <string name="home_page_bottom_text">Recherchez vos produits dès maintenant!</string>
+
 </resources>
