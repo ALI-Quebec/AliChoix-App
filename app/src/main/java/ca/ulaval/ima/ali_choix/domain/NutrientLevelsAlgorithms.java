@@ -5,8 +5,8 @@ public class NutrientLevelsAlgorithms {
     private static final Float MODERATE_FAT_VALUE = 20f;
     private static final Float LOW_SATURATED_FAT_VALUE = 1.5f;
     private static final Float MODERATE_SATURATED_FAT_VALUE = 5f;
-    private static final Float LOW_SUGAR_VALUE = 5f;
-    private static final Float MODERATE_SUGAR_VALUE = 12.5f;
+    private static final Float LOW_SUGARS_VALUE = 5f;
+    private static final Float MODERATE_SUGARS_VALUE = 12.5f;
     private static final Float LOW_SALT_VALUE = 0.3f;
     private static final Float MODERATE_SALT_VALUE = 1.5f;
 
@@ -30,10 +30,10 @@ public class NutrientLevelsAlgorithms {
         }
     }
 
-    public static NutrientLevelsQuantity evaluateSugar(Float sugarPer100g) {
-        if (sugarPer100g <= LOW_SUGAR_VALUE) {
+    public static NutrientLevelsQuantity evaluateSugars(Float sugarsPer100g) {
+        if (sugarsPer100g <= LOW_SUGARS_VALUE) {
             return NutrientLevelsQuantity.LOW;
-        } else if (sugarPer100g <= MODERATE_SUGAR_VALUE) {
+        } else if (sugarsPer100g <= MODERATE_SUGARS_VALUE) {
             return NutrientLevelsQuantity.MODERATE;
         } else {
             return NutrientLevelsQuantity.HIGH;

@@ -23,9 +23,14 @@ public abstract class ProductService extends Service {
 
         nutrientLevelsQuantity.put("fatNutrientLevelsQuantity", NutrientLevelsAlgorithms.evaluateFat(nutriments.getFat100g()));
         nutrientLevelsQuantity.put("saturatedFatNutrientLevelsQuantity", NutrientLevelsAlgorithms.evaluateSaturatedFat(nutriments.getSaturatedFat100g()));
-        nutrientLevelsQuantity.put("sugarNutrientLevelsQuantity", NutrientLevelsAlgorithms.evaluateSugar(nutriments.getSugar100g()));
+        nutrientLevelsQuantity.put("sugarsNutrientLevelsQuantity", NutrientLevelsAlgorithms.evaluateSugars(nutriments.getSugars100g()));
         nutrientLevelsQuantity.put("saltNutrientLevelsQuantity", NutrientLevelsAlgorithms.evaluateSalt(nutriments.getSalt100g()));
 
         return nutrientLevelsQuantity;
+    }
+
+    public String getNutrientLevelsDescription(String level) {
+        NutrientLevelsQuantity nutrientLevelsQuantity = NutrientLevelsQuantity.get(level);
+        return nutrientLevelsQuantity.getDescription();
     }
 }
