@@ -1,27 +1,33 @@
 package ca.ulaval.ima.ali_choix.ui.options;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import ca.ulaval.ima.ali_choix.R;
-import ca.ulaval.ima.ali_choix.dummy.DummyContent.DummyItem;
+import ca.ulaval.ima.ali_choix.ui.options.OptionsContent.OptionsItem;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem}.
+ * {@link RecyclerView.Adapter} that can display a {@link OptionsItem}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<OptionsItem> mValues;
+    private final FragmentManager fragmentManager;
 
-    public MyItemRecyclerViewAdapter(List<DummyItem> items) {
+    public MyItemRecyclerViewAdapter(List<OptionsItem> items, FragmentManager fragmentManager) {
         mValues = items;
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -34,8 +40,20 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
+        holder.mIconView.setImageResource(mValues.get(position).icon);
         holder.mContentView.setText(mValues.get(position).content);
+        holder.mContentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeFragment(mValues.get(position).target);
+            }
+        });
+        holder.mIconView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeFragment(mValues.get(position).target);
+            }
+        });
     }
 
     @Override
@@ -43,17 +61,24 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         return mValues.size();
     }
 
+    private void changeFragment(Fragment target) {
+        //TODO it says the fragment already exists if you go there multiple times
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.replace(R.id.nav_host_fragment, target);
+        ft.commit();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
+        public final ImageView mIconView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public OptionsItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mIconView = view.findViewById(R.id.item_icon);
+            mContentView = view.findViewById(R.id.content);
         }
 
         @Override

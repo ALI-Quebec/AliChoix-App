@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ca.ulaval.ima.ali_choix.R;
-import ca.ulaval.ima.ali_choix.dummy.DummyContent;
 
 /**
  * A fragment representing a list of Items.
@@ -65,7 +64,7 @@ public class OptionsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS));
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(OptionsContent.ITEMS, getParentFragmentManager()));
         }
         return view;
     }
