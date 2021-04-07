@@ -2,6 +2,7 @@ package ca.ulaval.ima.ali_choix.ui.dashboard;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
 import ca.ulaval.ima.ali_choix.R;
+import ca.ulaval.ima.ali_choix.ui.scannedproduct.ScannedProductActivity;
 
 public class DashboardFragment extends Fragment {
     private static final int CAMERA_PERMISSION_CODE = 5050;
@@ -73,7 +75,10 @@ public class DashboardFragment extends Fragment {
         scannerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                codeScanner.startPreview();
+                //codeScanner.startPreview();
+                Intent intent = new Intent(getContext(), ScannedProductActivity.class);
+                intent.putExtra("productId", "737628064502");
+                startActivity(intent);
             }
         });
     }

@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_scanned_product"
-        android:name="ca.ulaval.ima.ali_choix.ui.scannedproduct.ScannedProductFragment"
+        android:name="ca.ulaval.ima.ali_choix.ui.scannedProduct.ScannedProductFragment"
         android:label="@string/title_scanned_product"
         tools:layout="@layout/fragment_scanned_product" />
 </navigation>
