@@ -19,9 +19,7 @@ import ca.ulaval.ima.ali_choix.R;
  */
 public class OptionsFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
 
     /**
@@ -31,7 +29,6 @@ public class OptionsFragment extends Fragment {
     public OptionsFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static OptionsFragment newInstance(int columnCount) {
         OptionsFragment fragment = new OptionsFragment();

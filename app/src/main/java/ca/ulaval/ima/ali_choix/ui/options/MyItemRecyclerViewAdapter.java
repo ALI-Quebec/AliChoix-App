@@ -16,10 +16,6 @@ import ca.ulaval.ima.ali_choix.ui.options.OptionsContent.OptionsItem;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link OptionsItem}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<OptionsItem> mValues;
@@ -62,7 +58,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     }
 
     private void changeFragment(Fragment target) {
-        //TODO it says the fragment already exists if you go there multiple times
+        //TODO it says the fragment already exists if you go there multiple times (might be fixed)
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.replace(R.id.nav_host_fragment, target);
         ft.commit();
