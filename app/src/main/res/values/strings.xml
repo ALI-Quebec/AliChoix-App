@@ -25,6 +25,6 @@
     <!--    Home fragment naming-->
     <string name="home_page_middle_text">Alimentation saine, durable, en toute simplicité!</string>
     <string name="home_page_bottom_text">Recherchez vos produits dès maintenant!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_text">Ce texte contiendra l\'information de l\'à propos</string>
+    <string name="about_hyperlink"><a href="https://stackoverflow.com/questions/2734270/how-to-make-links-in-a-textview-clickable">Tapez ici pour connaître nos collabrateurs</a></string>
 </resources>
