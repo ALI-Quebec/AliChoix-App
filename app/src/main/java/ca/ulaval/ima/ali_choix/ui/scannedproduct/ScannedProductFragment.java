@@ -1,4 +1,4 @@
-package ca.ulaval.ima.ali_choix.ui.scannedproduct;
+package ca.ulaval.ima.ali_choix.ui.scannedProduct;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -116,15 +116,15 @@ public class ScannedProductFragment extends Fragment {
             }
         });
 
-        getInformationsWithOpenFoodFact();
+        getInformationsWithOpenFoodFact(getArguments().getString("productId"));
 
         return root;
     }
 
 
-    private void getInformationsWithOpenFoodFact() {
+    private void getInformationsWithOpenFoodFact(String productID) {
         OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
-        OFFClient.get("0677210090246", null, new JsonHttpResponseHandler() {
+        OFFClient.get(productID, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject dataObject) {
                 try {

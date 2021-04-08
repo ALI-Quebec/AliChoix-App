@@ -2,7 +2,6 @@ package ca.ulaval.ima.ali_choix.ui.scan;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
@@ -21,7 +22,6 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
 import ca.ulaval.ima.ali_choix.R;
-import ca.ulaval.ima.ali_choix.ui.scannedproduct.ScannedProductActivity;
 
 public class ScanFragment extends Fragment {
     private static final int CAMERA_PERMISSION_CODE = 5050;
@@ -76,9 +76,14 @@ public class ScanFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //codeScanner.startPreview();
-                Intent intent = new Intent(getContext(), ScannedProductActivity.class);
-                intent.putExtra("productId", "737628064502");
-                startActivity(intent);
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+                Bundle bundle = new Bundle();
+                bundle.putString("productId", "737628064502");
+                navController.navigate(R.id.action_navigation_scan_to_navigation_scanned_product,bundle);
+
+//                Intent intent = new Intent(getContext(), ScannedProductActivity.class);
+//                intent.putExtra("productId", "737628064502");
+//                startActivity(intent);
             }
         });
     }
