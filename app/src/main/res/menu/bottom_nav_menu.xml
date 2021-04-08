@@ -7,13 +7,23 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:id="@+id/navigation_scan"
+        android:icon="@drawable/ic_baseline_document_scanner_24"
+        android:title="@string/title_scan" />
 
     <item
         android:id="@+id/navigation_scanned_product"
         android:icon="@drawable/ic_baseline_food_bank_24"
         android:title="@string/title_scanned_product" />
+
+<!--    <item-->
+<!--        android:id="@+id/navigation_history"-->
+<!--        android:icon="@drawable/ic_baseline_food_bank_24"-->
+<!--        android:title="@string/title_history" />-->
+
+<!--        <item-->
+<!--            android:id="@+id/navigation_history"-->
+<!--            android:icon="@drawable/ic_baseline_more_horiz_24"-->
+<!--            android:title="@string/title_options" />-->
 
 </menu>
