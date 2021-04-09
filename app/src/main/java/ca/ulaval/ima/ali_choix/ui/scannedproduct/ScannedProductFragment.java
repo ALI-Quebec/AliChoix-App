@@ -20,7 +20,9 @@ import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
+import ca.ulaval.ima.ali_choix.services.HistoricService;
 import ca.ulaval.ima.ali_choix.services.ProductService;
+import ca.ulaval.ima.ali_choix.services.ServiceLocator;
 import cz.msebera.android.httpclient.Header;
 
 import org.json.JSONException;
@@ -56,10 +58,15 @@ public class ScannedProductFragment extends Fragment {
     private TextView nutriScoreDescription;
     private String scannedProductNutriScoreGrade;
 
+    private HistoricService historicService;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_scanned_product, container, false);
+
+        historicService = (HistoricService) ServiceLocator.getInstance().get(HistoricService.class);
+
         scannedProductImage = root.findViewById(R.id.scanned_product_image);
         scannedProductOrigin = root.findViewById(R.id.scanned_product_origin);
         scannedProductCountryImported = root.findViewById(R.id.scanned_product_imported_country);
@@ -116,15 +123,15 @@ public class ScannedProductFragment extends Fragment {
             }
         });
 
-        getInformationsWithOpenFoodFact();
+        getInformationsWithOpenFoodFact("0677210090246");
 
         return root;
     }
 
 
-    private void getInformationsWithOpenFoodFact() {
+    private void getInformationsWithOpenFoodFact(String productId) {
         OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
-        OFFClient.get("0677210090246", null, new JsonHttpResponseHandler() {
+        OFFClient.get(productId, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject dataObject) {
                 try {
@@ -132,6 +139,8 @@ public class ScannedProductFragment extends Fragment {
                     Gson gson = new Gson();
                     product = gson.fromJson(String.valueOf(productJson), Product.class);
                     showInformations();
+                    historicService.addHistoricElement(productId,product.getImage(),product.getFrenchName());
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

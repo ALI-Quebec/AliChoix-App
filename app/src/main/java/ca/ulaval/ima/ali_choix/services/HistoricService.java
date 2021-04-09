@@ -14,7 +14,7 @@ import ca.ulaval.ima.ali_choix.domain.HistoricElementFactory;
 import ca.ulaval.ima.ali_choix.domain.HistoricRepository;
 import ca.ulaval.ima.ali_choix.domain.ProductId;
 
-public class HistoricService extends Service {
+public class HistoricService{
     private HistoricRepository historicRepository;
     private HistoricElementFactory historicElementFactory;
 
@@ -22,12 +22,6 @@ public class HistoricService extends Service {
         historicRepository = new HistoricRepositoryLocal();
         getHistoricFromDevice();
         historicElementFactory = new HistoricElementFactory();
-    }
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
     }
 
     public void addHistoricElement(String productId, String image_front_url, String productName){

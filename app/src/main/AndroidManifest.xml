@@ -29,10 +29,6 @@
             android:label="Product service"
             tools:ignore="Instantiatable">
         </service>
-        <service
-            android:name=".services.HistoricService"
-            android:label="Historic service">
-        </service>
     </application>
 
 </manifest>
