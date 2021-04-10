@@ -20,10 +20,14 @@ import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
+import ca.ulaval.ima.ali_choix.services.HistoryService;
+
 import ca.ulaval.ima.ali_choix.domain.GlobalConstant;
 import ca.ulaval.ima.ali_choix.domain.NutrientLevelsQuantity;
 import ca.ulaval.ima.ali_choix.domain.Nutriments;
+
 import ca.ulaval.ima.ali_choix.services.ProductService;
+import ca.ulaval.ima.ali_choix.services.ServiceLocator;
 import cz.msebera.android.httpclient.Header;
 
 import org.json.JSONException;
@@ -70,10 +74,15 @@ public class ScannedProductFragment extends Fragment {
     private TextView sugarsQuantityDescription;
     private TextView saltQuantityDescription;
 
+    private HistoryService historyService;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_scanned_product, container, false);
+
+        historyService = (HistoryService) ServiceLocator.getInstance().get(HistoryService.class);
+
         scannedProductImage = root.findViewById(R.id.scanned_product_image);
         scannedProductOrigin = root.findViewById(R.id.scanned_product_origin);
         scannedProductCountryImported = root.findViewById(R.id.scanned_product_imported_country);
@@ -139,15 +148,15 @@ public class ScannedProductFragment extends Fragment {
         sugarsQuantityDescription = root.findViewById(R.id.sugars_quantity);
         saltQuantityDescription = root.findViewById(R.id.salt_quantity);
 
-        getInformationsWithOpenFoodFact();
+        getInformationsWithOpenFoodFact("0677210090246");
 
         return root;
     }
 
 
-    private void getInformationsWithOpenFoodFact() {
+    private void getInformationsWithOpenFoodFact(String productId) {
         OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
-        OFFClient.get("3229820100234", null, new JsonHttpResponseHandler() {
+        OFFClient.get(productId, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject dataObject) {
                 try {
@@ -155,6 +164,8 @@ public class ScannedProductFragment extends Fragment {
                     Gson gson = new Gson();
                     product = gson.fromJson(String.valueOf(productJson), Product.class);
                     showInformations();
+                    historyService.addHistoryElement(productId,product.getImage(),product.getFrenchName());
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

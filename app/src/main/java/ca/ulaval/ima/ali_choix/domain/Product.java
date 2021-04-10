@@ -45,6 +45,7 @@ public class Product {
         this.product_quantity = product_quantity;
     }
 
+    //TODO only getName, config will decide if we return french or english one (avoid putting getFrenchName in all code)
     public String getEnglishName() {
         return product_name_en;
     }
