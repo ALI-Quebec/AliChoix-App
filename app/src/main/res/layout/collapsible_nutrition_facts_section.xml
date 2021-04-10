@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="0dp"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp"
+    android:layout_marginBottom="12dp"
+    android:padding="16dp"
+    android:background="@color/item_collapsible_header"
+    android:id="@+id/collapsible_nutrition_facts_section">
+
+    <TextView
+        android:id="@+id/nutrition_facts_collapsible_header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/naming_ingredients_collapsible_header_section"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_font_size"
+        android:textStyle="bold" />
+
+    <!--    Hide when not collapsed -->
+    <ImageView
+        android:id="@+id/nutrition_facts_down_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+        android:layout_alignParentRight="true" />
+
+    <!--    Content to hide and show -->
+    <ImageView
+        android:id="@+id/nutrition_facts_up_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+        android:layout_alignParentRight="true"/>
+
+    <RelativeLayout
+        android:id="@+id/nutrition_facts_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nutrition_facts_collapsible_header_title"
+        >
+
+    <TableLayout
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/naming_nutrition_facts"
+                android:layout_weight="1"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/naming_as_sold_100g_100ml"
+                android:layout_weight="1"
+                android:text="Tel que vendu \n pour 100 g / 100 ml"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/naming_nutrition_facts_energy_kj"
+                android:layout_weight="1"
+                android:text="Energy (kJ)" />
+
+            <TextView
+                android:id="@+id/nutrition_facts_energy_kj_value"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/naming_nutrition_facts_energy_kcal"
+                android:layout_weight="1"
+                android:text="Energy (kcal)" />
+
+            <TextView
+                android:id="@+id/nutrition_facts_energy_kcal_value"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/naming_nutrition_facts_fat"
+                android:layout_weight="1"
+                android:text="Fat" />
+
+            <TextView
+                android:id="@+id/nutrition_facts_fat_value"
+                android:layout_weight="1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/naming_nutrition_facts_saturated_fat"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="- Saturated Fat" />
+
+            <TextView
+                android:id="@+id/nutrition_facts_saturated_fat_value"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/naming_nutrition_facts_carbohydrates"
+                android:layout_weight="1"
+                android:text="Glucides" />
+
+            <TextView
+                android:id="@+id/nutrition_facts_carbohydrates_value"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/naming_nutrition_facts_sugars"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="- Sucres" />
+
+            <TextView
+                android:id="@+id/nutrition_facts_sugars_value"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/naming_nutrition_facts_fibers"
+                android:layout_weight="1"
+                android:text="Fibres" />
+
+            <TextView
+                android:id="@+id/nutrition_facts_fibers_value"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/naming_nutrition_facts_proteins"
+                android:layout_weight="1"
+                android:text="Protéines" />
+
+            <TextView
+                android:id="@+id/nutrition_facts_proteins_value"
+                android:layout_weight="1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/naming_nutrition_facts_salt"
+                android:layout_weight="1"
+                android:text="Sel" />
+
+            <TextView
+                android:id="@+id/nutrition_facts_salt_value"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/naming_nutrition_facts_sodium"
+                android:layout_weight="1"
+                android:text="- Sodium"
+                android:padding="10dp"
+                />
+
+            <TextView
+                android:id="@+id/nutrition_facts_sodium_value"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/naming_nutrition_facts_alcohol"
+                android:layout_weight="1"
+                android:text="Alcohol"
+                />
+
+            <TextView
+                android:id="@+id/nutrition_facts_alcohol_value"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/naming_nutrition_facts_iron"
+                android:layout_weight="1"
+                android:text="Fer"
+                />
+
+            <TextView
+                android:id="@+id/nutrition_facts_iron_value"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/naming_nutrition_facts_magnesium"
+                android:layout_weight="1"
+                android:text="Magnésium"
+                />
+
+            <TextView
+                android:id="@+id/nutrition_facts_magnesium_value"
+                android:layout_weight="1"/>
+        </TableRow>
+
+    </TableLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

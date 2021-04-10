@@ -142,6 +142,7 @@
                     <include layout="@layout/collapsible_nutri_score_section"/>
                     <include layout="@layout/collapsible_ingredients_analysis_section"/>
                     <include layout="@layout/collapsible_nutrient_levels_section"/>
+                    <include layout="@layout/collapsible_nutrition_facts_section"/>
                     <include layout="@layout/space_under_collapsible_section"/>
                 </LinearLayout>
             </LinearLayout>

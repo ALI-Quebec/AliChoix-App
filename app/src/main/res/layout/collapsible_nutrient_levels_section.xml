@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginRight="24dp"
     android:layout_marginLeft="24dp"
-    android:layout_marginBottom="24dp"
+    android:layout_marginBottom="12dp"
     android:layout_marginTop="0dp"
     android:padding="16dp"
     android:background="@color/item_collapsible_header"
@@ -15,7 +15,7 @@
         android:id="@+id/nutrient_levels_collapsible_header_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/naming_nutrient_levels"
+        android:text="@string/naming_nutrient_levels_collapsible_header_section"
         android:textColor="@color/black"
         android:textSize="@dimen/text_font_size"
         android:textStyle="bold" />
