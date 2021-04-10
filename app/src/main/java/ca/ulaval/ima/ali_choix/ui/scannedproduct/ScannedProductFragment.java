@@ -148,7 +148,16 @@ public class ScannedProductFragment extends Fragment {
         sugarsQuantityDescription = root.findViewById(R.id.sugars_quantity);
         saltQuantityDescription = root.findViewById(R.id.salt_quantity);
 
-        getInformationsWithOpenFoodFact("0677210090246");
+        if(getArguments() != null){
+            String productId = getArguments().getString("productId");
+            if (productId == null){
+                productId = "";
+            }
+            getInformationsWithOpenFoodFact(getArguments().getString("productId"));
+        } else {
+            //TODO Appeller l'historique pour savoir quoi afficher
+            getInformationsWithOpenFoodFact("0677210090246");
+        }
 
         return root;
     }
