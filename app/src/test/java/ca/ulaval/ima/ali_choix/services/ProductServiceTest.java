@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 
+import ca.ulaval.ima.ali_choix.domain.GlobalConstant;
 import ca.ulaval.ima.ali_choix.domain.NutrientLevelsQuantity;
 import ca.ulaval.ima.ali_choix.domain.Nutriments;
 import ca.ulaval.ima.ali_choix.domain.exceptions.InvalidNutriScoreGradeException;
@@ -72,10 +73,10 @@ public class ProductServiceTest {
         nutriments.setSalt100g(0.1f);
 
         HashMap<String, NutrientLevelsQuantity> nutrientLevelsQuantity = new HashMap<>();
-        nutrientLevelsQuantity.put("fatNutrientLevelsQuantity", NutrientLevelsQuantity.LOW);
-        nutrientLevelsQuantity.put("saturatedFatNutrientLevelsQuantity", NutrientLevelsQuantity.LOW);
-        nutrientLevelsQuantity.put("sugarsNutrientLevelsQuantity", NutrientLevelsQuantity.LOW);
-        nutrientLevelsQuantity.put("saltNutrientLevelsQuantity", NutrientLevelsQuantity.LOW);
+        nutrientLevelsQuantity.put(GlobalConstant.FAT_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsQuantity.LOW);
+        nutrientLevelsQuantity.put(GlobalConstant.SATURATED_FAT_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsQuantity.LOW);
+        nutrientLevelsQuantity.put(GlobalConstant.SUGARS_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsQuantity.LOW);
+        nutrientLevelsQuantity.put(GlobalConstant.SALT_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsQuantity.LOW);
 
         assertEquals(nutrientLevelsQuantity, productService.getNutrientLevelsQuantity(nutriments));
     }
@@ -88,10 +89,10 @@ public class ProductServiceTest {
         nutriments.setSalt100g(1.5f);
 
         HashMap<String, NutrientLevelsQuantity> nutrientLevelsQuantity = new HashMap<>();
-        nutrientLevelsQuantity.put("fatNutrientLevelsQuantity", NutrientLevelsQuantity.MODERATE);
-        nutrientLevelsQuantity.put("saturatedFatNutrientLevelsQuantity", NutrientLevelsQuantity.MODERATE);
-        nutrientLevelsQuantity.put("sugarsNutrientLevelsQuantity", NutrientLevelsQuantity.MODERATE);
-        nutrientLevelsQuantity.put("saltNutrientLevelsQuantity", NutrientLevelsQuantity.MODERATE);
+        nutrientLevelsQuantity.put(GlobalConstant.FAT_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsQuantity.MODERATE);
+        nutrientLevelsQuantity.put(GlobalConstant.SATURATED_FAT_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsQuantity.MODERATE);
+        nutrientLevelsQuantity.put(GlobalConstant.SUGARS_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsQuantity.MODERATE);
+        nutrientLevelsQuantity.put(GlobalConstant.SALT_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsQuantity.MODERATE);
 
         assertEquals(nutrientLevelsQuantity, productService.getNutrientLevelsQuantity(nutriments));
     }
@@ -104,10 +105,10 @@ public class ProductServiceTest {
         nutriments.setSalt100g(4f);
 
         HashMap<String, NutrientLevelsQuantity> nutrientLevelsQuantity = new HashMap<>();
-        nutrientLevelsQuantity.put("fatNutrientLevelsQuantity", NutrientLevelsQuantity.HIGH);
-        nutrientLevelsQuantity.put("saturatedFatNutrientLevelsQuantity", NutrientLevelsQuantity.HIGH);
-        nutrientLevelsQuantity.put("sugarsNutrientLevelsQuantity", NutrientLevelsQuantity.HIGH);
-        nutrientLevelsQuantity.put("saltNutrientLevelsQuantity", NutrientLevelsQuantity.HIGH);
+        nutrientLevelsQuantity.put(GlobalConstant.FAT_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsQuantity.HIGH);
+        nutrientLevelsQuantity.put(GlobalConstant.SATURATED_FAT_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsQuantity.HIGH);
+        nutrientLevelsQuantity.put(GlobalConstant.SUGARS_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsQuantity.HIGH);
+        nutrientLevelsQuantity.put(GlobalConstant.SALT_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsQuantity.HIGH);
 
         assertEquals(nutrientLevelsQuantity, productService.getNutrientLevelsQuantity(nutriments));
     }
