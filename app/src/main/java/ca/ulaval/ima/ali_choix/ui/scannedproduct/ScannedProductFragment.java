@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
-import ca.ulaval.ima.ali_choix.services.HistoricService;
+import ca.ulaval.ima.ali_choix.services.HistoryService;
 import ca.ulaval.ima.ali_choix.services.ProductService;
 import ca.ulaval.ima.ali_choix.services.ServiceLocator;
 import cz.msebera.android.httpclient.Header;
@@ -58,14 +58,14 @@ public class ScannedProductFragment extends Fragment {
     private TextView nutriScoreDescription;
     private String scannedProductNutriScoreGrade;
 
-    private HistoricService historicService;
+    private HistoryService historyService;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_scanned_product, container, false);
 
-        historicService = (HistoricService) ServiceLocator.getInstance().get(HistoricService.class);
+        historyService = (HistoryService) ServiceLocator.getInstance().get(HistoryService.class);
 
         scannedProductImage = root.findViewById(R.id.scanned_product_image);
         scannedProductOrigin = root.findViewById(R.id.scanned_product_origin);
@@ -139,7 +139,7 @@ public class ScannedProductFragment extends Fragment {
                     Gson gson = new Gson();
                     product = gson.fromJson(String.valueOf(productJson), Product.class);
                     showInformations();
-                    historicService.addHistoricElement(productId,product.getImage(),product.getFrenchName());
+                    historyService.addHistoricElement(productId,product.getImage(),product.getFrenchName());
 
                 } catch (JSONException e) {
                     e.printStackTrace();

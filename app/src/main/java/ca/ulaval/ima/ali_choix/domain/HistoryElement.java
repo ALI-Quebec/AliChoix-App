@@ -2,13 +2,13 @@ package ca.ulaval.ima.ali_choix.domain;
 
 import java.time.LocalDateTime;
 
-public class HistoricElement {
+public class HistoryElement {
     private ProductId productId;
     private String image_front_url;
     private String productName;
     private LocalDateTime timeAddedToHistoric;
 
-    public HistoricElement(ProductId productId, String image_front_url, String productName, LocalDateTime timeAddedToHistoric) {
+    public HistoryElement(ProductId productId, String image_front_url, String productName, LocalDateTime timeAddedToHistoric) {
         this.productId = productId;
         this.image_front_url = image_front_url;
         this.productName = productName;

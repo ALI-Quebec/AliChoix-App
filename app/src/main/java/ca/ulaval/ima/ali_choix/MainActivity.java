@@ -1,19 +1,16 @@
 package ca.ulaval.ima.ali_choix;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.IBinder;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import ca.ulaval.ima.ali_choix.services.HistoricService;
+import ca.ulaval.ima.ali_choix.services.HistoryService;
 import ca.ulaval.ima.ali_choix.services.ServiceLocator;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setup(){
         ServiceLocator serviceLocator = ServiceLocator.getInstance();
-        serviceLocator.subscribeService(HistoricService.class, new HistoricService());
+        serviceLocator.subscribeService(HistoryService.class, new HistoryService());
     }
 
 }

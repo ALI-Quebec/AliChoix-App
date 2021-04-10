@@ -2,15 +2,15 @@ package ca.ulaval.ima.ali_choix.domain;
 
 import java.util.List;
 
-public interface HistoricRepository {
+public interface HistoryRepository {
 
-    void addElement(HistoricElement historicElement);
+    void addElement(HistoryElement historyElement);
 
     void removeElement(ProductId productId);
 
     void removeAllElement();
 
-    List<HistoricElement> getHistoric();
+    List<HistoryElement> getHistoric();
 
     ProductId getLastSearchedProductId();
 }

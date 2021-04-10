@@ -4,24 +4,24 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import ca.ulaval.ima.ali_choix.domain.HistoricElement;
-import ca.ulaval.ima.ali_choix.domain.HistoricRepository;
+import ca.ulaval.ima.ali_choix.domain.HistoryElement;
+import ca.ulaval.ima.ali_choix.domain.HistoryRepository;
 import ca.ulaval.ima.ali_choix.domain.ProductId;
 import ca.ulaval.ima.ali_choix.domain.exceptions.HistoricEmptyException;
 
-public class HistoricRepositoryLocal implements HistoricRepository {
-    private LinkedHashMap<ProductId,HistoricElement> historic;
+public class HistoryRepositoryLocal implements HistoryRepository {
+    private LinkedHashMap<ProductId, HistoryElement> historic;
 
-    public HistoricRepositoryLocal(){
+    public HistoryRepositoryLocal(){
         historic = new LinkedHashMap<>();
     }
 
     @Override
-    public void addElement(HistoricElement historicElement) {
-        if(historic.containsKey(historicElement.getProductId())){
-            historic.remove(historicElement.getProductId());
+    public void addElement(HistoryElement historyElement) {
+        if(historic.containsKey(historyElement.getProductId())){
+            historic.remove(historyElement.getProductId());
         }
-        historic.put(historicElement.getProductId(),historicElement);
+        historic.put(historyElement.getProductId(), historyElement);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class HistoricRepositoryLocal implements HistoricRepository {
     }
 
     @Override
-    public List<HistoricElement> getHistoric() {
+    public List<HistoryElement> getHistoric() {
         return new ArrayList<>(historic.values());
     }
 
