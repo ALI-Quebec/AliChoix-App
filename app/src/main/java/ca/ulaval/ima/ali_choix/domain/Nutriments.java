@@ -3,22 +3,22 @@ package ca.ulaval.ima.ali_choix.domain;
 import com.google.gson.annotations.SerializedName;
 
 public class Nutriments {
-    private Float fat_100g;
+    private Float fat_100g = 0f;
     @SerializedName(value = "saturated-fat_100g")
-    private Float saturated_fat_100g;
-    private Float sugars_100g;
-    private Float salt_100g;
+    private Float saturated_fat_100g = 0f;
+    private Float sugars_100g = 0f;
+    private Float salt_100g = 0f;
     @SerializedName(value = "energy-kcal_100g")
-    private Float energy_kcal_100g;
+    private Float energy_kcal_100g = 0f;
     @SerializedName(value = "energy-kj_value")
-    private Float energy_kj_value;
-    private Float carbohydrates_100g;
-    private Float fiber_100g;
-    private Float proteins_100g;
-    private Float sodium_100g;
-    private Float alcohol_100g;
-    private Float iron_100g;
-    private Float magnesium_100g;
+    private Float energy_kj_value = 0f;
+    private Float carbohydrates_100g = 0f;
+    private Float fiber_100g = 0f;
+    private Float proteins_100g = 0f;
+    private Float sodium_100g = 0f;
+    private Float alcohol_100g = 0f;
+    private Float iron_100g = 0f;
+    private Float magnesium_100g = 0f;
 
     public void setSaturatedFat100g(Float saturated_fat_100g) { this.saturated_fat_100g = saturated_fat_100g; }
 
