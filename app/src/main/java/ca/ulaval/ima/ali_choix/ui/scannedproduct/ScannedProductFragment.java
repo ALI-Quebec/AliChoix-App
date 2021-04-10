@@ -1,4 +1,4 @@
-package ca.ulaval.ima.ali_choix.ui.scannedProduct;
+package ca.ulaval.ima.ali_choix.ui.scannedproduct;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -20,11 +20,21 @@ import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
+import ca.ulaval.ima.ali_choix.services.HistoryService;
+
+import ca.ulaval.ima.ali_choix.domain.GlobalConstant;
+import ca.ulaval.ima.ali_choix.domain.NutrientLevelsQuantity;
+import ca.ulaval.ima.ali_choix.domain.Nutriments;
+
 import ca.ulaval.ima.ali_choix.services.ProductService;
+import ca.ulaval.ima.ali_choix.services.ServiceLocator;
 import cz.msebera.android.httpclient.Header;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.Product;
@@ -45,7 +55,7 @@ public class ScannedProductFragment extends Fragment {
     private RelativeLayout ingredientsAnalysisCollapsible;
     private ImageView ingredientAnalysisDownArrow;
     private ImageView ingredientAnalysisUpArrow;
-    private TextView isVegeterian;
+    private TextView isVegetarian;
     private TextView isVegan;
     private RelativeLayout ingredientsAnalysisLayout;
     private TextView isPalmOilFree;
@@ -55,11 +65,24 @@ public class ScannedProductFragment extends Fragment {
     private ImageView nutrientLevelsUpArrow;
     private TextView nutriScoreDescription;
     private String scannedProductNutriScoreGrade;
+    private ImageView fatQuantityIndicator;
+    private ImageView saturatedFatQuantityIndicator;
+    private ImageView sugarsQuantityIndicator;
+    private ImageView saltQuantityIndicator;
+    private TextView fatQuantityDescription;
+    private TextView saturatedFatQuantityDescription;
+    private TextView sugarsQuantityDescription;
+    private TextView saltQuantityDescription;
+
+    private HistoryService historyService;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_scanned_product, container, false);
+
+        historyService = (HistoryService) ServiceLocator.getInstance().get(HistoryService.class);
+
         scannedProductImage = root.findViewById(R.id.scanned_product_image);
         scannedProductOrigin = root.findViewById(R.id.scanned_product_origin);
         scannedProductCountryImported = root.findViewById(R.id.scanned_product_imported_country);
@@ -87,7 +110,7 @@ public class ScannedProductFragment extends Fragment {
         ingredientsAnalysisLayout = root.findViewById(R.id.diet_type_layout);
         ingredientAnalysisDownArrow = root.findViewById(R.id.diet_down_arrow);
         ingredientAnalysisUpArrow = root.findViewById(R.id.diet_up_arrow);
-        isVegeterian = root.findViewById(R.id.is_vegeterian);
+        isVegetarian = root.findViewById(R.id.is_vegeterian);
         isVegan = root.findViewById(R.id.is_vegan);
         isPalmOilFree = root.findViewById(R.id.is_palm_oil_free);
 
@@ -116,15 +139,24 @@ public class ScannedProductFragment extends Fragment {
             }
         });
 
-        getInformationsWithOpenFoodFact(getArguments().getString("productId"));
+        fatQuantityIndicator = root.findViewById(R.id.fat_quantity_indicator);
+        saturatedFatQuantityIndicator = root.findViewById(R.id.saturated_fat_quantity_indicator);
+        sugarsQuantityIndicator = root.findViewById(R.id.sugars_indicator);
+        saltQuantityIndicator = root.findViewById(R.id.salt_indicator);
+        fatQuantityDescription = root.findViewById(R.id.fat_quantity);
+        saturatedFatQuantityDescription = root.findViewById(R.id.saturated_fat_quantity);
+        sugarsQuantityDescription = root.findViewById(R.id.sugars_quantity);
+        saltQuantityDescription = root.findViewById(R.id.salt_quantity);
+
+        getInformationsWithOpenFoodFact("0677210090246");
 
         return root;
     }
 
-
-    private void getInformationsWithOpenFoodFact(String productID) {
+    private void getInformationsWithOpenFoodFact(String productId) {
         OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
-        OFFClient.get(productID, null, new JsonHttpResponseHandler() {
+        OFFClient.get(productId, null, new JsonHttpResponseHandler() {
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject dataObject) {
                 try {
@@ -132,6 +164,8 @@ public class ScannedProductFragment extends Fragment {
                     Gson gson = new Gson();
                     product = gson.fromJson(String.valueOf(productJson), Product.class);
                     showInformations();
+                    historyService.addHistoryElement(productId,product.getImage(),product.getFrenchName());
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -152,10 +186,15 @@ public class ScannedProductFragment extends Fragment {
         String englishName = product.getEnglishName();
         String frenchName = product.getFrenchName();
         String url_front = product.getImage();
+        String origin = product.getOrigin();
+        String countryImported = product.getCountryImported();
+        String quantity = product.getQuantity();
+        Nutriments nutriments = product.getNutriments();
+
         Picasso.get().load(url_front).into(scannedProductImage);
-        scannedProductOrigin.setText(product.getOrigin());
-        scannedProductCountryImported.setText(product.getCountryImported());
-        scannedProductQuantity.setText(product.getQuantity()+'g');
+        scannedProductOrigin.setText( origin == null || origin.isEmpty() ? "No results found" : origin);
+        scannedProductCountryImported.setText(countryImported == null || countryImported.isEmpty()  ? "No results found" : countryImported);
+        scannedProductQuantity.setText(quantity == null || quantity.isEmpty() ? "No results found" : quantity+'g');
         if (englishName != null && !englishName.trim().equals("")) {
             scannedProductName.setText(englishName);
         }
@@ -166,6 +205,30 @@ public class ScannedProductFragment extends Fragment {
         scannedProductNutriScoreGrade = product.getNutriScoreGrade();
         nutriScoreDrawable.setBackground(getNutriScoreGradeDrawable(scannedProductNutriScoreGrade.toLowerCase()));
         nutriScoreDescription.setText(productService.getNutriScoreDescription(scannedProductNutriScoreGrade.toLowerCase()));
+
+        //TODO est-ce qu'il ne faudrait pas ici mettre un interface pour pas que le UI soit dépendant du naming dans le domaine ?
+        HashMap nutrientLevels = productService.getNutrientLevelsQuantity(nutriments);
+        NutrientLevelsQuantity fatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(GlobalConstant.FAT_NUTRIENT_LEVELS_QUANTITY);
+        NutrientLevelsQuantity saturatedFatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(GlobalConstant.SATURATED_FAT_NUTRIENT_LEVELS_QUANTITY);
+        NutrientLevelsQuantity sugarsNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(GlobalConstant.SUGARS_NUTRIENT_LEVELS_QUANTITY);
+        NutrientLevelsQuantity saltNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(GlobalConstant.SALT_NUTRIENT_LEVELS_QUANTITY);
+
+        fatQuantityIndicator.setBackground(getNutrientLevelsQuantityDrawable(fatNutrientLevelsQuantity.toString()));
+        saturatedFatQuantityIndicator.setBackground(getNutrientLevelsQuantityDrawable(saturatedFatNutrientLevelsQuantity.toString()));
+        sugarsQuantityIndicator.setBackground(getNutrientLevelsQuantityDrawable(sugarsNutrientLevelsQuantity.toString()));
+        saltQuantityIndicator.setBackground(getNutrientLevelsQuantityDrawable(saltNutrientLevelsQuantity.toString()));
+
+        fatQuantityDescription.setText(productService.getNutrientLevelsDescription(fatNutrientLevelsQuantity.toString()));
+        saturatedFatQuantityDescription.setText(productService.getNutrientLevelsDescription(saturatedFatNutrientLevelsQuantity.toString()));
+        sugarsQuantityDescription.setText(productService.getNutrientLevelsDescription(sugarsNutrientLevelsQuantity.toString()));
+        saltQuantityDescription.setText(productService.getNutrientLevelsDescription(saltNutrientLevelsQuantity.toString()));
+
+        ArrayList<String> ingredientsAnalysisTags = product.getIngredientsAnalysisTags();
+        for (String tag: ingredientsAnalysisTags) {
+            if (tag.contains("palm")) setIngredientsAnalysisTextView(isPalmOilFree, tag);
+            if (tag.contains("vegan")) setIngredientsAnalysisTextView(isVegan, tag);
+            if (tag.contains("vegetarian")) setIngredientsAnalysisTextView(isVegetarian, tag);
+        }
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -181,6 +244,35 @@ public class ScannedProductFragment extends Fragment {
                 return getResources().getDrawable(R.drawable.ic_nutriscore_d);
             case "e":
                 return getResources().getDrawable(R.drawable.ic_nutriscore_e);
+            default:
+                break;
+        }
+
+        return null;
+    }
+
+    private void setIngredientsAnalysisTextView(TextView textView, String tag) {
+        switch (tag) {
+            case "en:palm-oil-free":
+            case "en:vegan":
+            case "en:vegetarian":
+                textView.setText("Oui");
+                break;
+            default:
+                textView.setText("Non");
+                break;
+        }
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private Drawable getNutrientLevelsQuantityDrawable(String level) {
+        switch (level) {
+            case "low":
+                return getResources().getDrawable(R.drawable.green_circle);
+            case "moderate":
+                return getResources().getDrawable(R.drawable.orange_circle);
+            case "high":
+                return getResources().getDrawable(R.drawable.red_circle);
             default:
                 break;
         }
