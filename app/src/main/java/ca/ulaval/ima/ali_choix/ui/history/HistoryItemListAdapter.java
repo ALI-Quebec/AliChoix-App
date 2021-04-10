@@ -26,8 +26,8 @@ public class HistoryItemListAdapter extends ArrayAdapter<HistoryElement> {
     }
 
     private class ViewHolder {
-        ImageView imageView;
-        TextView txtTitle;
+        ImageView historyProductImage;
+        TextView historyProductName;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -39,14 +39,14 @@ public class HistoryItemListAdapter extends ArrayAdapter<HistoryElement> {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.history_item, null);
             holder = new ViewHolder();
-            holder.txtTitle = (TextView) convertView.findViewById(R.id.history_product_name);
-            holder.imageView = (ImageView) convertView.findViewById(R.id.history_product_image);
+            holder.historyProductName = (TextView) convertView.findViewById(R.id.history_product_name);
+            holder.historyProductImage = (ImageView) convertView.findViewById(R.id.history_product_image);
             convertView.setTag(holder);
         } else
             holder = (ViewHolder) convertView.getTag();
 
-        holder.txtTitle.setText(historyElement.getProductName());
-        Picasso.get().load(historyElement.getImage_front_url()).into(holder.imageView);
+        holder.historyProductName.setText(historyElement.getProductName());
+        Picasso.get().load(historyElement.getImage_front_url()).into(holder.historyProductImage);
 
         return convertView;
     }
