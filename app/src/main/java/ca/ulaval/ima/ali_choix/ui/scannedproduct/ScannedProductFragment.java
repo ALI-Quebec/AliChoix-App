@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
+import ca.ulaval.ima.ali_choix.domain.GlobalConstant;
 import ca.ulaval.ima.ali_choix.domain.NutrientLevelsQuantity;
 import ca.ulaval.ima.ali_choix.domain.Nutriments;
 import ca.ulaval.ima.ali_choix.services.ProductService;
@@ -194,13 +195,13 @@ public class ScannedProductFragment extends Fragment {
         nutriScoreDrawable.setBackground(getNutriScoreGradeDrawable(scannedProductNutriScoreGrade.toLowerCase()));
         nutriScoreDescription.setText(productService.getNutriScoreDescription(scannedProductNutriScoreGrade.toLowerCase()));
 
+        //TODO est-ce qu'il ne faudrait pas ici mettre un interface pour pas que le UI soit dépendant du naming dans le domaine ?
         HashMap nutrientLevels = productService.getNutrientLevelsQuantity(nutriments);
-        NutrientLevelsQuantity fatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get("fatNutrientLevelsQuantity");
-        NutrientLevelsQuantity saturatedFatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get("saturatedFatNutrientLevelsQuantity");
-        NutrientLevelsQuantity sugarsNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get("sugarNutrientLevelsQuantity");
-        NutrientLevelsQuantity saltNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get("saltNutrientLevelsQuantity");
+        NutrientLevelsQuantity fatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(GlobalConstant.FAT_NUTRIENT_LEVELS_QUANTITY);
+        NutrientLevelsQuantity saturatedFatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(GlobalConstant.SATURATED_FAT_NUTRIENT_LEVELS_QUANTITY);
+        NutrientLevelsQuantity sugarsNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(GlobalConstant.SUGARS_NUTRIENT_LEVELS_QUANTITY);
+        NutrientLevelsQuantity saltNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(GlobalConstant.SALT_NUTRIENT_LEVELS_QUANTITY);
 
-        //TODO est-ce qu'il ne faudrait pas ici mettre un interface pour pas que le UI soit dépendant du naming du service ?
         fatQuantityIndicator.setBackground(getNutrientLevelsQuantityDrawable(fatNutrientLevelsQuantity.toString()));
         saturatedFatQuantityIndicator.setBackground(getNutrientLevelsQuantityDrawable(saturatedFatNutrientLevelsQuantity.toString()));
         sugarsQuantityIndicator.setBackground(getNutrientLevelsQuantityDrawable(sugarsNutrientLevelsQuantity.toString()));
@@ -242,11 +243,7 @@ public class ScannedProductFragment extends Fragment {
     private void setIngredientsAnalysisTextView(TextView textView, String tag) {
         switch (tag) {
             case "en:palm-oil-free":
-                textView.setText("Oui");
-                break;
             case "en:vegan":
-                textView.setText("Oui");
-                break;
             case "en:vegetarian":
                 textView.setText("Oui");
                 break;
