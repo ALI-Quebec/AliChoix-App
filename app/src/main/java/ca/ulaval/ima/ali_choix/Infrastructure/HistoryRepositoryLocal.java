@@ -7,43 +7,43 @@ import java.util.List;
 import ca.ulaval.ima.ali_choix.domain.HistoryElement;
 import ca.ulaval.ima.ali_choix.domain.HistoryRepository;
 import ca.ulaval.ima.ali_choix.domain.ProductId;
-import ca.ulaval.ima.ali_choix.domain.exceptions.HistoricEmptyException;
+import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryEmptyException;
 
 public class HistoryRepositoryLocal implements HistoryRepository {
-    private LinkedHashMap<ProductId, HistoryElement> historic;
+    private LinkedHashMap<ProductId, HistoryElement> history;
 
     public HistoryRepositoryLocal(){
-        historic = new LinkedHashMap<>();
+        history = new LinkedHashMap<>();
     }
 
     @Override
     public void addElement(HistoryElement historyElement) {
-        if(historic.containsKey(historyElement.getProductId())){
-            historic.remove(historyElement.getProductId());
+        if(history.containsKey(historyElement.getProductId())){
+            history.remove(historyElement.getProductId());
         }
-        historic.put(historyElement.getProductId(), historyElement);
+        history.put(historyElement.getProductId(), historyElement);
     }
 
     @Override
     public void removeElement(ProductId productId) {
-        historic.remove(productId);
+        history.remove(productId);
     }
 
     @Override
-    public void removeAllElement() {
-        historic.clear();
+    public void removeAllElements() {
+        history.clear();
     }
 
     @Override
-    public List<HistoryElement> getHistoric() {
-        return new ArrayList<>(historic.values());
+    public List<HistoryElement> getHistory() {
+        return new ArrayList<>(history.values());
     }
 
     @Override
     public ProductId getLastSearchedProductId() {
-        if(historic.size() == 0){
-            throw new HistoricEmptyException();
+        if(history.size() == 0){
+            throw new HistoryEmptyException();
         }
-        return new ArrayList<>(historic.keySet()).get(historic.size() - 1);
+        return new ArrayList<>(history.keySet()).get(history.size() - 1);
     }
 }
