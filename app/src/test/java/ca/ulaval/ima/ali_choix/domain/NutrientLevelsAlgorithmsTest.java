@@ -36,18 +36,18 @@ public class NutrientLevelsAlgorithmsTest {
     }
 
     @Test
-    public void givenLowSugarLevel_whenEvaluatingSugar_thenReturnLowNutrientLevelsQuantity() {
-        assertEquals(NutrientLevelsQuantity.LOW, NutrientLevelsAlgorithms.evaluateSugar(4f));
+    public void givenLowSugarsLevel_whenEvaluatingSugars_thenReturnLowNutrientLevelsQuantity() {
+        assertEquals(NutrientLevelsQuantity.LOW, NutrientLevelsAlgorithms.evaluateSugars(4f));
     }
 
     @Test
-    public void givenMediumSugarLevel_whenEvaluatingSugar_thenReturnModerateNutrientLevelsQuantity() {
-        assertEquals(NutrientLevelsQuantity.MODERATE, NutrientLevelsAlgorithms.evaluateSugar(9.5f));
+    public void givenMediumSugarsLevel_whenEvaluatingSugars_thenReturnModerateNutrientLevelsQuantity() {
+        assertEquals(NutrientLevelsQuantity.MODERATE, NutrientLevelsAlgorithms.evaluateSugars(9.5f));
     }
 
     @Test
-    public void givenHighSugarLevel_whenEvaluatingSugar_thenReturnHighNutrientLevelsQuantity() {
-        assertEquals(NutrientLevelsQuantity.HIGH, NutrientLevelsAlgorithms.evaluateSugar(13f));
+    public void givenHighSugarsLevel_whenEvaluatingSugars_thenReturnHighNutrientLevelsQuantity() {
+        assertEquals(NutrientLevelsQuantity.HIGH, NutrientLevelsAlgorithms.evaluateSugars(13f));
     }
 
     @Test

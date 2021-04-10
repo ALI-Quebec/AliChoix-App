@@ -39,8 +39,7 @@
         <ImageView
             android:id="@+id/fat_quantity_indicator"
             android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/orange_circle"/>
+            android:layout_height="20dp"/>
 
         <TextView
             android:id="@+id/naming_fat_quantity"
@@ -62,7 +61,6 @@
             android:id="@+id/saturated_fat_quantity_indicator"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/green_circle"
             android:layout_below="@id/fat_quantity_indicator"
             android:layout_marginTop="20dp"/>
 
@@ -90,7 +88,6 @@
             android:id="@+id/sugars_indicator"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/orange_circle"
             android:layout_below="@id/saturated_fat_quantity_indicator"
             android:layout_marginTop="20dp"/>
 
@@ -118,7 +115,6 @@
             android:id="@+id/salt_indicator"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/orange_circle"
             android:layout_below="@id/sugars_indicator"
             android:layout_marginTop="20dp"/>
 

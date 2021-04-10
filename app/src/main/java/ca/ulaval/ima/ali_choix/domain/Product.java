@@ -1,5 +1,7 @@
 package ca.ulaval.ima.ali_choix.domain;
 
+import java.util.ArrayList;
+
 public class Product {
     private String image_front_url;
     private String origins;
@@ -8,6 +10,8 @@ public class Product {
     private String product_name_en;
     private String product_name_fr;
     private String nutriscore_grade;
+    private Nutriments nutriments;
+    private ArrayList<String> ingredients_analysis_tags;
 
     public String getImage() {
         return image_front_url;
@@ -58,7 +62,15 @@ public class Product {
         this.product_name_fr = product_name_fr;
     }
 
-    public String getNutriScoreGrade() { return nutriscore_grade;}
+    public String getNutriScoreGrade() { return nutriscore_grade; }
 
     public void setNutriScoreGrade() { this.nutriscore_grade = nutriscore_grade; }
+
+    public Nutriments getNutriments() { return nutriments; }
+
+    public void setNutriments() {  this.nutriments = nutriments; }
+
+    public ArrayList<String> getIngredientsAnalysisTags() { return ingredients_analysis_tags; }
+
+    public void setIngredientsAnalysisTags() { this.ingredients_analysis_tags = ingredients_analysis_tags; }
 }
