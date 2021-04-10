@@ -1,5 +1,7 @@
 package ca.ulaval.ima.ali_choix.domain;
 
+import java.util.ArrayList;
+
 public class Product {
     private String image_front_url;
     private String origins;
@@ -8,6 +10,8 @@ public class Product {
     private String product_name_en;
     private String product_name_fr;
     private String nutriscore_grade;
+    private Nutriments nutriments;
+    private ArrayList<String> ingredients_analysis_tags;
 
     public String getImage() {
         return image_front_url;
@@ -29,7 +33,7 @@ public class Product {
         return countries_imported;
     }
 
-    public void setCountriesImported() {
+    public void setCountriesImported(String countries_imported) {
         this.countries_imported = countries_imported;
     }
 
@@ -37,7 +41,7 @@ public class Product {
         return product_quantity;
     }
 
-    public void setProductQuantity() {
+    public void setProductQuantity(String product_quantity) {
         this.product_quantity = product_quantity;
     }
 
@@ -46,7 +50,7 @@ public class Product {
         return product_name_en;
     }
 
-    public void setEnglishName() {
+    public void setEnglishName(String product_name_en) {
         this.product_name_en = product_name_en;
     }
 
@@ -54,11 +58,19 @@ public class Product {
         return product_name_fr;
     }
 
-    public void setFrenchName() {
+    public void setFrenchName(String product_name_fr) {
         this.product_name_fr = product_name_fr;
     }
 
-    public String getNutriScoreGrade() { return nutriscore_grade;}
+    public String getNutriScoreGrade() { return nutriscore_grade; }
 
-    public void setNutriScoreGrade() { this.nutriscore_grade = nutriscore_grade; }
+    public void setNutriScoreGrade(String nutriscore_grade) { this.nutriscore_grade = nutriscore_grade; }
+
+    public Nutriments getNutriments() { return nutriments; }
+
+    public void setNutriments(Nutriments nutriments) {  this.nutriments = nutriments; }
+
+    public ArrayList<String> getIngredientsAnalysisTags() { return ingredients_analysis_tags; }
+
+    public void setIngredientsAnalysisTags(ArrayList<String> ingredients_analysis_tags) { this.ingredients_analysis_tags = ingredients_analysis_tags; }
 }

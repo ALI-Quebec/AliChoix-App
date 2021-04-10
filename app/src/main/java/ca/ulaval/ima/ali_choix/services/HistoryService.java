@@ -14,40 +14,40 @@ public class HistoryService {
 
     public HistoryService(){
         historyRepository = new HistoryRepositoryLocal();
-        getHistoricFromDevice();
+        getHistoryFromDevice();
         historyElementFactory = new HistoryElementFactory();
     }
 
-    public void addHistoricElement(String productId, String image_front_url, String productName){
+    public void addHistoryElement(String productId, String image_front_url, String productName){
         HistoryElement addedHistoryElement = historyElementFactory.create(productId,image_front_url,productName);
         historyRepository.addElement(addedHistoryElement);
-        saveHistoricOnDevice();
+        saveHistoryOnDevice();
     }
 
-    public void removeHistoricElement(String productId){
+    public void removeHistoryElement(String productId){
         ProductId removedProductId = new ProductId(productId);
         historyRepository.removeElement(removedProductId);
-        saveHistoricOnDevice();
+        saveHistoryOnDevice();
     }
 
-    public void removeAllHistoric(){
-        historyRepository.removeAllElement();
-        saveHistoricOnDevice();
+    public void removeAllHistory(){
+        historyRepository.removeAllElements();
+        saveHistoryOnDevice();
     }
 
     public List<HistoryElement> getHistory(){
-        return historyRepository.getHistoric();
+        return historyRepository.getHistory();
     }
 
     public String getLastSearchedProductId(){
         return historyRepository.getLastSearchedProductId().toString();
     }
 
-    private void saveHistoricOnDevice(){
+    private void saveHistoryOnDevice(){
       //TODO
     }
 
-    private void getHistoricFromDevice(){
+    private void getHistoryFromDevice(){
         //TODO
     }
 }

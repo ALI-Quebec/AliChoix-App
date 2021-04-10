@@ -6,13 +6,13 @@ public class HistoryElement {
     private ProductId productId;
     private String image_front_url;
     private String productName;
-    private LocalDateTime timeAddedToHistoric;
+    private LocalDateTime timeAddedToHistory;
 
-    public HistoryElement(ProductId productId, String image_front_url, String productName, LocalDateTime timeAddedToHistoric) {
+    public HistoryElement(ProductId productId, String image_front_url, String productName, LocalDateTime timeAddedToHistory) {
         this.productId = productId;
         this.image_front_url = image_front_url;
         this.productName = productName;
-        this.timeAddedToHistoric = timeAddedToHistoric;
+        this.timeAddedToHistory = timeAddedToHistory;
     }
 
     public ProductId getProductId() {
@@ -27,7 +27,7 @@ public class HistoryElement {
         return productName;
     }
 
-    public LocalDateTime getTimeAddedToHistoric() {
-        return timeAddedToHistoric;
+    public LocalDateTime getTimeAddedToHistory() {
+        return timeAddedToHistory;
     }
 }

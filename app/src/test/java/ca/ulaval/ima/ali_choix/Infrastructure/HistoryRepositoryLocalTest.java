@@ -5,7 +5,7 @@ import org.junit.Test;
 import ca.ulaval.ima.ali_choix.domain.HistoryElement;
 import ca.ulaval.ima.ali_choix.domain.HistoryRepository;
 import ca.ulaval.ima.ali_choix.domain.ProductId;
-import ca.ulaval.ima.ali_choix.domain.exceptions.HistoricEmptyException;
+import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryEmptyException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -32,7 +32,7 @@ public class HistoryRepositoryLocalTest {
     }
 
     @Test
-    public void givenElementPresent_whenAddingExistingProduct_addedProductIsLast(){
+    public void givenPresentElement_whenAddingExistingProduct_thenAddedProductIsLast(){
         setUp();
         assertEquals(THIRD_PRODUCT_ID, historyRepository.getLastSearchedProductId());
 
@@ -42,7 +42,7 @@ public class HistoryRepositoryLocalTest {
     }
 
     @Test
-    public void givenElementPresent_whenAddingExistingProduct_moveProductAtTheEnd(){
+    public void givenPresentElement_whenAddingExistingProduct_thenMoveProductAtTheEnd(){
         setUp();
         assertEquals(THIRD_PRODUCT_ID, historyRepository.getLastSearchedProductId());
 
@@ -52,38 +52,38 @@ public class HistoryRepositoryLocalTest {
     }
 
     @Test
-    public void givenElementPresent_whenAddingExistingProduct_historicSizeDoesNotChange(){
+    public void givenPresentElement_whenAddingExistingProduct_thenHistorySizeDoesNotChange(){
         setUp();
-        int originalSize = historyRepository.getHistoric().size();
+        int originalSize = historyRepository.getHistory().size();
 
         historyRepository.addElement(FIRST_ELEMENT);
 
-        int newSize = historyRepository.getHistoric().size();
+        int newSize = historyRepository.getHistory().size();
         assertEquals(originalSize, newSize);
     }
 
     @Test
-    public void givenElementPresent_whenRemoving_elementIsRemoved(){
+    public void givenPresentElement_whenRemoving_elementIsRemoved(){
         setUp();
 
         historyRepository.removeElement(FIRST_PRODUCT_ID);
 
-        assertFalse(historyRepository.getHistoric().contains(FIRST_ELEMENT));
+        assertFalse(historyRepository.getHistory().contains(FIRST_ELEMENT));
     }
 
     @Test
-    public void givenMultipleElement_whenRemovingAll_historicIsEmpty(){
+    public void givenMultipleElement_whenRemovingAll_historyIsEmpty(){
         setUp();
 
-        historyRepository.removeAllElement();
+        historyRepository.removeAllElements();
 
-        assertEquals(0, historyRepository.getHistoric().size());
+        assertEquals(0, historyRepository.getHistory().size());
     }
 
-    @Test (expected = HistoricEmptyException.class)
-    public void givenHistoricIsEmpty_whenGettingLastSearched_throwHistoricEmptyException(){
+    @Test (expected = HistoryEmptyException.class)
+    public void givenHistoryIsEmpty_whenGettingLastSearched_throwHistoryEmptyException(){
         setUp();
-        historyRepository.removeAllElement();
+        historyRepository.removeAllElements();
 
         historyRepository.getLastSearchedProductId();
     }

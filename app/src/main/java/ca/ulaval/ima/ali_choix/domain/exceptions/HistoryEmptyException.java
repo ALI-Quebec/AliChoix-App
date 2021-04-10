@@ -6,12 +6,12 @@ import androidx.annotation.RequiresApi;
 
 import ca.ulaval.ima.ali_choix.domain.ErrorCode;
 
-public class HistoricEmptyException extends ApplicationException {
-    private static final String ERROR = "Historic is empty";
-    private static final String DESCRIPTION = "Cannot get searched product because historic is empty";
+public class HistoryEmptyException extends ApplicationException {
+    private static final String ERROR = "History is empty";
+    private static final String DESCRIPTION = "Cannot get searched product because history is empty";
     private static final ErrorCode CODE = ErrorCode.INVALID_REQUEST;
 
-    public HistoricEmptyException() {
+    public HistoryEmptyException() {
         super(ERROR, DESCRIPTION, CODE);
     }
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.scannedproduct.ScannedProductFragment">
+    tools:context=".ui.scannedProduct.ScannedProductFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -142,6 +142,7 @@
                     <include layout="@layout/collapsible_nutri_score_section"/>
                     <include layout="@layout/collapsible_ingredients_analysis_section"/>
                     <include layout="@layout/collapsible_nutrient_levels_section"/>
+                    <include layout="@layout/collapsible_nutrition_facts_section"/>
                     <include layout="@layout/space_under_collapsible_section"/>
                 </LinearLayout>
             </LinearLayout>

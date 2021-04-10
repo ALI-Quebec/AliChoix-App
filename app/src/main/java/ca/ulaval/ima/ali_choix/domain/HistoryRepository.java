@@ -8,9 +8,9 @@ public interface HistoryRepository {
 
     void removeElement(ProductId productId);
 
-    void removeAllElement();
+    void removeAllElements();
 
-    List<HistoryElement> getHistoric();
+    List<HistoryElement> getHistory();
 
     ProductId getLastSearchedProductId();
 }
