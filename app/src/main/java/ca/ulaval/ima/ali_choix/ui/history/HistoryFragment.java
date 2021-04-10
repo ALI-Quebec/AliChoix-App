@@ -15,13 +15,12 @@ import java.util.List;
 import java.util.ListIterator;
 
 import ca.ulaval.ima.ali_choix.R;
-import ca.ulaval.ima.ali_choix.domain.HistoricElement;
-import ca.ulaval.ima.ali_choix.domain.HistoricElementFactory;
-import ca.ulaval.ima.ali_choix.services.HistoricService;
+import ca.ulaval.ima.ali_choix.domain.HistoryElement;
+import ca.ulaval.ima.ali_choix.services.HistoryService;
 import ca.ulaval.ima.ali_choix.services.ServiceLocator;
 
 public class HistoryFragment extends ListFragment {
-    ArrayList<HistoricElement> listHistoryItem =new ArrayList<>();
+    ArrayList<HistoryElement> listHistoryItem =new ArrayList<>();
     HistoryItemListAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -29,16 +28,16 @@ public class HistoryFragment extends ListFragment {
 
         View root = inflater.inflate(R.layout.fragment_history, container, false);
 
-        HistoricService historicService = (HistoricService) ServiceLocator.getInstance().get(HistoricService.class);
+        HistoryService historyService = (HistoryService) ServiceLocator.getInstance().get(HistoryService.class);
 
-        historicService.addHistoricElement("1","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 1");
-        historicService.addHistoricElement("2","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 2");
-        historicService.addHistoricElement("3","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 3");
-        historicService.addHistoricElement("4","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 4");
-        historicService.addHistoricElement("5","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 5");
-        historicService.addHistoricElement("6","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 6");
-        historicService.addHistoricElement("7","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 7");
-        historicService.addHistoricElement("8","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 8");
+        historyService.addHistoricElement("1","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 1");
+        historyService.addHistoricElement("2","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 2");
+        historyService.addHistoricElement("3","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 3");
+        historyService.addHistoricElement("4","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 4");
+        historyService.addHistoricElement("5","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 5");
+        historyService.addHistoricElement("6","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 6");
+        historyService.addHistoricElement("7","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 7");
+        historyService.addHistoricElement("8","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 8");
 
         fillItemListFromHistory();
 
@@ -54,15 +53,15 @@ public class HistoryFragment extends ListFragment {
     public void onListItemClick(ListView listView, View view, int positionIndex, long id) {
         super.onListItemClick(listView, view, positionIndex, id);
 
-        HistoricElement clickedItem = listHistoryItem.get(positionIndex);
+        HistoryElement clickedItem = listHistoryItem.get(positionIndex);
         Toast.makeText(getActivity(), clickedItem.getProductId().toString(), Toast.LENGTH_SHORT).show();
     }
 
     private void fillItemListFromHistory(){
-        HistoricService historicService = (HistoricService) ServiceLocator.getInstance().get(HistoricService.class);
-        List history = historicService.getHistoric();
+        HistoryService historyService = (HistoryService) ServiceLocator.getInstance().get(HistoryService.class);
+        List history = historyService.getHistory();
 
-        ListIterator<HistoricElement> historyIterator = history.listIterator(history.size());
+        ListIterator<HistoryElement> historyIterator = history.listIterator(history.size());
 
         while(historyIterator.hasPrevious()) {
             listHistoryItem.add(historyIterator.previous());

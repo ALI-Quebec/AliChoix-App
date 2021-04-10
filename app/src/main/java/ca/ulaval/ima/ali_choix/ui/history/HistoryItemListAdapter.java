@@ -9,20 +9,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import ca.ulaval.ima.ali_choix.R;
-import ca.ulaval.ima.ali_choix.domain.HistoricElement;
+import ca.ulaval.ima.ali_choix.domain.HistoryElement;
 
-public class HistoryItemListAdapter extends ArrayAdapter<HistoricElement> {
+public class HistoryItemListAdapter extends ArrayAdapter<HistoryElement> {
 
     Context context;
 
-    public HistoryItemListAdapter(Context context, int resourceId, List<HistoricElement> items) {
+    public HistoryItemListAdapter(Context context, int resourceId, List<HistoryElement> items) {
         super(context, resourceId, items);
         this.context = context;
     }
@@ -34,7 +32,7 @@ public class HistoryItemListAdapter extends ArrayAdapter<HistoricElement> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
-        HistoricElement historicElement = getItem(position);
+        HistoryElement historyElement = getItem(position);
 
         LayoutInflater mInflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -47,8 +45,8 @@ public class HistoryItemListAdapter extends ArrayAdapter<HistoricElement> {
         } else
             holder = (ViewHolder) convertView.getTag();
 
-        holder.txtTitle.setText(historicElement.getProductName());
-        Picasso.get().load(historicElement.getImage_front_url()).into(holder.imageView);
+        holder.txtTitle.setText(historyElement.getProductName());
+        Picasso.get().load(historyElement.getImage_front_url()).into(holder.imageView);
 
         return convertView;
     }

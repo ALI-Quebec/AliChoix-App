@@ -35,7 +35,7 @@ public class HistoryService {
         saveHistoricOnDevice();
     }
 
-    public List<HistoryElement> getHistoric(){
+    public List<HistoryElement> getHistory(){
         return historyRepository.getHistoric();
     }
 
