@@ -30,6 +30,7 @@ public class HistoryFragment extends ListFragment {
 
         HistoryService historyService = (HistoryService) ServiceLocator.getInstance().get(HistoryService.class);
 
+        //TODO remove when testing is done
         historyService.addHistoryElement("1","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 1");
         historyService.addHistoryElement("2","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 2");
         historyService.addHistoryElement("3","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 3");
