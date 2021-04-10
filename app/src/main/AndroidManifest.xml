@@ -29,6 +29,7 @@
             android:label="Product service"
             tools:ignore="Instantiatable">
         </service>
+
     </application>
 
 </manifest>
