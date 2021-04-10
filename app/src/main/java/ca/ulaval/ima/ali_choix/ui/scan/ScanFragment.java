@@ -22,6 +22,8 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
 import ca.ulaval.ima.ali_choix.R;
+import ca.ulaval.ima.ali_choix.services.HistoricService;
+import ca.ulaval.ima.ali_choix.services.ServiceLocator;
 
 public class ScanFragment extends Fragment {
     private static final int CAMERA_PERMISSION_CODE = 5050;
