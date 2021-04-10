@@ -61,7 +61,7 @@ public class ProductServiceTest {
     }
 
     @Test(expected = InvalidNutriScoreGradeException.class)
-    public void givenWrongNutriScoreGrade_whenGettingNutriScoreDescription_thenThrow() {
+    public void givenWrongNutriScoreGrade_whenGettingNutriScoreDescription_thenThrowInvalidNutriScoreGradeException() {
         productService.getNutriScoreDescription("x");
     }
 
@@ -129,7 +129,7 @@ public class ProductServiceTest {
     }
 
     @Test(expected = InvalidNutrientLevelsQuantityException.class)
-    public void givenWrongNutrientLevelsQuantity_whenGettingNutrientLevelsDescription_thenThrow() {
+    public void givenWrongNutrientLevelsQuantity_whenGettingNutrientLevelsDescription_thenThrowInvalidNutrientLevelsQuantityException() {
         productService.getNutrientLevelsDescription("x");
     }
 
