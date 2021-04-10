@@ -67,7 +67,10 @@ public class ScanFragment extends Fragment {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
+                        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("productId", "737628064502");
+                        navController.navigate(R.id.action_navigation_scan_to_navigation_scanned_product,bundle);
                     }
                 });
             }
@@ -75,15 +78,7 @@ public class ScanFragment extends Fragment {
         scannerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //codeScanner.startPreview();
-                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-                Bundle bundle = new Bundle();
-                bundle.putString("productId", "737628064502");
-                navController.navigate(R.id.action_navigation_scan_to_navigation_scanned_product,bundle);
-
-//                Intent intent = new Intent(getContext(), ScannedProductActivity.class);
-//                intent.putExtra("productId", "737628064502");
-//                startActivity(intent);
+                codeScanner.startPreview();
             }
         });
     }
