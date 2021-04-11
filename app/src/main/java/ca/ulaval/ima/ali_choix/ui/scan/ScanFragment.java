@@ -25,6 +25,7 @@ import ca.ulaval.ima.ali_choix.R;
 
 import static ca.ulaval.ima.ali_choix.domain.GlobalConstant.PRODUCT_ID_KEY;
 
+
 public class ScanFragment extends Fragment {
     private static final int CAMERA_PERMISSION_CODE = 5050;
     private CodeScanner codeScanner;
