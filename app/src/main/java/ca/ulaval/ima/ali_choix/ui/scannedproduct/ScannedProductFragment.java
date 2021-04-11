@@ -195,15 +195,24 @@ public class ScannedProductFragment extends Fragment {
         nutritionFactsAlcohol = root.findViewById(R.id.nutrition_facts_alcohol_value);
         nutritionFactsIron = root.findViewById(R.id.nutrition_facts_iron_value);
 
-        getInformationsWithOpenFoodFact("0677210090246");
+        if(getArguments() != null){
+            String productId = getArguments().getString("productId");
+            if (productId == null){
+                productId = "";
+            }
+            getInformationsWithOpenFoodFact(getArguments().getString("productId"));
+        } else {
+            //TODO Appeller l'historique pour savoir quoi afficher
+            getInformationsWithOpenFoodFact("0677210090246");
+        }
 
         return root;
     }
 
-
     private void getInformationsWithOpenFoodFact(String productId) {
         OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
         OFFClient.get(productId, null, new JsonHttpResponseHandler() {
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject dataObject) {
                 try {
