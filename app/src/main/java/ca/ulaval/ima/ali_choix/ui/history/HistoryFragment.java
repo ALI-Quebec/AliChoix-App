@@ -54,16 +54,18 @@ public class HistoryFragment extends ListFragment {
             }
         });
 
+        completeDeletionButton.setVisibility(View.GONE);
+
 
         //TODO remove when testing is done
-        historyService.addHistoryElement("737628064502","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 737628064502");
-        historyService.addHistoryElement("2","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 2");
-        historyService.addHistoryElement("3","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 3");
-        historyService.addHistoryElement("4","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 4");
-        historyService.addHistoryElement("5","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 5");
-        historyService.addHistoryElement("6","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 6");
-        historyService.addHistoryElement("7","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 7");
-        historyService.addHistoryElement("8","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 8");
+        historyService.addHistoryElement("737628064502","https://static.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.full.jpg","Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning - Thai Kitchen - 155 g");
+        historyService.addHistoryElement("3274080005003","https://static.openfoodfacts.org/images/products/327/408/000/5003/front_en.640.full.jpg","Spring water - Cristaline - 1,5 l");
+        historyService.addHistoryElement("3017620422003","https://static.openfoodfacts.org/images/products/301/762/042/2003/front_fr.260.full.jpg","Nutella - Ferrero - 400 g");
+        historyService.addHistoryElement("3229820100234","https://static.openfoodfacts.org/images/products/322/982/010/0234/front_fr.115.full.jpg","Fourrés Chocolat noir - bjorg - 225 g");
+        historyService.addHistoryElement("3392460480827","https://static.openfoodfacts.org/images/products/339/246/048/0827/front_en.72.full.jpg","Biscottes heudebert - 300 g");
+        historyService.addHistoryElement("8002270014901","https://static.openfoodfacts.org/images/products/800/227/001/4901/front_fr.164.full.jpg","san Pellegrino - 1 L");
+        historyService.addHistoryElement("7503018092775","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Hongo shiitake Morimoto - 50 g");
+        historyService.addHistoryElement("0011110844149","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Private selection, mukimame");
 
         fillItemListFromHistory();
 
