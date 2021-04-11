@@ -16,13 +16,13 @@ import ca.ulaval.ima.ali_choix.ui.options.OptionsContent.OptionsItem;
 
 import java.util.List;
 
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
+public class OptionsRecyclerViewAdapter extends RecyclerView.Adapter<OptionsRecyclerViewAdapter.ViewHolder> {
 
-    private final List<OptionsItem> mValues;
+    private final List<OptionsItem> items;
     private final FragmentManager fragmentManager;
 
-    public MyItemRecyclerViewAdapter(List<OptionsItem> items, FragmentManager fragmentManager) {
-        mValues = items;
+    public OptionsRecyclerViewAdapter(List<OptionsItem> items, FragmentManager fragmentManager) {
+        this.items = items;
         this.fragmentManager = fragmentManager;
     }
 
@@ -35,51 +35,50 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIconView.setImageResource(mValues.get(position).icon);
-        holder.mContentView.setText(mValues.get(position).content);
-        holder.mContentView.setOnClickListener(new View.OnClickListener() {
+        holder.item = items.get(position);
+        holder.iconView.setImageResource(items.get(position).icon);
+        holder.textView.setText(items.get(position).content);
+        holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeFragment(mValues.get(position).target);
+                changeFragment(items.get(position).target);
             }
         });
-        holder.mIconView.setOnClickListener(new View.OnClickListener() {
+        holder.iconView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeFragment(mValues.get(position).target);
+                changeFragment(items.get(position).target);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return items.size();
     }
 
     private void changeFragment(Fragment target) {
-        //TODO it says the fragment already exists if you go there multiple times (might be fixed)
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.replace(R.id.nav_host_fragment, target);
         ft.commit();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final ImageView mIconView;
-        public final TextView mContentView;
-        public OptionsItem mItem;
+        public final View view;
+        public final ImageView iconView;
+        public final TextView textView;
+        public OptionsItem item;
 
         public ViewHolder(View view) {
             super(view);
-            mView = view;
-            mIconView = view.findViewById(R.id.item_icon);
-            mContentView = view.findViewById(R.id.content);
+            this.view = view;
+            iconView = view.findViewById(R.id.item_icon);
+            textView = view.findViewById(R.id.content);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + textView.getText() + "'";
         }
     }
 }
