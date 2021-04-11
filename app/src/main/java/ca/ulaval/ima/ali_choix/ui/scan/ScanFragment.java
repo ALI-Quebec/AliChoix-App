@@ -81,11 +81,11 @@ public class ScanFragment extends Fragment {
         scannerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-                Bundle bundle = new Bundle();
-                bundle.putString(PRODUCT_ID_KEY, "737628064502");
-                navController.navigate(R.id.action_navigation_scan_to_navigation_scanned_product,bundle);
-                codeScanner.startPreview();
+//                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+//                Bundle bundle = new Bundle();
+//                bundle.putString(PRODUCT_ID_KEY, "737628064502");
+//                navController.navigate(R.id.action_navigation_scan_to_navigation_scanned_product,bundle);
+//                codeScanner.startPreview();
             }
         });
     }

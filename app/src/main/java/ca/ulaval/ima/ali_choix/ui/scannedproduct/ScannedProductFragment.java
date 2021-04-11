@@ -228,7 +228,7 @@ public class ScannedProductFragment extends Fragment {
                     Gson gson = new Gson();
                     product = gson.fromJson(String.valueOf(productJson), Product.class);
                     showInformations();
-                    historyService.addHistoryElement(productId,product.getImage(),product.getFrenchName());
+                    historyService.addHistoryElement(productId,product.getImage(),product.getEnglishName());
 
                 } catch (JSONException e) {
                     e.printStackTrace();
