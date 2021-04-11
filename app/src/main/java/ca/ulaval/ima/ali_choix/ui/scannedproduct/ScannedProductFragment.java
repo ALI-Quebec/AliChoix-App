@@ -113,7 +113,7 @@ public class ScannedProductFragment extends Fragment {
             getInformationsWithOpenFoodFact(getArguments().getString("productId"));
         } else {
             //TODO Appeller l'historique pour savoir quoi afficher
-            getInformationsWithOpenFoodFact("13twt6245t");
+            getInformationsWithOpenFoodFact("0737628064502");
         }
 
         return root;
@@ -231,6 +231,11 @@ public class ScannedProductFragment extends Fragment {
             case "en:vegan":
             case "en:vegetarian":
                 textView.setText("Oui");
+                break;
+            case "en:palm-oil-content-unknown":
+            case "en:vegan-status-unknown":
+            case "en:vegetarian-status-unknown":
+                textView.setText(GlobalConstant.UNKNOWN);
                 break;
             default:
                 textView.setText("Non");
