@@ -203,7 +203,7 @@ public class ScannedProductFragment extends Fragment {
             getInformationsWithOpenFoodFact(getArguments().getString("productId"));
         } else {
             //TODO Appeller l'historique pour savoir quoi afficher
-            getInformationsWithOpenFoodFact("0677210090246");
+            getInformationsWithOpenFoodFact("0737628064502");
         }
 
         return root;
