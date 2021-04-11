@@ -69,7 +69,7 @@ public class ScanFragment extends Fragment {
                     public void run() {
                         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
                         Bundle bundle = new Bundle();
-                        bundle.putString("productId", "737628064502");
+                        bundle.putString("productId", "0737628064502");
                         navController.navigate(R.id.action_navigation_scan_to_navigation_scanned_product,bundle);
                     }
                 });
@@ -80,7 +80,7 @@ public class ScanFragment extends Fragment {
             public void onClick(View view) {
                 NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
                 Bundle bundle = new Bundle();
-                bundle.putString("productId", "737628064502");
+                bundle.putString("productId", "0737628064502");
                 navController.navigate(R.id.action_navigation_scan_to_navigation_scanned_product,bundle);
                 codeScanner.startPreview();
             }
