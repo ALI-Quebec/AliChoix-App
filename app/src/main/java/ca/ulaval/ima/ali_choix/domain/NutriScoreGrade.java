@@ -10,7 +10,8 @@ public enum NutriScoreGrade {
     B("b", "Bonne qualité nutritionnelle"),
     C("c", "Qualité nutritionnelle moyenne"),
     D("d", "Mauvaise qualité nutritionnelle"),
-    E("e", "Très mauvaise qualité nutritionnelle");
+    E("e", "Très mauvaise qualité nutritionnelle"),
+    NOT_COMPUTED("not computed", "Nutri-Score non calculé\nQualité nutritionnelle inconnue");
 
     private String grade;
     private String description;

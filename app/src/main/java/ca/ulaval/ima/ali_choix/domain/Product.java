@@ -1,5 +1,7 @@
 package ca.ulaval.ima.ali_choix.domain;
 
+import com.google.zxing.common.StringUtils;
+
 import java.util.ArrayList;
 
 public class Product {
@@ -45,24 +47,23 @@ public class Product {
         this.product_quantity = product_quantity;
     }
 
-    //TODO only getName, config will decide if we return french or english one (avoid putting getFrenchName in all code)
-    public String getEnglishName() {
-        return product_name_en;
+    public String getName() {
+        if (product_name_en != null || !product_name_en.trim().equals("")) return product_name_en;
+        if (product_name_fr != null || !product_name_en.trim().equals("")) return product_name_fr;
+        return GlobalConstant.MISSING_INFORMATION;
     }
 
-    public void setEnglishName(String product_name_en) {
+    //TODO only getName, config will decide if we return french or english one (avoid putting getFrenchName in all code)
+    //on fait quoi pour le set ?
+    public void setName(String product_name_en) {
         this.product_name_en = product_name_en;
     }
 
-    public String getFrenchName() {
-        return product_name_fr;
-    }
+    public String getNutriScoreGrade() {
+        if (nutriscore_grade == null) return NutriScoreGrade.NOT_COMPUTED.toString();
 
-    public void setFrenchName(String product_name_fr) {
-        this.product_name_fr = product_name_fr;
+        return nutriscore_grade;
     }
-
-    public String getNutriScoreGrade() { return nutriscore_grade; }
 
     public void setNutriScoreGrade(String nutriscore_grade) { this.nutriscore_grade = nutriscore_grade; }
 
