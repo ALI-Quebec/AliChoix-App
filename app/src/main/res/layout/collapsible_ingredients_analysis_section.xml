@@ -15,7 +15,7 @@
         android:id="@+id/diet_collapsible_header_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/naming_ingredients_analysis"
+        android:text="@string/naming_ingredients_analysis_collapsible_header_section"
         android:textColor="@color/black"
         android:textSize="@dimen/text_font_size"
         android:textStyle="bold" />

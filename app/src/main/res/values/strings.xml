@@ -11,8 +11,8 @@
     <string name="naming_origin">Origine</string>
     <string name="naming_imported_country">Pays importé</string>
     <string name="naming_quantity">Quantité</string>
-    <string name="naming_nutri_score">Nutri score</string>
-    <string name="naming_ingredients_analysis">Analyse des ingrédients</string>
+    <string name="naming_nutri_score_collapsible_header_section">Nutri score</string>
+    <string name="naming_ingredients_analysis_collapsible_header_section">Analyse des ingrédients</string>
     <string name="naming_vegan">Alimentation végétalienne</string>
     <string name="naming_vegeterian">Alimentation végétarienne</string>
     <string name="naming_palm_oil">Huile de palme</string>
@@ -20,7 +20,8 @@
     <string name="naming_saturated_fat_quantity">Gras saturés</string>
     <string name="naming_sugars_quantity">Sucres</string>
     <string name="naming_salt_quantity">Sel</string>
-    <string name="naming_nutrient_levels">Niveaux de nutriments pour 100g</string>
+    <string name="naming_nutrient_levels_collapsible_header_section">Niveaux de nutriments pour 100g</string>
+    <string name="naming_ingredients_collapsible_header_section">Apports nutritionnels</string>
 
     <!--    Home fragment naming-->
     <string name="home_page_middle_text">Alimentation saine, durable, en toute simplicité!</string>

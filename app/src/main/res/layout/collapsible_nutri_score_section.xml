@@ -14,7 +14,7 @@
         android:id="@+id/nutri_score_collapsible_header_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/naming_nutri_score"
+        android:text="@string/naming_nutri_score_collapsible_header_section"
         android:textColor="@color/black"
         android:textSize="@dimen/text_font_size"
         android:textStyle="bold" />

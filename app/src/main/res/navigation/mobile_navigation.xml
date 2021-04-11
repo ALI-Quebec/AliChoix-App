@@ -15,13 +15,23 @@
         android:id="@+id/navigation_scan"
         android:name="ca.ulaval.ima.ali_choix.ui.scan.ScanFragment"
         android:label="@string/title_scan"
-        tools:layout="@layout/fragment_scan" />
+        tools:layout="@layout/fragment_scan" >
+        <action
+            android:id="@+id/action_navigation_scan_to_navigation_scanned_product"
+            app:destination="@id/navigation_scanned_product" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_scanned_product"
         android:name="ca.ulaval.ima.ali_choix.ui.scannedproduct.ScannedProductFragment"
         android:label="@string/title_scanned_product"
         tools:layout="@layout/fragment_scanned_product" />
+  
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="ca.ulaval.ima.ali_choix.ui.history.HistoryFragment"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/navigation_options"
