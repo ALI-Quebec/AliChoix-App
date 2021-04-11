@@ -7,10 +7,16 @@
     android:layout_height="121dp"
     android:orientation="horizontal">
 
+    <CheckBox
+        android:id="@+id/history_delete_item_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
     <ImageView
         android:id="@+id/history_product_image"
         android:layout_width="wrap_content"
-        android:layout_height="121dp"
+        android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_launcher_background"
         tools:ignore="VectorDrawableCompat" />
 
@@ -18,7 +24,6 @@
         android:id="@+id/history_product_name"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:text="ProductName" />
 
 </LinearLayout>
