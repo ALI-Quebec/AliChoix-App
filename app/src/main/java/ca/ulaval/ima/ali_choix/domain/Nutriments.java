@@ -3,6 +3,7 @@ package ca.ulaval.ima.ali_choix.domain;
 import com.google.gson.annotations.SerializedName;
 
 public class Nutriments {
+    //TODO gestion des informations manquantes autrement car c'est faux que si on n'a pas l'info, que c'est à 0f
     private Float fat_100g = 0f;
     @SerializedName(value = "saturated-fat_100g")
     private Float saturated_fat_100g = 0f;
@@ -42,7 +43,9 @@ public class Nutriments {
 
     public void setEnergyKj100g(Float energy_kj_value) { this.energy_kj_value = energy_kj_value;}
 
-    public Float getEnergyKj100g() { return energy_kj_value;}
+    public Float getEnergyKj100g() {
+        return energy_kj_value;
+    }
 
     public void setCarbohydrates100g(Float carbohydrates_100g) { this.carbohydrates_100g = carbohydrates_100g;}
 

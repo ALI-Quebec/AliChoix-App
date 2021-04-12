@@ -1,5 +1,7 @@
 package ca.ulaval.ima.ali_choix.domain;
 
+import com.google.zxing.common.StringUtils;
+
 import java.util.ArrayList;
 
 public class Product {
@@ -22,7 +24,9 @@ public class Product {
     }
 
     public String getOrigin() {
-        return origins;
+        if (origins != null) return origins;
+
+        return GlobalConstant.INFORMATION_NOT_COMPUTED;
     }
 
     public void setOrigins(String origins) {
@@ -30,7 +34,9 @@ public class Product {
     }
 
     public String getCountryImported() {
-        return countries_imported;
+        if (countries_imported != null) return countries_imported;
+
+        return GlobalConstant.INFORMATION_NOT_COMPUTED;
     }
 
     public void setCountriesImported(String countries_imported) {
@@ -38,31 +44,33 @@ public class Product {
     }
 
     public String getQuantity() {
-        return product_quantity;
+        if (product_quantity != null) return product_quantity + " g";
+
+        return GlobalConstant.INFORMATION_NOT_COMPUTED;
     }
 
     public void setProductQuantity(String product_quantity) {
         this.product_quantity = product_quantity;
     }
 
-    //TODO only getName, config will decide if we return french or english one (avoid putting getFrenchName in all code)
-    public String getEnglishName() {
-        return product_name_en;
+    public String getName() {
+        if (product_name_en != null || !product_name_en.trim().equals("")) return product_name_en;
+        if (product_name_fr != null || !product_name_en.trim().equals("")) return product_name_fr;
+
+        return GlobalConstant.INFORMATION_NOT_COMPUTED;
     }
 
     public void setEnglishName(String product_name_en) {
         this.product_name_en = product_name_en;
     }
+    
+    public void setFrenchName(String product_name_fr) { this.product_name_fr = product_name_fr; }
 
-    public String getFrenchName() {
-        return product_name_fr;
+    public String getNutriScoreGrade() {
+        if (nutriscore_grade == null) return NutriScoreGrade.NOT_COMPUTED.toString();
+
+        return nutriscore_grade;
     }
-
-    public void setFrenchName(String product_name_fr) {
-        this.product_name_fr = product_name_fr;
-    }
-
-    public String getNutriScoreGrade() { return nutriscore_grade; }
 
     public void setNutriScoreGrade(String nutriscore_grade) { this.nutriscore_grade = nutriscore_grade; }
 

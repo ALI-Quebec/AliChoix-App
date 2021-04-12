@@ -47,7 +47,6 @@
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-            android:background="@drawable/ic_nutriscore_a"
             android:focusable="true"
             android:gravity="center|clip_vertical"
             android:textColor="#FFFFFF"

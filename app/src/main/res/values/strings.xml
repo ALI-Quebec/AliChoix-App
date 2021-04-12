@@ -11,7 +11,7 @@
     <string name="naming_origin">Origine</string>
     <string name="naming_imported_country">Pays importé</string>
     <string name="naming_quantity">Quantité</string>
-    <string name="naming_nutri_score_collapsible_header_section">Nutri score</string>
+    <string name="naming_nutri_score_collapsible_header_section">Nutri-score</string>
     <string name="naming_ingredients_analysis_collapsible_header_section">Analyse des ingrédients</string>
     <string name="naming_vegan">Alimentation végétalienne</string>
     <string name="naming_vegeterian">Alimentation végétarienne</string>
