@@ -24,7 +24,7 @@ public class Product {
     }
 
     public String getOrigin() {
-        if (origins != null || !origins.trim().equals("")) return origins;
+        if (origins != null) return origins;
 
         return GlobalConstant.INFORMATION_NOT_COMPUTED;
     }
@@ -34,7 +34,7 @@ public class Product {
     }
 
     public String getCountryImported() {
-        if (countries_imported != null || !countries_imported.trim().equals("")) return countries_imported;
+        if (countries_imported != null) return countries_imported;
 
         return GlobalConstant.INFORMATION_NOT_COMPUTED;
     }
@@ -44,7 +44,7 @@ public class Product {
     }
 
     public String getQuantity() {
-        if (product_quantity != null || !product_quantity.trim().equals("")) return product_quantity + " g";
+        if (product_quantity != null) return product_quantity + " g";
 
         return GlobalConstant.INFORMATION_NOT_COMPUTED;
     }

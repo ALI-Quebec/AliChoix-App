@@ -25,17 +25,12 @@
         android:id="@+id/navigation_scanned_product"
         android:name="ca.ulaval.ima.ali_choix.ui.scannedproduct.ScannedProductFragment"
         android:label="@string/title_scanned_product"
-<<<<<<< HEAD
         tools:layout="@layout/fragment_scanned_product">
         <action
             android:id="@+id/action_navigation_scanned_product_to_navigation_scan"
             app:destination="@id/navigation_scan" />
     </fragment>
 
-=======
-        tools:layout="@layout/fragment_scanned_product" />
-  
->>>>>>> origin/preprod
     <fragment
         android:id="@+id/navigation_history"
         android:name="ca.ulaval.ima.ali_choix.ui.history.HistoryFragment"
