@@ -21,6 +21,8 @@ import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
+import ca.ulaval.ima.ali_choix.domain.ProductId;
+import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryEmptyException;
 import ca.ulaval.ima.ali_choix.services.HistoryService;
 
 import ca.ulaval.ima.ali_choix.domain.NutrientLevelsQuantity;
@@ -42,6 +44,8 @@ import java.util.HashMap;
 import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.Product;
 import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
+
+import static ca.ulaval.ima.ali_choix.domain.GlobalConstant.PRODUCT_ID_KEY;
 
 public class ScannedProductFragment extends Fragment {
     private Product product;
@@ -106,14 +110,18 @@ public class ScannedProductFragment extends Fragment {
         assignVisualElements(root);
 
         if(getArguments() != null){
-            String productId = getArguments().getString("productId");
+            String productId = getArguments().getString(PRODUCT_ID_KEY);
             if (productId == null){
                 productId = "";
             }
-            getInformationsWithOpenFoodFact(getArguments().getString("productId"));
+            getInformationsWithOpenFoodFact(getArguments().getString(PRODUCT_ID_KEY));
         } else {
-            //TODO Appeller l'historique pour savoir quoi afficher
-            getInformationsWithOpenFoodFact("123rwer34");
+            try {
+                String productId = historyService.getLastSearchedProductId();
+                getInformationsWithOpenFoodFact(productId);
+            } catch (HistoryEmptyException e) {
+                //TODO popup pour envoyer a la page de scan
+            }
         }
 
         return root;

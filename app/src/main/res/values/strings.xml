@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">Ali-Choix</string>
-<!--    Navigation namings-->
+    <!--    Navigation namings-->
     <string name="title_home">Accueil</string>
     <string name="title_scan">Scan</string>
     <string name="title_scanned_product">Produit scanné</string>
     <string name="title_history">Historique</string>
     <string name="title_options">Options</string>
 
-<!--    Scanned product fragment namings-->
+    <!--    Scanned product fragment namings-->
     <string name="naming_origin">Origine</string>
     <string name="naming_imported_country">Pays importé</string>
     <string name="naming_quantity">Quantité</string>
@@ -23,8 +23,11 @@
     <string name="naming_nutrient_levels_collapsible_header_section">Niveaux de nutriments pour 100g</string>
     <string name="naming_ingredients_collapsible_header_section">Apports nutritionnels</string>
 
-<!--    Home fragment naming-->
+    <!--    Home fragment naming-->
     <string name="home_page_middle_text">Alimentation saine, durable, en toute simplicité!</string>
     <string name="home_page_bottom_text">Recherchez vos produits dès maintenant!</string>
 
+    <!--    About fragment naming-->
+    <string name="about_text">Ce texte contiendra l\'information de l\'à propos</string>
+    <string name="about_hyperlink"><a href="https://www.aliquebec.org/">Tapez ici pour connaître nos collaborateurs</a></string>
 </resources>

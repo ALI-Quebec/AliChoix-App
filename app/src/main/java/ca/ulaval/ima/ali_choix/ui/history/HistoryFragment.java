@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.ListFragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,53 +21,98 @@ import ca.ulaval.ima.ali_choix.domain.HistoryElement;
 import ca.ulaval.ima.ali_choix.services.HistoryService;
 import ca.ulaval.ima.ali_choix.services.ServiceLocator;
 
+import static ca.ulaval.ima.ali_choix.domain.GlobalConstant.PRODUCT_ID_KEY;
+
 public class HistoryFragment extends ListFragment {
-    ArrayList<HistoryElement> listHistoryItem =new ArrayList<>();
-    HistoryItemListAdapter adapter;
+    private ArrayList<HistoryElement> historyItems;
+    private HistoryItemListAdapter adapter;
+    private HistoryService historyService;
+    
+    private ImageButton deleteButton;
+    private ImageButton completeDeletionButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_history, container, false);
 
-        HistoryService historyService = (HistoryService) ServiceLocator.getInstance().get(HistoryService.class);
+        historyService = (HistoryService) ServiceLocator.getInstance().get(HistoryService.class);
 
-        //TODO remove when testing is done
-        historyService.addHistoryElement("1","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 1");
-        historyService.addHistoryElement("2","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 2");
-        historyService.addHistoryElement("3","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 3");
-        historyService.addHistoryElement("4","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 4");
-        historyService.addHistoryElement("5","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 5");
-        historyService.addHistoryElement("6","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 6");
-        historyService.addHistoryElement("7","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 7");
-        historyService.addHistoryElement("8","https://static.openfoodfacts.org/images/products/067/721/009/0246/front_en.7.400.jpg","Nom du produit vraiment long mais pas 8");
+        deleteButton = root.findViewById(R.id.history_start_deletion_button);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startDeletionProcess();
+            }
+        });
+
+        completeDeletionButton = root.findViewById(R.id.history_complete_deletion_button);
+        completeDeletionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                completeDeletionProcess();
+            }
+        });
+
+        completeDeletionButton.setVisibility(View.GONE);
 
         fillItemListFromHistory();
 
         adapter=new HistoryItemListAdapter(getActivity(),
                 android.R.layout.activity_list_item,
-                listHistoryItem);
+                historyItems);
         setListAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         return root;
+    }
+
+    private void startDeletionProcess() {
+        deleteButton.setVisibility(View.GONE);
+        completeDeletionButton.setVisibility(View.VISIBLE);
+
+        adapter.setDeleteMode(true);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void completeDeletionProcess(){
+
+        ArrayList<Boolean> checkedItems = (ArrayList) adapter.getCheckboxState();
+        for(int i = 0; i < checkedItems.size(); i++){
+            if(checkedItems.get(i)){
+                historyService.removeHistoryElement(historyItems.get(i).getProductId().toString());
+            }
+        }
+        fillItemListFromHistory();
+
+        completeDeletionButton.setVisibility(View.GONE);
+        deleteButton.setVisibility(View.VISIBLE);
+
+        adapter=new HistoryItemListAdapter(getActivity(),
+                android.R.layout.activity_list_item,
+                historyItems);
+        setListAdapter(adapter);
     }
 
     @Override
     public void onListItemClick(ListView listView, View view, int positionIndex, long id) {
         super.onListItemClick(listView, view, positionIndex, id);
 
-        HistoryElement clickedItem = listHistoryItem.get(positionIndex);
-        Toast.makeText(getActivity(), clickedItem.getProductId().toString(), Toast.LENGTH_SHORT).show();
+        HistoryElement clickedItem = historyItems.get(positionIndex);
+
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        Bundle bundle = new Bundle();
+        bundle.putString(PRODUCT_ID_KEY, clickedItem.getProductId().toString());
+        navController.navigate(R.id.action_navigation_history_to_navigation_scanned_product,bundle);
     }
 
     private void fillItemListFromHistory(){
-        HistoryService historyService = (HistoryService) ServiceLocator.getInstance().get(HistoryService.class);
         List history = historyService.getHistory();
-
         ListIterator<HistoryElement> historyIterator = history.listIterator(history.size());
 
+        historyItems = new ArrayList<>();
         while(historyIterator.hasPrevious()) {
-            listHistoryItem.add(historyIterator.previous());
+            historyItems.add(historyIterator.previous());
         }
     }
 }

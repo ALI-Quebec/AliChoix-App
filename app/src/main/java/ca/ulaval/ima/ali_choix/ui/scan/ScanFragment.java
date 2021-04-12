@@ -23,6 +23,9 @@ import com.google.zxing.Result;
 
 import ca.ulaval.ima.ali_choix.R;
 
+import static ca.ulaval.ima.ali_choix.domain.GlobalConstant.PRODUCT_ID_KEY;
+
+
 public class ScanFragment extends Fragment {
     private static final int CAMERA_PERMISSION_CODE = 5050;
     private CodeScanner codeScanner;
@@ -69,7 +72,7 @@ public class ScanFragment extends Fragment {
                     public void run() {
                         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
                         Bundle bundle = new Bundle();
-                        bundle.putString("productId", "0737628064502");
+                        bundle.putString(PRODUCT_ID_KEY, result.getText());
                         navController.navigate(R.id.action_navigation_scan_to_navigation_scanned_product,bundle);
                     }
                 });
@@ -78,11 +81,11 @@ public class ScanFragment extends Fragment {
         scannerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-                Bundle bundle = new Bundle();
-                bundle.putString("productId", "0737628064502");
-                navController.navigate(R.id.action_navigation_scan_to_navigation_scanned_product,bundle);
-                codeScanner.startPreview();
+//                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+//                Bundle bundle = new Bundle();
+//                bundle.putString(PRODUCT_ID_KEY, "737628064502");
+//                navController.navigate(R.id.action_navigation_scan_to_navigation_scanned_product,bundle);
+//                codeScanner.startPreview();
             }
         });
     }
