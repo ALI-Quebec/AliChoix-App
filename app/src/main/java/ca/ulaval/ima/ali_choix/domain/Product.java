@@ -60,11 +60,11 @@ public class Product {
         return GlobalConstant.INFORMATION_NOT_COMPUTED;
     }
 
-    //TODO only getName, config will decide if we return french or english one (avoid putting getFrenchName in all code)
-    //on fait quoi pour le set ?
-    public void setName(String product_name_en) {
+    public void setEnglishName(String product_name_en) {
         this.product_name_en = product_name_en;
     }
+    
+    public void setFrenchName(String product_name_fr) { this.product_name_fr = product_name_fr; }
 
     public String getNutriScoreGrade() {
         if (nutriscore_grade == null) return NutriScoreGrade.NOT_COMPUTED.toString();
