@@ -1,6 +1,8 @@
-package ca.ulaval.ima.ali_choix.domain;
+package ca.ulaval.ima.ali_choix.domain.history;
 
 import java.time.LocalDateTime;
+
+import ca.ulaval.ima.ali_choix.domain.product.ProductId;
 
 public class HistoryElement {
     private ProductId productId;

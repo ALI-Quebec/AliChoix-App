@@ -2,6 +2,9 @@ package ca.ulaval.ima.ali_choix.domain;
 
 import org.junit.Test;
 
+import ca.ulaval.ima.ali_choix.domain.product.NutrientLevelsAlgorithms;
+import ca.ulaval.ima.ali_choix.domain.product.NutrientLevelsQuantity;
+
 import static org.junit.Assert.*;
 
 public class NutrientLevelsAlgorithmsTest {

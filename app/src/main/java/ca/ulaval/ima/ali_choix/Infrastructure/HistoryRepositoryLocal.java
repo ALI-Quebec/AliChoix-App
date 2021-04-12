@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import ca.ulaval.ima.ali_choix.domain.HistoryElement;
-import ca.ulaval.ima.ali_choix.domain.HistoryRepository;
-import ca.ulaval.ima.ali_choix.domain.ProductId;
+import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
+import ca.ulaval.ima.ali_choix.domain.history.HistoryRepository;
+import ca.ulaval.ima.ali_choix.domain.product.ProductId;
 import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryEmptyException;
 
 public class HistoryRepositoryLocal implements HistoryRepository {

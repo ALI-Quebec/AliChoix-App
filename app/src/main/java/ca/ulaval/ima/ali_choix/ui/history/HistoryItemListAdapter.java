@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 import ca.ulaval.ima.ali_choix.R;
-import ca.ulaval.ima.ali_choix.domain.HistoryElement;
+import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 
 public class HistoryItemListAdapter extends ArrayAdapter<HistoryElement> {
 

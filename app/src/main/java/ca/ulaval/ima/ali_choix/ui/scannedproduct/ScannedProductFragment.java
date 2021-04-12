@@ -21,17 +21,17 @@ import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
-import ca.ulaval.ima.ali_choix.domain.ProductId;
+import ca.ulaval.ima.ali_choix.domain.DomainConstant;
 import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryEmptyException;
 import ca.ulaval.ima.ali_choix.services.HistoryService;
 
-import ca.ulaval.ima.ali_choix.domain.NutrientLevelsQuantity;
-import ca.ulaval.ima.ali_choix.domain.Nutriments;
+import ca.ulaval.ima.ali_choix.domain.product.NutrientLevelsQuantity;
+import ca.ulaval.ima.ali_choix.domain.product.Nutriments;
 
 import ca.ulaval.ima.ali_choix.services.ProductService;
 import ca.ulaval.ima.ali_choix.services.ServiceLocator;
 import ca.ulaval.ima.ali_choix.ui.dialog.FireDialogFragment;
-import ca.ulaval.ima.ali_choix.ui.GlobalConstant;
+import ca.ulaval.ima.ali_choix.ui.UiConstant;
 import cz.msebera.android.httpclient.Header;
 
 import org.json.JSONException;
@@ -42,10 +42,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import ca.ulaval.ima.ali_choix.R;
-import ca.ulaval.ima.ali_choix.domain.Product;
+import ca.ulaval.ima.ali_choix.domain.product.Product;
 import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
 
-import static ca.ulaval.ima.ali_choix.domain.GlobalConstant.PRODUCT_ID_KEY;
+import static ca.ulaval.ima.ali_choix.domain.DomainConstant.PRODUCT_ID_KEY;
 
 public class ScannedProductFragment extends Fragment {
     private Product product;
@@ -183,10 +183,10 @@ public class ScannedProductFragment extends Fragment {
 
         //TODO est-ce qu'il ne faudrait pas ici mettre un interface pour pas que le UI soit dépendant du naming dans le domaine ?
         HashMap nutrientLevels = productService.getNutrientLevelsQuantity(nutriments);
-        NutrientLevelsQuantity fatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(GlobalConstant.FAT_NUTRIENT_LEVELS_QUANTITY);
-        NutrientLevelsQuantity saturatedFatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(GlobalConstant.SATURATED_FAT_NUTRIENT_LEVELS_QUANTITY);
-        NutrientLevelsQuantity sugarsNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(GlobalConstant.SUGARS_NUTRIENT_LEVELS_QUANTITY);
-        NutrientLevelsQuantity saltNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(GlobalConstant.SALT_NUTRIENT_LEVELS_QUANTITY);
+        NutrientLevelsQuantity fatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(DomainConstant.FAT_NUTRIENT_LEVELS_QUANTITY);
+        NutrientLevelsQuantity saturatedFatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(DomainConstant.SATURATED_FAT_NUTRIENT_LEVELS_QUANTITY);
+        NutrientLevelsQuantity sugarsNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(DomainConstant.SUGARS_NUTRIENT_LEVELS_QUANTITY);
+        NutrientLevelsQuantity saltNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(DomainConstant.SALT_NUTRIENT_LEVELS_QUANTITY);
 
         fatQuantityIndicator.setBackground(getNutrientLevelsQuantityDrawable(fatNutrientLevelsQuantity.toString()));
         saturatedFatQuantityIndicator.setBackground(getNutrientLevelsQuantityDrawable(saturatedFatNutrientLevelsQuantity.toString()));
@@ -200,9 +200,9 @@ public class ScannedProductFragment extends Fragment {
 
         ArrayList<String> ingredientsAnalysisTags = product.getIngredientsAnalysisTags();
         for (String tag: ingredientsAnalysisTags) {
-            if (tag.contains(GlobalConstant.PALM)) setIngredientsAnalysisTextView(isPalmOilFree, tag);
-            if (tag.contains(GlobalConstant.VEGAN)) setIngredientsAnalysisTextView(isVegan, tag);
-            if (tag.contains(GlobalConstant.VEGETARIAN)) setIngredientsAnalysisTextView(isVegetarian, tag);
+            if (tag.contains(UiConstant.PALM)) setIngredientsAnalysisTextView(isPalmOilFree, tag);
+            if (tag.contains(UiConstant.VEGAN)) setIngredientsAnalysisTextView(isVegan, tag);
+            if (tag.contains(UiConstant.VEGETARIAN)) setIngredientsAnalysisTextView(isVegetarian, tag);
         }
 
         nutritionFactsEnergyKj.setText(decimalFormat.format(nutriments.getEnergyKj100g())+" kj");
@@ -248,7 +248,7 @@ public class ScannedProductFragment extends Fragment {
             case "en:palm-oil-content-unknown":
             case "en:vegan-status-unknown":
             case "en:vegetarian-status-unknown":
-                textView.setText(GlobalConstant.UNKNOWN);
+                textView.setText(UiConstant.UNKNOWN);
                 break;
             default:
                 textView.setText("Non");

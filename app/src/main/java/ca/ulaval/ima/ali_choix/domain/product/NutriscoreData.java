@@ -1,4 +1,4 @@
-package ca.ulaval.ima.ali_choix.domain;
+package ca.ulaval.ima.ali_choix.domain.product;
 
 public class NutriscoreData {
     //TODO Faudrait-tu mettre sa public a la place? un réusinage sera peut-être nécessaire lors de l'utilisation du nutriScoreData
