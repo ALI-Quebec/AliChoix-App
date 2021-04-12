@@ -24,7 +24,7 @@ import ca.ulaval.ima.ali_choix.services.ServiceLocator;
 import static ca.ulaval.ima.ali_choix.domain.GlobalConstant.PRODUCT_ID_KEY;
 
 public class HistoryFragment extends ListFragment {
-    private ArrayList<HistoryElement> listHistoryItem;
+    private ArrayList<HistoryElement> historyItems;
     private HistoryItemListAdapter adapter;
     private HistoryService historyService;
     
@@ -60,7 +60,7 @@ public class HistoryFragment extends ListFragment {
 
         adapter=new HistoryItemListAdapter(getActivity(),
                 android.R.layout.activity_list_item,
-                listHistoryItem);
+                historyItems);
         setListAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -77,10 +77,10 @@ public class HistoryFragment extends ListFragment {
 
     private void completeDeletionProcess(){
 
-        ArrayList<Boolean> checkedItem = (ArrayList) adapter.getCheckboxState();
-        for(int i = 0; i < checkedItem.size(); i++){
-            if(checkedItem.get(i)){
-                historyService.removeHistoryElement(listHistoryItem.get(i).getProductId().toString());
+        ArrayList<Boolean> checkedItems = (ArrayList) adapter.getCheckboxState();
+        for(int i = 0; i < checkedItems.size(); i++){
+            if(checkedItems.get(i)){
+                historyService.removeHistoryElement(historyItems.get(i).getProductId().toString());
             }
         }
         fillItemListFromHistory();
@@ -90,7 +90,7 @@ public class HistoryFragment extends ListFragment {
 
         adapter=new HistoryItemListAdapter(getActivity(),
                 android.R.layout.activity_list_item,
-                listHistoryItem);
+                historyItems);
         setListAdapter(adapter);
     }
 
@@ -98,7 +98,7 @@ public class HistoryFragment extends ListFragment {
     public void onListItemClick(ListView listView, View view, int positionIndex, long id) {
         super.onListItemClick(listView, view, positionIndex, id);
 
-        HistoryElement clickedItem = listHistoryItem.get(positionIndex);
+        HistoryElement clickedItem = historyItems.get(positionIndex);
 
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         Bundle bundle = new Bundle();
@@ -110,9 +110,9 @@ public class HistoryFragment extends ListFragment {
         List history = historyService.getHistory();
         ListIterator<HistoryElement> historyIterator = history.listIterator(history.size());
 
-        listHistoryItem = new ArrayList<>();
+        historyItems = new ArrayList<>();
         while(historyIterator.hasPrevious()) {
-            listHistoryItem.add(historyIterator.previous());
+            historyItems.add(historyIterator.previous());
         }
     }
 }
