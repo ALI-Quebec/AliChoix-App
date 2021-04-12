@@ -4,8 +4,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import ca.ulaval.ima.ali_choix.domain.ErrorCode;
-import ca.ulaval.ima.ali_choix.domain.NutrientLevelsQuantity;
+import ca.ulaval.ima.ali_choix.domain.product.NutrientLevelsQuantity;
 
 public class InvalidNutrientLevelsQuantityException extends ApplicationException {
     private static final String ERROR = "Invalid nutrient levels quantity";

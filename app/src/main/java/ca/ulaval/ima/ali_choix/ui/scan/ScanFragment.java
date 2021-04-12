@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +22,7 @@ import com.google.zxing.Result;
 
 import ca.ulaval.ima.ali_choix.R;
 
-import static ca.ulaval.ima.ali_choix.domain.GlobalConstant.PRODUCT_ID_KEY;
+import static ca.ulaval.ima.ali_choix.domain.DomainConstant.PRODUCT_ID_KEY;
 
 
 public class ScanFragment extends Fragment {
