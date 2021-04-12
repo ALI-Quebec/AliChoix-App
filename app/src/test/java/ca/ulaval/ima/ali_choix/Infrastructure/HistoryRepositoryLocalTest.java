@@ -2,9 +2,9 @@ package ca.ulaval.ima.ali_choix.Infrastructure;
 
 import org.junit.Test;
 
-import ca.ulaval.ima.ali_choix.domain.HistoryElement;
-import ca.ulaval.ima.ali_choix.domain.HistoryRepository;
-import ca.ulaval.ima.ali_choix.domain.ProductId;
+import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
+import ca.ulaval.ima.ali_choix.domain.history.HistoryRepository;
+import ca.ulaval.ima.ali_choix.domain.product.ProductId;
 import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryEmptyException;
 
 import static org.junit.Assert.assertEquals;

@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import ca.ulaval.ima.ali_choix.domain.ErrorCode;
-
 public abstract class ApplicationException extends RuntimeException {
     private final String error;
     private final String description;

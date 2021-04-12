@@ -1,4 +1,4 @@
-package ca.ulaval.ima.ali_choix.domain;
+package ca.ulaval.ima.ali_choix.domain.product;
 
 public class ProductId {
     private final String code;

@@ -1,8 +1,8 @@
-package ca.ulaval.ima.ali_choix.domain;
-
-import com.google.zxing.common.StringUtils;
+package ca.ulaval.ima.ali_choix.domain.product;
 
 import java.util.ArrayList;
+
+import ca.ulaval.ima.ali_choix.domain.DomainConstant;
 
 public class Product {
     private String image_front_url;
@@ -26,7 +26,7 @@ public class Product {
     public String getOrigin() {
         if (origins != null) return origins;
 
-        return GlobalConstant.INFORMATION_NOT_COMPUTED;
+        return DomainConstant.INFORMATION_NOT_COMPUTED;
     }
 
     public void setOrigins(String origins) {
@@ -36,7 +36,7 @@ public class Product {
     public String getCountryImported() {
         if (countries_imported != null) return countries_imported;
 
-        return GlobalConstant.INFORMATION_NOT_COMPUTED;
+        return DomainConstant.INFORMATION_NOT_COMPUTED;
     }
 
     public void setCountriesImported(String countries_imported) {
@@ -46,7 +46,7 @@ public class Product {
     public String getQuantity() {
         if (product_quantity != null) return product_quantity + " g";
 
-        return GlobalConstant.INFORMATION_NOT_COMPUTED;
+        return DomainConstant.INFORMATION_NOT_COMPUTED;
     }
 
     public void setProductQuantity(String product_quantity) {
@@ -57,7 +57,7 @@ public class Product {
         if (product_name_en != null && !product_name_en.trim().equals("")) return product_name_en;
         if (product_name_fr != null && !product_name_fr.trim().equals("")) return product_name_fr;
 
-        return GlobalConstant.INFORMATION_NOT_COMPUTED;
+        return DomainConstant.INFORMATION_NOT_COMPUTED;
     }
 
     public void setEnglishName(String product_name_en) {
