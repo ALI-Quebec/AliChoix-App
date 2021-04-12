@@ -54,8 +54,8 @@ public class Product {
     }
 
     public String getName() {
-        if (product_name_en != null || !product_name_en.trim().equals("")) return product_name_en;
-        if (product_name_fr != null || !product_name_en.trim().equals("")) return product_name_fr;
+        if (product_name_en != null && !product_name_en.trim().equals("")) return product_name_en;
+        if (product_name_fr != null && !product_name_fr.trim().equals("")) return product_name_fr;
 
         return GlobalConstant.INFORMATION_NOT_COMPUTED;
     }
