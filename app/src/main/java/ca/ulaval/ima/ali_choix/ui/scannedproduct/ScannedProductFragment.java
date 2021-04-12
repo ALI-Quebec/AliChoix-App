@@ -113,7 +113,7 @@ public class ScannedProductFragment extends Fragment {
             getInformationsWithOpenFoodFact(getArguments().getString("productId"));
         } else {
             //TODO Appeller l'historique pour savoir quoi afficher
-            getInformationsWithOpenFoodFact("0737628064502");
+            getInformationsWithOpenFoodFact("123rwer34");
         }
 
         return root;
@@ -158,10 +158,15 @@ public class ScannedProductFragment extends Fragment {
         String quantity = product.getQuantity();
         Nutriments nutriments = product.getNutriments();
 
-        Picasso.get().load(url_front).into(scannedProductImage);
-        scannedProductOrigin.setText( origin == null || origin.isEmpty() ? "Information manquante" : origin);
-        scannedProductCountryImported.setText(countryImported == null || countryImported.isEmpty()  ? "Information manquante" : countryImported);
-        scannedProductQuantity.setText(quantity == null || quantity.isEmpty() ? "Information manquante" : quantity+'g');
+        if (url_front != null) {
+            Picasso.get().load(url_front).into(scannedProductImage);
+        } else {
+            //TODO n'affiche pas l'image
+            scannedProductImage.setBackground(getResources().getDrawable(R.drawable.ic_picture_svgrepo_com));
+        };
+        scannedProductOrigin.setText(origin);
+        scannedProductCountryImported.setText(countryImported);
+        scannedProductQuantity.setText(quantity);
         scannedProductName.setText(name);
 
         scannedProductNutriScoreGrade = product.getNutriScoreGrade();

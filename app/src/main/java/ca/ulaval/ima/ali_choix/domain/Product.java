@@ -24,7 +24,9 @@ public class Product {
     }
 
     public String getOrigin() {
-        return origins;
+        if (origins != null || !origins.trim().equals("")) return origins;
+
+        return GlobalConstant.INFORMATION_NOT_COMPUTED;
     }
 
     public void setOrigins(String origins) {
@@ -32,7 +34,9 @@ public class Product {
     }
 
     public String getCountryImported() {
-        return countries_imported;
+        if (countries_imported != null || !countries_imported.trim().equals("")) return countries_imported;
+
+        return GlobalConstant.INFORMATION_NOT_COMPUTED;
     }
 
     public void setCountriesImported(String countries_imported) {
@@ -40,7 +44,9 @@ public class Product {
     }
 
     public String getQuantity() {
-        return product_quantity;
+        if (product_quantity != null || !product_quantity.trim().equals("")) return product_quantity + " g";
+
+        return GlobalConstant.INFORMATION_NOT_COMPUTED;
     }
 
     public void setProductQuantity(String product_quantity) {
@@ -50,7 +56,8 @@ public class Product {
     public String getName() {
         if (product_name_en != null || !product_name_en.trim().equals("")) return product_name_en;
         if (product_name_fr != null || !product_name_en.trim().equals("")) return product_name_fr;
-        return GlobalConstant.MISSING_INFORMATION;
+
+        return GlobalConstant.INFORMATION_NOT_COMPUTED;
     }
 
     //TODO only getName, config will decide if we return french or english one (avoid putting getFrenchName in all code)

@@ -37,12 +37,12 @@
 
                 <ImageView
                     android:id="@+id/scanned_product_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="121dp"
+                    android:layout_width="122dp"
+                    android:layout_height="122dp"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="80dp"
                     app:srcCompat="@drawable/ic_launcher_background"
-                    tools:ignore="VectorDrawableCompat" />
+                    android:adjustViewBounds="true" />
 
                 <TextView
                     android:id="@+id/scanned_product_name"
@@ -111,6 +111,9 @@
                         android:id="@+id/scanned_product_origin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:maxWidth="200dp"
                         android:layout_toRightOf="@id/naming_imported_country"
                         android:layout_marginLeft="48dp"/>
 
@@ -118,6 +121,9 @@
                         android:id="@+id/scanned_product_imported_country"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:maxWidth="200dp"
                         android:layout_below="@id/scanned_product_origin"
                         android:layout_toRightOf="@id/naming_imported_country"
                         android:layout_marginLeft="48dp"
@@ -127,6 +133,9 @@
                         android:id="@+id/scanned_product_quantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:maxWidth="200dp"
                         android:layout_toRightOf="@id/naming_imported_country"
                         android:layout_below="@id/scanned_product_imported_country"
                         android:layout_marginTop="24dp"

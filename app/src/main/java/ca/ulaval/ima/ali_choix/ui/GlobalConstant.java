@@ -10,4 +10,6 @@ public class GlobalConstant {
     public final static String VEGAN = "vegan";
     public final static String VEGETARIAN = "vegetarian";
     public final static String UNKNOWN = "Non connu";
+
+    public final static String INFORMATION_NOT_COMPUTED = "Non connu";
 }
