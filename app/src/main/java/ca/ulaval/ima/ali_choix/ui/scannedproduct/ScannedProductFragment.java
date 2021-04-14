@@ -23,6 +23,8 @@ import com.squareup.picasso.Picasso;
 
 import ca.ulaval.ima.ali_choix.domain.ProductId;
 import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryEmptyException;
+import ca.ulaval.ima.ali_choix.network.MongoDBClient;
+import ca.ulaval.ima.ali_choix.network.exceptions.NotFoundException;
 import ca.ulaval.ima.ali_choix.services.HistoryService;
 
 import ca.ulaval.ima.ali_choix.domain.NutrientLevelsQuantity;
@@ -127,8 +129,9 @@ public class ScannedProductFragment extends Fragment {
         return root;
     }
 
+    // TODO: rename and switch to MongoDB method
     private void getInformationsWithOpenFoodFact(String productId) {
-        OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
+        /*OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
         OFFClient.get(productId, null, new JsonHttpResponseHandler() {
 
             @Override
@@ -145,7 +148,24 @@ public class ScannedProductFragment extends Fragment {
                     dialog.show(getFragmentManager(), "FireDialogFragment");
                 }
             }
+        });*/
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String productJson = MongoDBClient.findProduct(productId);
+                    Gson gson = new Gson();
+                    product = gson.fromJson(String.valueOf(productJson), Product.class);
+                    showInformations();
+                    historyService.addHistoryElement(productId,product.getImage(),product.getName());
+                } catch (NotFoundException e) {
+                    e.printStackTrace();
+                    DialogFragment dialog = new FireDialogFragment();
+                    dialog.show(getFragmentManager(), "FireDialogFragment");
+                }
+            }
         });
+        thread.start();
     }
 
     @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n", "DefaultLocale"})

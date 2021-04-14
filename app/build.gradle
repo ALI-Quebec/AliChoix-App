@@ -57,7 +57,9 @@ dependencies {
     //async
     implementation 'com.loopj.android:android-async-http:1.4.10'
     //mongodb
-    implementation 'org.mongodb:mongodb-driver:3.12.8'
+    //implementation 'org.mongodb:mongodb-driver-core:3.12.8'
+    //implementation 'org.mongodb:bson:3.12.8'
+    implementation files('libs\\mongo-java-driver-3.4.0.jar')
     //multidex because app got too big
     implementation 'com.android.support:multidex:1.0.3'
 }
