@@ -18,10 +18,8 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
-import ca.ulaval.ima.ali_choix.domain.ProductId;
 import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryEmptyException;
 import ca.ulaval.ima.ali_choix.network.MongoDBClient;
 import ca.ulaval.ima.ali_choix.network.exceptions.NotFoundException;
@@ -34,10 +32,6 @@ import ca.ulaval.ima.ali_choix.services.ProductService;
 import ca.ulaval.ima.ali_choix.services.ServiceLocator;
 import ca.ulaval.ima.ali_choix.ui.dialog.FireDialogFragment;
 import ca.ulaval.ima.ali_choix.ui.GlobalConstant;
-import cz.msebera.android.httpclient.Header;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -45,7 +39,6 @@ import java.util.HashMap;
 
 import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.Product;
-import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
 
 import static ca.ulaval.ima.ali_choix.domain.GlobalConstant.PRODUCT_ID_KEY;
 
@@ -149,23 +142,45 @@ public class ScannedProductFragment extends Fragment {
                 }
             }
         });*/
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String productJson = MongoDBClient.findProduct(productId);
-                    Gson gson = new Gson();
-                    product = gson.fromJson(String.valueOf(productJson), Product.class);
-                    showInformations();
-                    historyService.addHistoryElement(productId,product.getImage(),product.getName());
-                } catch (NotFoundException e) {
-                    e.printStackTrace();
-                    DialogFragment dialog = new FireDialogFragment();
-                    dialog.show(getFragmentManager(), "FireDialogFragment");
-                }
-            }
-        });
+        MongoDBThread mongo = new MongoDBThread(productId);
+        Thread thread = new Thread(mongo);
         thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (mongo.hasFound()) {
+            showInformations();
+            historyService.addHistoryElement(productId,product.getImage(),product.getName());
+        }
+    }
+
+    private class MongoDBThread implements Runnable {
+        private String productId;
+        private volatile boolean found = false;
+
+        MongoDBThread(String productId) {
+            this.productId = productId;
+        }
+
+        @Override
+        public void run() {
+            try {
+                String productJson = MongoDBClient.findProduct(productId);
+                Gson gson = new Gson();
+                product = gson.fromJson(String.valueOf(productJson), Product.class);
+                found = true;
+            } catch (NotFoundException e) {
+                e.printStackTrace();
+                DialogFragment dialog = new FireDialogFragment();
+                dialog.show(getFragmentManager(), "FireDialogFragment");
+            }
+        }
+
+        public boolean hasFound() {
+            return found;
+        }
     }
 
     @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n", "DefaultLocale"})
