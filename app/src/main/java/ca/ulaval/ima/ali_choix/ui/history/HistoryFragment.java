@@ -17,11 +17,11 @@ import java.util.List;
 import java.util.ListIterator;
 
 import ca.ulaval.ima.ali_choix.R;
-import ca.ulaval.ima.ali_choix.domain.HistoryElement;
+import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 import ca.ulaval.ima.ali_choix.services.HistoryService;
 import ca.ulaval.ima.ali_choix.services.ServiceLocator;
 
-import static ca.ulaval.ima.ali_choix.domain.GlobalConstant.PRODUCT_ID_KEY;
+import static ca.ulaval.ima.ali_choix.domain.DomainConstant.PRODUCT_ID_KEY;
 
 public class HistoryFragment extends ListFragment {
     private ArrayList<HistoryElement> historyItems;

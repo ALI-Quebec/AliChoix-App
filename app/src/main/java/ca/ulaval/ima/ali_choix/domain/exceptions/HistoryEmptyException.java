@@ -4,8 +4,6 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import ca.ulaval.ima.ali_choix.domain.ErrorCode;
-
 public class HistoryEmptyException extends ApplicationException {
     private static final String ERROR = "History is empty";
     private static final String DESCRIPTION = "Cannot get searched product because history is empty";

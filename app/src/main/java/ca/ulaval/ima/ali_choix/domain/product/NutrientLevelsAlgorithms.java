@@ -1,4 +1,4 @@
-package ca.ulaval.ima.ali_choix.domain;
+package ca.ulaval.ima.ali_choix.domain.product;
 
 public class NutrientLevelsAlgorithms {
     private static final Float LOW_FAT_VALUE = 3f;
