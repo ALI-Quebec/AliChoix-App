@@ -46,7 +46,6 @@ import java.util.HashMap;
 
 import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.product.Product;
-import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
 
 import static ca.ulaval.ima.ali_choix.domain.DomainConstant.PRODUCT_ID_KEY;
 

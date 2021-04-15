@@ -4,7 +4,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import ca.ulaval.ima.ali_choix.domain.ErrorCode;
+import ca.ulaval.ima.ali_choix.domain.exceptions.ErrorCode;
 import ca.ulaval.ima.ali_choix.domain.exceptions.ApplicationException;
 
 public class NotFoundException extends ApplicationException {
