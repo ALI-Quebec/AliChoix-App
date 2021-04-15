@@ -18,10 +18,15 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryEmptyException;
 import ca.ulaval.ima.ali_choix.network.MongoDBClient;
+import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
 import ca.ulaval.ima.ali_choix.network.exceptions.NotFoundException;
 import ca.ulaval.ima.ali_choix.services.HistoryService;
 
@@ -39,6 +44,7 @@ import java.util.HashMap;
 
 import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.Product;
+import cz.msebera.android.httpclient.Header;
 
 import static ca.ulaval.ima.ali_choix.domain.GlobalConstant.PRODUCT_ID_KEY;
 
@@ -124,7 +130,7 @@ public class ScannedProductFragment extends Fragment {
 
     // TODO: rename and switch to MongoDB method
     private void getInformationsWithOpenFoodFact(String productId) {
-        /*OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
+        OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
         OFFClient.get(productId, null, new JsonHttpResponseHandler() {
 
             @Override
@@ -141,19 +147,10 @@ public class ScannedProductFragment extends Fragment {
                     dialog.show(getFragmentManager(), "FireDialogFragment");
                 }
             }
-        });*/
+        });
         MongoDBThread mongo = new MongoDBThread(productId);
         Thread thread = new Thread(mongo);
         thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        if (mongo.hasFound()) {
-            showInformations();
-            historyService.addHistoryElement(productId,product.getImage(),product.getName());
-        }
     }
 
     private class MongoDBThread implements Runnable {
@@ -167,19 +164,10 @@ public class ScannedProductFragment extends Fragment {
         @Override
         public void run() {
             try {
-                String productJson = MongoDBClient.findProduct(productId);
-                Gson gson = new Gson();
-                product = gson.fromJson(String.valueOf(productJson), Product.class);
-                found = true;
+                MongoDBClient.findProduct(productId);
             } catch (NotFoundException e) {
-                e.printStackTrace();
-                DialogFragment dialog = new FireDialogFragment();
-                dialog.show(getFragmentManager(), "FireDialogFragment");
+                // Do nothing because OFF has the info anyway
             }
-        }
-
-        public boolean hasFound() {
-            return found;
         }
     }
 

@@ -23,6 +23,7 @@ public class MongoDBClient {
     private static final String MISSING_PRODUCTS_COLLECTION_NAME = "missingproducts";
     private static final String SCAN_COUNT_FIELD_NAME = "scanCount";
 
+    // For now, only used to compile history and missing products
     public static String findProduct(String productID) {
         MongoClient mongoClient = new MongoClient(MONGODB_CONNECTION);
         MongoCollection<Document> productsCollection = mongoClient.getDatabase(DATABASE_NAME).getCollection(PRODUCTS_COLLECTION_NAME);
