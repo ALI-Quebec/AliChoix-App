@@ -2,7 +2,6 @@ package ca.ulaval.ima.ali_choix.Infrastructure;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,10 +12,11 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.ulaval.ima.ali_choix.domain.history.HistoryDataManager;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryRepository;
 
-public class LocalHistoryFile {
+public class LocalHistoryFile implements HistoryDataManager {
 
     private static final String HistoryFileName = "LocalHistory";
 
@@ -33,15 +33,14 @@ public class LocalHistoryFile {
 
         catch(IOException ex)
         {
-            //TODO what should we do?
+            throw new FileWritingException();
         }
         finally
         {
             try {
                 objectOutputStream.close();
             } catch (IOException e) {
-                e.printStackTrace();
-                //TODO what should we do?
+                throw new FileWritingException();
             }
         }
     }
@@ -62,9 +61,9 @@ public class LocalHistoryFile {
         }
         catch(IOException ex)
         {
-            //TODO what should we do?
+            throw new FileReadingException();
         } catch (ClassNotFoundException e) {
-            //TODO what should we do?
+            throw new FileReadingException();
         } finally
         {
             try {
@@ -72,8 +71,7 @@ public class LocalHistoryFile {
                     objectInputStream.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
-                //TODO what should we do?
+                throw new FileReadingException();
             }
         }
 
