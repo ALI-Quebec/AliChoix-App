@@ -1,8 +1,11 @@
 package ca.ulaval.ima.ali_choix.services;
 
+import android.content.Context;
+
 import java.util.List;
 
 import ca.ulaval.ima.ali_choix.Infrastructure.HistoryRepositoryLocal;
+import ca.ulaval.ima.ali_choix.Infrastructure.LocalHistoryFile;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElementFactory;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryRepository;
@@ -11,9 +14,12 @@ import ca.ulaval.ima.ali_choix.domain.product.ProductId;
 public class HistoryService {
     private HistoryRepository historyRepository;
     private HistoryElementFactory historyElementFactory;
+    private LocalHistoryFile localHistoryFile;
+    private Context context;
 
-    public HistoryService(){
-        historyRepository = new HistoryRepositoryLocal();
+    public HistoryService(Context context){
+        this.context = context;
+        localHistoryFile = new LocalHistoryFile();
         getHistoryFromDevice();
         historyElementFactory = new HistoryElementFactory();
     }
@@ -44,10 +50,10 @@ public class HistoryService {
     }
 
     private void saveHistoryOnDevice(){
-      //TODO
+       localHistoryFile.saveHistory(historyRepository,context);
     }
 
     private void getHistoryFromDevice(){
-        //TODO
+        historyRepository = localHistoryFile.loadHistory(context);
     }
 }

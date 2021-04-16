@@ -16,6 +16,14 @@ public class HistoryRepositoryLocal implements HistoryRepository {
         history = new LinkedHashMap<>();
     }
 
+    public HistoryRepositoryLocal(List<HistoryElement> historyElements){
+        history = new LinkedHashMap<>();
+
+        for (HistoryElement historyElement: historyElements) {
+            history.put(historyElement.getProductId(),historyElement);
+        }
+    }
+
     @Override
     public void addElement(HistoryElement historyElement) {
         if(history.containsKey(historyElement.getProductId())){
