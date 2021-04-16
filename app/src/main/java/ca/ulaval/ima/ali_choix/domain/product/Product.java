@@ -3,6 +3,7 @@ package ca.ulaval.ima.ali_choix.domain.product;
 import java.util.ArrayList;
 
 import ca.ulaval.ima.ali_choix.domain.DomainConstant;
+import kotlin.text.UStringsKt;
 
 public class Product {
     private String image_front_url;
@@ -14,6 +15,7 @@ public class Product {
     private String nutriscore_grade;
     private Nutriments nutriments;
     private ArrayList<String> ingredients_analysis_tags;
+    private String ecoscore_grade;
 
     public String getImage() {
         return image_front_url;
@@ -81,4 +83,12 @@ public class Product {
     public ArrayList<String> getIngredientsAnalysisTags() { return ingredients_analysis_tags; }
 
     public void setIngredientsAnalysisTags(ArrayList<String> ingredients_analysis_tags) { this.ingredients_analysis_tags = ingredients_analysis_tags; }
+
+    public void setEcoScoreGrade(String ecoscore_grade) { this.ecoscore_grade = ecoscore_grade; }
+
+    public String getEcoScoreGrade() {
+        if (ecoscore_grade == null) return EcoScoreGrade.UNKNOWN.toString();
+
+        return ecoscore_grade;
+    }
 }
