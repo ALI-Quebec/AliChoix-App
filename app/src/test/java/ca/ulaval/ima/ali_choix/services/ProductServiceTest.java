@@ -37,32 +37,32 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void givenNutriScoreGradeA_whenGettingDescription_thenReturnCorrespondingDescription() {
+    public void givenNutriScoreGradeA_whenGettingDescription_thenReturnNutriScoreGradeADescription() {
         assertEquals("Très bonne qualité nutritionnelle", productService.getNutriScoreDescription("a"));
     }
 
     @Test
-    public void givenNutriScoreGradeB_whenGettingDescription_thenReturnCorrespondingDescription() {
+    public void givenNutriScoreGradeB_whenGettingDescription_thenReturnNutriScoreGradeBDescription() {
         assertEquals("Bonne qualité nutritionnelle", productService.getNutriScoreDescription("b"));
     }
 
     @Test
-    public void givenNutriScoreGradeC_whenGettingDescription_thenReturnCorrespondingDescription() {
+    public void givenNutriScoreGradeC_whenGettingDescription_thenReturnNutriScoreGradeCDescription() {
         assertEquals("Qualité nutritionnelle moyenne", productService.getNutriScoreDescription("c"));
     }
 
     @Test
-    public void givenNutriScoreGradeD_whenGettingDescription_thenReturnCorrespondingDescription() {
+    public void givenNutriScoreGradeD_whenGettingDescription_thenReturnNutriScoreGradeDDescription() {
         assertEquals("Mauvaise qualité nutritionnelle", productService.getNutriScoreDescription("d"));
     }
 
     @Test
-    public void givenNutriScoreGradeE_whenGettingDescription_thenReturnCorrespondingDescription() {
+    public void givenNutriScoreGradeE_whenGettingDescription_thenReturnNutriScoreGradeEDescription() {
         assertEquals("Très mauvaise qualité nutritionnelle", productService.getNutriScoreDescription("e"));
     }
 
     @Test
-    public void givenNutriScoreGradeUnknown_whenGettingDescription_thenReturnCorrespondingDescription() {
+    public void givenNutriScoreGradeUnknown_whenGettingDescription_thenReturnNutriScoreGradeUnknownDescription() {
         assertEquals("Nutri-Score non calculé\nQualité nutritionnelle inconnue", productService.getNutriScoreDescription("unknown"));
     }
 
@@ -140,32 +140,32 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void givenEcoScoreGradeA_whenGettingDescription_thenReturnCorrespondingDescription() {
+    public void givenEcoScoreGradeA_whenGettingDescription_thenReturnEcoScoreGradeADescription() {
         assertEquals("Très faible impact environnemental", productService.getEcoScoreDescription("a"));
     }
 
     @Test
-    public void givenEcoScoreGradeB_whenGettingDescription_thenReturnCorrespondingDescription() {
+    public void givenEcoScoreGradeB_whenGettingDescription_thenReturnEcoScoreGradeBDescription() {
         assertEquals("Faible impact environnemental", productService.getEcoScoreDescription("b"));
     }
 
     @Test
-    public void givenEcoScoreGradeC_whenGettingDescription_thenReturnCorrespondingDescription() {
+    public void givenEcoScoreGradeC_whenGettingDescription_thenReturnEcoScoreGradeCDescription() {
         assertEquals("Impact modéré sur l'environnement", productService.getEcoScoreDescription("c"));
     }
 
     @Test
-    public void givenEcoScoreGradeD_whenGettingDescription_thenReturnCorrespondingDescription() {
+    public void givenEcoScoreGradeD_whenGettingDescription_thenReturnEcoScoreGradeDDescription() {
         assertEquals("Impact environnemental élevé", productService.getEcoScoreDescription("d"));
     }
 
     @Test
-    public void givenEcoScoreGradeE_whenGettingDescription_thenReturnCorrespondingDescription() {
+    public void givenEcoScoreGradeE_whenGettingDescription_thenReturnEcoScoreGradeEDescription() {
         assertEquals("Impact environnemental très élevé", productService.getEcoScoreDescription("e"));
     }
 
     @Test
-    public void givenEcoScoreGradeUnknown_whenGettingDescription_thenReturnCorrespondingDescription() {
+    public void givenEcoScoreGradeUnknown_whenGettingDescription_thenReturnEcoScoreGradeUnknownDescription() {
         assertEquals("Impact environnemental inconnu", productService.getEcoScoreDescription("unknown"));
     }
 
