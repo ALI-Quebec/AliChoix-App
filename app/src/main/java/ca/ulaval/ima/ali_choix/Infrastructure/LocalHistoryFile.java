@@ -12,6 +12,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryLoadingException;
+import ca.ulaval.ima.ali_choix.domain.exceptions.HistorySavingException;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryRepositoryCollector;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryRepository;
@@ -31,7 +33,7 @@ public class LocalHistoryFile implements HistoryRepositoryCollector {
             objectOutputStream.writeObject(historyElements);
         }
 
-        catch(IOException ex)
+        catch(IOException e)
         {
             throw new HistorySavingException();
         }
@@ -59,7 +61,7 @@ public class LocalHistoryFile implements HistoryRepositoryCollector {
         {
             historyElements=new ArrayList<>();
         }
-        catch(IOException ex)
+        catch(IOException e)
         {
             throw new HistoryLoadingException();
         } catch (ClassNotFoundException e) {

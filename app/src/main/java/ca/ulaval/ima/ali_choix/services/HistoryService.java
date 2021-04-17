@@ -4,8 +4,8 @@ import android.content.Context;
 
 import java.util.List;
 
-import ca.ulaval.ima.ali_choix.Infrastructure.HistoryLoadingException;
-import ca.ulaval.ima.ali_choix.Infrastructure.HistorySavingException;
+import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryLoadingException;
+import ca.ulaval.ima.ali_choix.domain.exceptions.HistorySavingException;
 import ca.ulaval.ima.ali_choix.Infrastructure.HistoryRepositoryLocal;
 import ca.ulaval.ima.ali_choix.Infrastructure.LocalHistoryFile;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryRepositoryCollector;
