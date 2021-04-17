@@ -25,7 +25,7 @@ import static ca.ulaval.ima.ali_choix.domain.DomainConstant.PRODUCT_ID_KEY;
 
 public class HistoryFragment extends ListFragment {
     private ArrayList<HistoryElement> historyItems;
-    private HistoryItemListAdapter adapter;
+    private HistoryItemRecyclerViewAdapter adapter;
     private HistoryService historyService;
     
     private ImageButton deleteButton;
@@ -58,7 +58,7 @@ public class HistoryFragment extends ListFragment {
 
         fillItemListFromHistory();
 
-        adapter=new HistoryItemListAdapter(getActivity(),
+        adapter=new HistoryItemRecyclerViewAdapter(getActivity(),
                 android.R.layout.activity_list_item,
                 historyItems);
         setListAdapter(adapter);
@@ -88,7 +88,7 @@ public class HistoryFragment extends ListFragment {
         completeDeletionButton.setVisibility(View.GONE);
         deleteButton.setVisibility(View.VISIBLE);
 
-        adapter=new HistoryItemListAdapter(getActivity(),
+        adapter=new HistoryItemRecyclerViewAdapter(getActivity(),
                 android.R.layout.activity_list_item,
                 historyItems);
         setListAdapter(adapter);
