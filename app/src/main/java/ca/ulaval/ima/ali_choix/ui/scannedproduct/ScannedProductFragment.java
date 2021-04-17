@@ -189,7 +189,7 @@ public class ScannedProductFragment extends Fragment {
 
         scannedProductEcoScoreGrade = product.getEcoScoreGrade();
         ecoScoreDrawable.setBackground(getEcoScoreGradeDrawable(scannedProductEcoScoreGrade.toLowerCase()));
-        ecoScoreDescription.setText(productService.getEcoScoreDescritpion(scannedProductEcoScoreGrade.toLowerCase()));
+        ecoScoreDescription.setText(productService.getEcoScoreDescription(scannedProductEcoScoreGrade.toLowerCase()));
 
         //TODO est-ce qu'il ne faudrait pas ici mettre un interface pour pas que le UI soit dépendant du naming dans le domaine ?
         HashMap nutrientLevels = productService.getNutrientLevelsQuantity(nutriments);

@@ -3,7 +3,6 @@ package ca.ulaval.ima.ali_choix.domain.product;
 import java.util.ArrayList;
 
 import ca.ulaval.ima.ali_choix.domain.DomainConstant;
-import kotlin.text.UStringsKt;
 
 public class Product {
     private String image_front_url;
@@ -69,7 +68,7 @@ public class Product {
     public void setFrenchName(String product_name_fr) { this.product_name_fr = product_name_fr; }
 
     public String getNutriScoreGrade() {
-        if (nutriscore_grade == null) return NutriScoreGrade.NOT_COMPUTED.toString();
+        if (nutriscore_grade == null) return NutriScoreGrade.UNKNOWN.toString();
 
         return nutriscore_grade;
     }

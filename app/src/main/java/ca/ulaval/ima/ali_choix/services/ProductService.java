@@ -20,7 +20,7 @@ public abstract class ProductService extends Service {
         return nutriScoreGrade.getDescription();
     }
 
-    public String getEcoScoreDescritpion(String grade) {
+    public String getEcoScoreDescription(String grade) {
         EcoScoreGrade ecoScoreGrade = EcoScoreGrade.get(grade);
         return ecoScoreGrade.getDescription();
     }
