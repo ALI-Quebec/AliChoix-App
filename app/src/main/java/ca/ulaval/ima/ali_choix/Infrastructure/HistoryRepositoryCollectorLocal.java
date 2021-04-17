@@ -18,9 +18,9 @@ import ca.ulaval.ima.ali_choix.domain.history.HistoryRepositoryCollector;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryRepository;
 
-public class LocalHistoryFile implements HistoryRepositoryCollector {
+public class HistoryRepositoryCollectorLocal implements HistoryRepositoryCollector {
 
-    private static final String HistoryFileName = "LocalHistory";
+    private static final String HISTORY_FILE_NAME = "LocalHistory";
 
     public void saveHistory(HistoryRepository historyRepository, Context context){
         List<HistoryElement> historyElements = historyRepository.getHistory();
@@ -28,7 +28,7 @@ public class LocalHistoryFile implements HistoryRepositoryCollector {
         FileOutputStream fileOutputStream;
         ObjectOutputStream objectOutputStream=null;
         try {
-            fileOutputStream= context.openFileOutput(HistoryFileName, Activity.MODE_PRIVATE);
+            fileOutputStream= context.openFileOutput(HISTORY_FILE_NAME, Activity.MODE_PRIVATE);
             objectOutputStream=new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(historyElements);
         }
@@ -53,7 +53,7 @@ public class LocalHistoryFile implements HistoryRepositoryCollector {
         FileInputStream fileInputStream;
         ObjectInputStream objectInputStream=null;
         try {
-            fileInputStream= context.openFileInput(HistoryFileName);
+            fileInputStream= context.openFileInput(HISTORY_FILE_NAME);
             objectInputStream=new ObjectInputStream(fileInputStream);
             historyElements =(ArrayList<HistoryElement>)objectInputStream.readObject();
         }
