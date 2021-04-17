@@ -8,7 +8,8 @@ import ca.ulaval.ima.ali_choix.domain.exceptions.InvalidNutrientLevelsQuantityEx
 public enum NutrientLevelsQuantity {
     LOW("low", "Quantité faible"),
     MODERATE("moderate", "Quantité modérée"),
-    HIGH("high", "Quantité élevée");
+    HIGH("high", "Quantité élevée"),
+    UNKNOWN("unknown", "Quantité inconnue");
 
     private String quantity;
     private String description;

@@ -14,6 +14,7 @@ public class Product {
     private String nutriscore_grade;
     private Nutriments nutriments;
     private ArrayList<String> ingredients_analysis_tags;
+    private String ecoscore_grade;
 
     public String getImage() {
         return image_front_url;
@@ -24,7 +25,7 @@ public class Product {
     }
 
     public String getOrigins() {
-        if (origins != null) return origins;
+        if (origins != null && !origins.trim().equals("")) return origins;
 
         return DomainConstant.UNKNOWN;
     }
@@ -34,7 +35,7 @@ public class Product {
     }
 
     public String getCountriesImported() {
-        if (countries_imported != null) return countries_imported;
+        if (countries_imported != null && !countries_imported.trim().equals("")) return countries_imported;
 
         return DomainConstant.UNKNOWN;
     }
@@ -44,7 +45,7 @@ public class Product {
     }
 
     public String getQuantity() {
-        if (product_quantity != null) return product_quantity;
+        if (product_quantity != null && !product_quantity.trim().equals("")) return product_quantity;
 
         return DomainConstant.UNKNOWN;
     }
@@ -67,9 +68,9 @@ public class Product {
     public void setFrenchName(String product_name_fr) { this.product_name_fr = product_name_fr; }
 
     public String getNutriScoreGrade() {
-        if (nutriscore_grade == null) return NutriScoreGrade.UNKNOWN.toString();
+        if (nutriscore_grade != null && !nutriscore_grade.trim().equals("")) return nutriscore_grade;
 
-        return nutriscore_grade;
+        return NutriScoreGrade.UNKNOWN.toString();
     }
 
     public void setNutriScoreGrade(String nutriscore_grade) { this.nutriscore_grade = nutriscore_grade; }
@@ -81,4 +82,12 @@ public class Product {
     public ArrayList<String> getIngredientsAnalysisTags() { return ingredients_analysis_tags; }
 
     public void setIngredientsAnalysisTags(ArrayList<String> ingredients_analysis_tags) { this.ingredients_analysis_tags = ingredients_analysis_tags; }
+
+    public void setEcoScoreGrade(String ecoscore_grade) { this.ecoscore_grade = ecoscore_grade; }
+
+    public String getEcoScoreGrade() {
+        if (ecoscore_grade != null && !ecoscore_grade.trim().equals("")) return ecoscore_grade;
+
+        return EcoScoreGrade.UNKNOWN.toString();
+    }
 }
