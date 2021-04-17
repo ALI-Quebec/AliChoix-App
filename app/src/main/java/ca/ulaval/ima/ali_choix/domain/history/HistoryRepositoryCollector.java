@@ -2,7 +2,6 @@ package ca.ulaval.ima.ali_choix.domain.history;
 
 import android.content.Context;
 
-//TODO rename manager BAD
 public interface HistoryRepositoryCollector {
     public void saveHistory(HistoryRepository historyRepository, Context context);
 
