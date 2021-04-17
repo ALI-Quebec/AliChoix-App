@@ -23,7 +23,7 @@ public class Product {
         this.image_front_url = image_front_url;
     }
 
-    public String getOrigin() {
+    public String getOrigins() {
         if (origins != null) return origins;
 
         return DomainConstant.INFORMATION_NOT_COMPUTED;
@@ -33,7 +33,7 @@ public class Product {
         this.origins = origins;
     }
 
-    public String getCountryImported() {
+    public String getCountriesImported() {
         if (countries_imported != null) return countries_imported;
 
         return DomainConstant.INFORMATION_NOT_COMPUTED;
@@ -44,12 +44,12 @@ public class Product {
     }
 
     public String getQuantity() {
-        if (product_quantity != null) return product_quantity + " g";
+        if (product_quantity != null) return product_quantity;
 
         return DomainConstant.INFORMATION_NOT_COMPUTED;
     }
 
-    public void setProductQuantity(String product_quantity) {
+    public void setQuantity(String product_quantity) {
         this.product_quantity = product_quantity;
     }
 
@@ -67,7 +67,7 @@ public class Product {
     public void setFrenchName(String product_name_fr) { this.product_name_fr = product_name_fr; }
 
     public String getNutriScoreGrade() {
-        if (nutriscore_grade == null) return NutriScoreGrade.NOT_COMPUTED.toString();
+        if (nutriscore_grade == null) return NutriScoreGrade.UNKNOWN.toString();
 
         return nutriscore_grade;
     }

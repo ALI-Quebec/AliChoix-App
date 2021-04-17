@@ -161,8 +161,8 @@ public class ScannedProductFragment extends Fragment {
 
         String name = product.getName();
         String url_front = product.getImage();
-        String origin = product.getOrigin();
-        String countryImported = product.getCountryImported();
+        String origin = product.getOrigins();
+        String countryImported = product.getCountriesImported();
         String quantity = product.getQuantity();
         Nutriments nutriments = product.getNutriments();
 
@@ -174,7 +174,7 @@ public class ScannedProductFragment extends Fragment {
         };
         scannedProductOrigin.setText(origin);
         scannedProductCountryImported.setText(countryImported);
-        scannedProductQuantity.setText(quantity);
+        scannedProductQuantity.setText(quantity+ " g");
         scannedProductName.setText(name);
 
         scannedProductNutriScoreGrade = product.getNutriScoreGrade();
@@ -233,6 +233,7 @@ public class ScannedProductFragment extends Fragment {
                 return getResources().getDrawable(R.drawable.ic_nutriscore_d);
             case "e":
                 return getResources().getDrawable(R.drawable.ic_nutriscore_e);
+            case "unknown":
             default:
                 return getResources().getDrawable(R.drawable.ic_nutriscore_unknown);
         }
