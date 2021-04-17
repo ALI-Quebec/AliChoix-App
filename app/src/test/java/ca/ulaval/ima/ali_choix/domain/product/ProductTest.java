@@ -58,14 +58,14 @@ public class ProductTest{
     }
 
     @Test
-    public void givenNullEnglishNameAndFrenchName_whenGettingName_thenReturnFrenchName() {
+    public void givenNullEnglishNameAndAFrenchName_whenGettingName_thenReturnFrenchName() {
         product.setFrenchName("French name");
 
         assertEquals(product.getName(), "French name");
     }
 
     @Test
-    public void givenNullFrenchNameAndEnglishName_whenGettingName_thenReturnEnglishName() {
+    public void givenNullFrenchNameAndAnEnglishName_whenGettingName_thenReturnEnglishName() {
         product.setEnglishName("English name");
 
         assertEquals(product.getName(), "English name");
