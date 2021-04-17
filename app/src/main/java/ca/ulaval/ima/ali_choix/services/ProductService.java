@@ -17,6 +17,7 @@ public abstract class ProductService extends Service {
 
     public String getNutriScoreDescription(String grade) {
         NutriScoreGrade nutriScoreGrade = NutriScoreGrade.get(grade);
+
         return nutriScoreGrade.getDescription();
     }
 
@@ -38,6 +39,7 @@ public abstract class ProductService extends Service {
 
     public String getNutrientLevelsDescription(String level) {
         NutrientLevelsQuantity nutrientLevelsQuantity = NutrientLevelsQuantity.get(level);
+
         return nutrientLevelsQuantity.getDescription();
     }
 }

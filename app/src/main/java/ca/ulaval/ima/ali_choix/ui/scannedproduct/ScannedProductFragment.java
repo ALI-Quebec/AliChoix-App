@@ -166,19 +166,19 @@ public class ScannedProductFragment extends Fragment {
 
         String name = product.getName();
         String url_front = product.getImage();
-        String origin = product.getOrigin();
-        String countryImported = product.getCountryImported();
+        String origin = product.getOrigins();
+        String countryImported = product.getCountriesImported();
         String quantity = product.getQuantity();
         Nutriments nutriments = product.getNutriments();
 
-        if (url_front == null) {
+        if (url_front != null) {
             Picasso.get().load(url_front).into(scannedProductImage);
         } else {
             scannedProductImage.setBackground(getResources().getDrawable(R.drawable.no_image_available));
         };
         scannedProductOrigin.setText(origin);
         scannedProductCountryImported.setText(countryImported);
-        scannedProductQuantity.setText(quantity);
+        scannedProductQuantity.setText(quantity.equals(UiConstant.UNKNOWN) ? quantity : quantity+ " g");
         scannedProductName.setText(name);
 
         scannedProductNutriScoreGrade = product.getNutriScoreGrade();
@@ -254,6 +254,7 @@ public class ScannedProductFragment extends Fragment {
                 return getResources().getDrawable(R.drawable.ic_nutriscore_d);
             case "e":
                 return getResources().getDrawable(R.drawable.ic_nutriscore_e);
+            case "unknown":
             default:
                 return getResources().getDrawable(R.drawable.ic_nutriscore_unknown);
         }
