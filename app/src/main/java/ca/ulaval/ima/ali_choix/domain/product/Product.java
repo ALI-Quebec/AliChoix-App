@@ -14,6 +14,7 @@ public class Product {
     private String nutriscore_grade;
     private Nutriments nutriments;
     private ArrayList<String> ingredients_analysis_tags;
+    private String ecoscore_grade;
 
     public String getImage() {
         return image_front_url;
@@ -67,7 +68,7 @@ public class Product {
     public void setFrenchName(String product_name_fr) { this.product_name_fr = product_name_fr; }
 
     public String getNutriScoreGrade() {
-        if (nutriscore_grade == null) return NutriScoreGrade.NOT_COMPUTED.toString();
+        if (nutriscore_grade == null) return NutriScoreGrade.UNKNOWN.toString();
 
         return nutriscore_grade;
     }
@@ -81,4 +82,12 @@ public class Product {
     public ArrayList<String> getIngredientsAnalysisTags() { return ingredients_analysis_tags; }
 
     public void setIngredientsAnalysisTags(ArrayList<String> ingredients_analysis_tags) { this.ingredients_analysis_tags = ingredients_analysis_tags; }
+
+    public void setEcoScoreGrade(String ecoscore_grade) { this.ecoscore_grade = ecoscore_grade; }
+
+    public String getEcoScoreGrade() {
+        if (ecoscore_grade == null) return EcoScoreGrade.UNKNOWN.toString();
+
+        return ecoscore_grade;
+    }
 }
