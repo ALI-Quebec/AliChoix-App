@@ -14,7 +14,7 @@ public class InvalidNutrientLevelsQuantityExceptionTest {
     }
 
     @Test
-    public void whenGettingDescription_thenEnumerateNutrientLevelsQuantityValues() {
+    public void whenGettingDescription_thenReturnInvalidNutrientLevelsQuantityExceptionDescription() {
         String expectedDescription = "Nutrient levels quantity is not valid";
         String description = exception.getDescription();
 

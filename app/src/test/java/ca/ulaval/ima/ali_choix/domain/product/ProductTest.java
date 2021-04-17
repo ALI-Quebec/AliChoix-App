@@ -1,7 +1,5 @@
 package ca.ulaval.ima.ali_choix.domain.product;
 
-import junit.framework.TestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,8 +17,8 @@ public class ProductTest{
     }
 
     @Test
-    public void givenNullOrigins_whenGettingOrigins_thenReturnDomainConstant() {
-        assertEquals(product.getOrigins(), DomainConstant.INFORMATION_NOT_COMPUTED);
+    public void givenNullOrigins_whenGettingOrigins_thenReturnUnknownConstant() {
+        assertEquals(product.getOrigins(), DomainConstant.UNKNOWN);
     }
 
     @Test
@@ -31,8 +29,8 @@ public class ProductTest{
     }
 
     @Test
-    public void givenNullCountriesImported_whenGettingCountriesImported_thenReturnDomainConstant() {
-        assertEquals(product.getCountriesImported(), DomainConstant.INFORMATION_NOT_COMPUTED);
+    public void givenNullCountriesImported_whenGettingCountriesImported_thenReturnUnknownConstant() {
+        assertEquals(product.getCountriesImported(), DomainConstant.UNKNOWN);
     }
 
     @Test
@@ -43,8 +41,8 @@ public class ProductTest{
     }
 
     @Test
-    public void givenNullQuantity_whenGettingQuantity_thenReturnDomainConstant() {
-        assertEquals(product.getQuantity(), DomainConstant.INFORMATION_NOT_COMPUTED);
+    public void givenNullQuantity_whenGettingQuantity_thenReturnUnknownConstant() {
+        assertEquals(product.getQuantity(), DomainConstant.UNKNOWN);
     }
 
     @Test
@@ -55,8 +53,8 @@ public class ProductTest{
     }
 
     @Test
-    public void givenNullEnglishAndFrenchName_whenGettingName_thenReturnDomainConstant() {
-        assertEquals(product.getName(), DomainConstant.INFORMATION_NOT_COMPUTED);
+    public void givenNullEnglishAndFrenchName_whenGettingName_thenReturnUnknownConstant() {
+        assertEquals(product.getName(), DomainConstant.UNKNOWN);
     }
 
     @Test

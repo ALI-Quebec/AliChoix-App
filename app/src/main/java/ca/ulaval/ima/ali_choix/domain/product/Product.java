@@ -26,7 +26,7 @@ public class Product {
     public String getOrigins() {
         if (origins != null) return origins;
 
-        return DomainConstant.INFORMATION_NOT_COMPUTED;
+        return DomainConstant.UNKNOWN;
     }
 
     public void setOrigins(String origins) {
@@ -36,7 +36,7 @@ public class Product {
     public String getCountriesImported() {
         if (countries_imported != null) return countries_imported;
 
-        return DomainConstant.INFORMATION_NOT_COMPUTED;
+        return DomainConstant.UNKNOWN;
     }
 
     public void setCountriesImported(String countries_imported) {
@@ -46,7 +46,7 @@ public class Product {
     public String getQuantity() {
         if (product_quantity != null) return product_quantity;
 
-        return DomainConstant.INFORMATION_NOT_COMPUTED;
+        return DomainConstant.UNKNOWN;
     }
 
     public void setQuantity(String product_quantity) {
@@ -57,7 +57,7 @@ public class Product {
         if (product_name_en != null && !product_name_en.trim().equals("")) return product_name_en;
         if (product_name_fr != null && !product_name_fr.trim().equals("")) return product_name_fr;
 
-        return DomainConstant.INFORMATION_NOT_COMPUTED;
+        return DomainConstant.UNKNOWN;
     }
 
     public void setEnglishName(String product_name_en) {

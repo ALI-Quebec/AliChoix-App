@@ -14,7 +14,7 @@ public class HistoryEmptyExceptionTest {
     }
 
     @Test
-    public void whenGettingDescription_thenEnumerateNutrientLevelsQuantityValues() {
+    public void whenGettingDescription_thenReturnHistoryEmptyExceptionExceptionDescription() {
         String expectedDescription = "Cannot get searched product because history is empty";
         String description = exception.getDescription();
 

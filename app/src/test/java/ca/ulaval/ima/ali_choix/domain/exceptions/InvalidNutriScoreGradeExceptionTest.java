@@ -15,7 +15,7 @@ public class InvalidNutriScoreGradeExceptionTest {
     }
 
     @Test
-    public void whenGettingDescription_thenEnumerateNutrientLevelsQuantityValues() {
+    public void whenGettingDescription_thenReturnInvalidNutriScoreGradeExceptionDescription() {
         String expectedDescription = "Nutri score grade is not valid";
         String description = exception.getDescription();
 
