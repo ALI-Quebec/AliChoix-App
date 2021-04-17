@@ -25,7 +25,7 @@ public class Product {
     }
 
     public String getOrigin() {
-        if (origins != null) return origins;
+        if (origins != null && !origins.trim().equals("")) return origins;
 
         return DomainConstant.INFORMATION_NOT_COMPUTED;
     }
@@ -35,7 +35,7 @@ public class Product {
     }
 
     public String getCountryImported() {
-        if (countries_imported != null) return countries_imported;
+        if (countries_imported != null && !countries_imported.trim().equals("")) return countries_imported;
 
         return DomainConstant.INFORMATION_NOT_COMPUTED;
     }
@@ -45,7 +45,7 @@ public class Product {
     }
 
     public String getQuantity() {
-        if (product_quantity != null) return product_quantity + " g";
+        if (product_quantity != null && !product_quantity.trim().equals("")) return product_quantity + " g";
 
         return DomainConstant.INFORMATION_NOT_COMPUTED;
     }
@@ -68,9 +68,9 @@ public class Product {
     public void setFrenchName(String product_name_fr) { this.product_name_fr = product_name_fr; }
 
     public String getNutriScoreGrade() {
-        if (nutriscore_grade == null) return NutriScoreGrade.UNKNOWN.toString();
+        if (nutriscore_grade != null && !nutriscore_grade.trim().equals("")) return nutriscore_grade;
 
-        return nutriscore_grade;
+        return NutriScoreGrade.UNKNOWN.toString();
     }
 
     public void setNutriScoreGrade(String nutriscore_grade) { this.nutriscore_grade = nutriscore_grade; }
@@ -86,8 +86,8 @@ public class Product {
     public void setEcoScoreGrade(String ecoscore_grade) { this.ecoscore_grade = ecoscore_grade; }
 
     public String getEcoScoreGrade() {
-        if (ecoscore_grade == null) return EcoScoreGrade.UNKNOWN.toString();
+        if (ecoscore_grade != null && !ecoscore_grade.trim().equals("")) return ecoscore_grade;
 
-        return ecoscore_grade;
+        return EcoScoreGrade.UNKNOWN.toString();
     }
 }
