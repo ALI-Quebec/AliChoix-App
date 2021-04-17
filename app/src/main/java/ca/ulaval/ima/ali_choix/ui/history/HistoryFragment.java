@@ -84,7 +84,7 @@ public class HistoryFragment extends ListFragment {
             historyService.resetHistoryLoadingProblemState();
         }
 
-        if (historyService.historyLoadProblemState()){
+        if (historyService.historySavingProblemState()){
             DialogFragment dialog = new DialogInformationFragment();
             Bundle bundle = new Bundle();
             bundle.putString(DIALOG_MESSAGE_KEY, HISTORY_SAVE_ERROR_MESSAGE);
