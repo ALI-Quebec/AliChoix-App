@@ -6,12 +6,14 @@ public class UiConstant {
     public final static String VEGETARIAN = "vegetarian";
     public final static String UNKNOWN = "Non connu";
 
+
     public final static String PRODUCT_ID_KEY= "productId";
     public final static String DIALOG_MESSAGE_KEY= "dialogMessage";
 
     public final static String GO_TO_SCAN_DIALOG_TEXT= "Aller au scan";
     public final static String PRODUCT_NOT_FOUND_MESSAGE= "Le produit n'a pas été trouvé";
     public final static String NO_PRODUCT_SCAN_YET_MESSAGE= "Scanner votre premier produit!";
-
+    public final static String HISTORY_LOAD_ERROR_MESSAGE = "Une erreur c'est produite et l'historique n'as pas pu être charger";
+    public final static String HISTORY_SAVE_ERROR_MESSAGE = "Une erreur c'est produite et les derniers changements a l'historique n'ont pas pu être sauvegarder";
 
 }

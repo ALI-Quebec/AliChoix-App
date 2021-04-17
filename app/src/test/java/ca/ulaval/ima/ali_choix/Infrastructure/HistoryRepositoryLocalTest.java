@@ -1,5 +1,6 @@
 package ca.ulaval.ima.ali_choix.Infrastructure;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
@@ -23,7 +24,7 @@ public class HistoryRepositoryLocalTest {
 
     HistoryRepository historyRepository;
 
-    //TODO : can't use beforeEach?
+    @Before
     public void setUp() {
         historyRepository = new HistoryRepositoryLocal();
         historyRepository.addElement(FIRST_ELEMENT);
@@ -33,7 +34,6 @@ public class HistoryRepositoryLocalTest {
 
     @Test
     public void givenPresentElement_whenAddingExistingProduct_thenAddedProductIsLast(){
-        setUp();
         assertEquals(THIRD_PRODUCT_ID, historyRepository.getLastSearchedProductId());
 
         historyRepository.addElement(FOURTH_ELEMENT);
@@ -43,7 +43,6 @@ public class HistoryRepositoryLocalTest {
 
     @Test
     public void givenPresentElement_whenAddingExistingProduct_thenMoveProductAtTheEnd(){
-        setUp();
         assertEquals(THIRD_PRODUCT_ID, historyRepository.getLastSearchedProductId());
 
         historyRepository.addElement(FIRST_ELEMENT);
@@ -53,7 +52,6 @@ public class HistoryRepositoryLocalTest {
 
     @Test
     public void givenPresentElement_whenAddingExistingProduct_thenHistorySizeDoesNotChange(){
-        setUp();
         int originalSize = historyRepository.getHistory().size();
 
         historyRepository.addElement(FIRST_ELEMENT);
@@ -64,8 +62,6 @@ public class HistoryRepositoryLocalTest {
 
     @Test
     public void givenPresentElement_whenRemoving_elementIsRemoved(){
-        setUp();
-
         historyRepository.removeElement(FIRST_PRODUCT_ID);
 
         assertFalse(historyRepository.getHistory().contains(FIRST_ELEMENT));
@@ -73,8 +69,6 @@ public class HistoryRepositoryLocalTest {
 
     @Test
     public void givenMultipleElement_whenRemovingAll_historyIsEmpty(){
-        setUp();
-
         historyRepository.removeAllElements();
 
         assertEquals(0, historyRepository.getHistory().size());
@@ -82,7 +76,6 @@ public class HistoryRepositoryLocalTest {
 
     @Test (expected = HistoryEmptyException.class)
     public void givenHistoryIsEmpty_whenGettingLastSearched_throwHistoryEmptyException(){
-        setUp();
         historyRepository.removeAllElements();
 
         historyRepository.getLastSearchedProductId();

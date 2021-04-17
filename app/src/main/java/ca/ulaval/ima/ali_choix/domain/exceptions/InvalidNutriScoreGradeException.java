@@ -4,8 +4,6 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import ca.ulaval.ima.ali_choix.domain.product.NutriScoreGrade;
-
 public class InvalidNutriScoreGradeException extends ApplicationException {
     private static final String ERROR = "Invalid nutri score grade";
     private static final String DESCRIPTION = "Nutri score grade is not valid";
@@ -18,6 +16,6 @@ public class InvalidNutriScoreGradeException extends ApplicationException {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public String getDescription() {
-        return String.format(DESCRIPTION, enumerateValues(NutriScoreGrade.class));
+        return String.format(DESCRIPTION);
     }
 }

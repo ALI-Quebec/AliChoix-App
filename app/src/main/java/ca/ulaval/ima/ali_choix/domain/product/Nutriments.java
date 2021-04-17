@@ -3,27 +3,28 @@ package ca.ulaval.ima.ali_choix.domain.product;
 import com.google.gson.annotations.SerializedName;
 
 public class Nutriments {
-    //TODO gestion des informations manquantes autrement car c'est faux que si on n'a pas l'info, que c'est à 0f
-    private Float fat_100g = 0f;
+    private Float fat_100g;
     @SerializedName(value = "saturated-fat_100g")
-    private Float saturated_fat_100g = 0f;
-    private Float sugars_100g = 0f;
-    private Float salt_100g = 0f;
+    private Float saturated_fat_100g;
+    private Float sugars_100g;
+    private Float salt_100g;
     @SerializedName(value = "energy-kcal_100g")
-    private Float energy_kcal_100g = 0f;
+    private Float energy_kcal_100g;
     @SerializedName(value = "energy-kj_value")
-    private Float energy_kj_value = 0f;
-    private Float carbohydrates_100g = 0f;
-    private Float fiber_100g = 0f;
-    private Float proteins_100g = 0f;
-    private Float sodium_100g = 0f;
-    private Float alcohol_100g = 0f;
-    private Float iron_100g = 0f;
-    private Float magnesium_100g = 0f;
+    private Float energy_kj_value;
+    private Float carbohydrates_100g;
+    private Float fiber_100g;
+    private Float proteins_100g;
+    private Float sodium_100g;
+    private Float alcohol_100g;
+    private Float iron_100g;
+    private Float magnesium_100g;
 
     public void setSaturatedFat100g(Float saturated_fat_100g) { this.saturated_fat_100g = saturated_fat_100g; }
 
-    public Float getSaturatedFat100g() { return saturated_fat_100g; }
+    public Float getSaturatedFat100g() {
+        return saturated_fat_100g;
+    }
 
     public void setFat100g(Float fat_100g) { this.fat_100g = fat_100g;}
 
@@ -75,7 +76,9 @@ public class Nutriments {
 
     public Float getMagnesium100g() { return magnesium_100g;}
 
-    public Float calculateToMilligram(float nutriment) {
+    public Float calculateToMilligram(Float nutriment) {
+        if (nutriment == null) return null;
+
         return nutriment * 1000;
     }
 }

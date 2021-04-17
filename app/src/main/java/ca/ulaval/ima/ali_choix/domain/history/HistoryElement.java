@@ -1,10 +1,11 @@
 package ca.ulaval.ima.ali_choix.domain.history;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import ca.ulaval.ima.ali_choix.domain.product.ProductId;
 
-public class HistoryElement {
+public class HistoryElement implements Serializable {
     private ProductId productId;
     private String image_front_url;
     private String productName;

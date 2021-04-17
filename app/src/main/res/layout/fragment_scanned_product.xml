@@ -41,8 +41,8 @@
                     android:layout_height="122dp"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="80dp"
-                    app:srcCompat="@drawable/ic_launcher_background"
-                    android:adjustViewBounds="true" />
+                    android:adjustViewBounds="true"/>
+
 
                 <TextView
                     android:id="@+id/scanned_product_name"
@@ -151,6 +151,7 @@
                     <include layout="@layout/collapsible_nutri_score_section"/>
                     <include layout="@layout/collapsible_ingredients_analysis_section"/>
                     <include layout="@layout/collapsible_nutrient_levels_section"/>
+                    <include layout="@layout/collapsible_eco_score_section"/>
                     <include layout="@layout/collapsible_nutrition_facts_section"/>
                     <include layout="@layout/space_under_collapsible_section"/>
                 </LinearLayout>
