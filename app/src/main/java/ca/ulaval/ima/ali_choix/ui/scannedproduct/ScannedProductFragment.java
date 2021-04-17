@@ -171,7 +171,7 @@ public class ScannedProductFragment extends Fragment {
         String quantity = product.getQuantity();
         Nutriments nutriments = product.getNutriments();
 
-        if (url_front == null) {
+        if (url_front != null) {
             Picasso.get().load(url_front).into(scannedProductImage);
         } else {
             scannedProductImage.setBackground(getResources().getDrawable(R.drawable.no_image_available));
