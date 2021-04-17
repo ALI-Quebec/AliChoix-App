@@ -20,8 +20,8 @@ public class HistoryService {
     private HistoryRepositoryCollector historyRepositoryCollector;
     private Context context;
 
-    private Boolean errorLoadingHistory = true;
-    private Boolean errorSavingHistory = true;
+    private Boolean errorLoadingHistory = false;
+    private Boolean errorSavingHistory = false;
 
     public HistoryService(Context context, HistoryRepositoryCollector historyRepositoryCollector, HistoryElementFactory historyElementFactory ){
         this.context = context;
