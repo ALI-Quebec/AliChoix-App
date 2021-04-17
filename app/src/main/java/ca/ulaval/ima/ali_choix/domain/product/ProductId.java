@@ -1,6 +1,8 @@
 package ca.ulaval.ima.ali_choix.domain.product;
 
-public class ProductId {
+import java.io.Serializable;
+
+public class ProductId implements Serializable {
     private final String code;
 
     public ProductId(String code) {
