@@ -12,11 +12,11 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.ulaval.ima.ali_choix.domain.history.HistoryDataManager;
+import ca.ulaval.ima.ali_choix.domain.history.HistoryRepositoryCollector;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryRepository;
 
-public class LocalHistoryFile implements HistoryDataManager {
+public class LocalHistoryFile implements HistoryRepositoryCollector {
 
     private static final String HistoryFileName = "LocalHistory";
 
@@ -33,14 +33,14 @@ public class LocalHistoryFile implements HistoryDataManager {
 
         catch(IOException ex)
         {
-            throw new FileWritingException();
+            throw new HistorySavingException();
         }
         finally
         {
             try {
                 objectOutputStream.close();
             } catch (IOException e) {
-                throw new FileWritingException();
+                throw new HistorySavingException();
             }
         }
     }
@@ -61,9 +61,9 @@ public class LocalHistoryFile implements HistoryDataManager {
         }
         catch(IOException ex)
         {
-            throw new FileReadingException();
+            throw new HistoryLoadingException();
         } catch (ClassNotFoundException e) {
-            throw new FileReadingException();
+            throw new HistoryLoadingException();
         } finally
         {
             try {
@@ -71,7 +71,7 @@ public class LocalHistoryFile implements HistoryDataManager {
                     objectInputStream.close();
                 }
             } catch (IOException e) {
-                throw new FileReadingException();
+                throw new HistoryLoadingException();
             }
         }
 

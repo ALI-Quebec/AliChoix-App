@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.ima.ali_choix.domain.history.HistoryDataManager;
+import ca.ulaval.ima.ali_choix.domain.history.HistoryRepositoryCollector;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElementFactory;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryRepository;
@@ -27,7 +27,7 @@ public class HistoryServiceTest {
 
     private HistoryService historyService;
     @Mock private Context context;
-    @Mock private HistoryDataManager historyDataManager;
+    @Mock private HistoryRepositoryCollector historyRepositoryCollector;
     @Mock private HistoryRepository historyRepository;
     @Mock private HistoryElementFactory historyElementFactory;
 
@@ -36,9 +36,9 @@ public class HistoryServiceTest {
         historyElement = new HistoryElement(productId,IMAGE_URL,PRODUCT_NAME,null);
 
         when(historyElementFactory.create(PRODUCT_ID,IMAGE_URL, PRODUCT_NAME)).thenReturn(historyElement);
-        when(historyDataManager.loadHistory(context)).thenReturn(historyRepository);
+        when(historyRepositoryCollector.loadHistory(context)).thenReturn(historyRepository);
 
-        historyService = new HistoryService(context,historyDataManager,historyElementFactory);
+        historyService = new HistoryService(context, historyRepositoryCollector,historyElementFactory);
 
     }
 
@@ -53,7 +53,7 @@ public class HistoryServiceTest {
     public void whenAddingHistoryElement_thenHistoryIsSaved() {
         historyService.addHistoryElement(PRODUCT_ID,IMAGE_URL, PRODUCT_NAME);
 
-        verify(historyDataManager).saveHistory(historyRepository,context);
+        verify(historyRepositoryCollector).saveHistory(historyRepository,context);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class HistoryServiceTest {
     public void whenRemovingHistoryElement_thenHistoryIsSaved() {
         historyService.removeHistoryElement(PRODUCT_ID);
 
-        verify(historyDataManager).saveHistory(historyRepository,context);
+        verify(historyRepositoryCollector).saveHistory(historyRepository,context);
     }
 
     @Test
@@ -81,6 +81,6 @@ public class HistoryServiceTest {
     public void whenRemovingAllHistory_thenHistoryIsSaved() {
         historyService.removeAllHistory();
 
-        verify(historyDataManager).saveHistory(historyRepository,context);
+        verify(historyRepositoryCollector).saveHistory(historyRepository,context);
     }
 }

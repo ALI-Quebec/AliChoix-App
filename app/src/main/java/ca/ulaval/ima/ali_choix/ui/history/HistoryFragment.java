@@ -22,6 +22,8 @@ import ca.ulaval.ima.ali_choix.services.HistoryService;
 import ca.ulaval.ima.ali_choix.services.ServiceLocator;
 
 import static ca.ulaval.ima.ali_choix.domain.DomainConstant.PRODUCT_ID_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UiConstant.HISTORY_LOAD_ERROR_MESSAGE;
+import static ca.ulaval.ima.ali_choix.ui.UiConstant.HISTORY_SAVE_ERROR_MESSAGE;
 
 public class HistoryFragment extends ListFragment {
     private ArrayList<HistoryElement> historyItems;
@@ -63,6 +65,18 @@ public class HistoryFragment extends ListFragment {
                 historyItems);
         setListAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        if (historyService.historyLoadProblemState()){
+            //TODO new dialog to warn
+            //HISTORY_LOAD_ERROR_MESSAGE;
+            historyService.resetHistoryLoadingProblemState();
+        }
+
+        if (historyService.historyLoadProblemState()){
+            //TODO new dialog to warn
+            //HISTORY_SAVE_ERROR_MESSAGE;
+            historyService.resetHistorySavingProblemState();
+        }
 
         return root;
     }

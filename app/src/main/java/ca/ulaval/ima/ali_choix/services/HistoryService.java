@@ -4,8 +4,11 @@ import android.content.Context;
 
 import java.util.List;
 
+import ca.ulaval.ima.ali_choix.Infrastructure.HistoryLoadingException;
+import ca.ulaval.ima.ali_choix.Infrastructure.HistorySavingException;
+import ca.ulaval.ima.ali_choix.Infrastructure.HistoryRepositoryLocal;
 import ca.ulaval.ima.ali_choix.Infrastructure.LocalHistoryFile;
-import ca.ulaval.ima.ali_choix.domain.history.HistoryDataManager;
+import ca.ulaval.ima.ali_choix.domain.history.HistoryRepositoryCollector;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElementFactory;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryRepository;
@@ -14,19 +17,22 @@ import ca.ulaval.ima.ali_choix.domain.product.ProductId;
 public class HistoryService {
     private HistoryRepository historyRepository;
     private HistoryElementFactory historyElementFactory;
-    private HistoryDataManager historyDataManager;
+    private HistoryRepositoryCollector historyRepositoryCollector;
     private Context context;
 
-    public HistoryService(Context context, HistoryDataManager historyDataManager,HistoryElementFactory historyElementFactory ){
+    private Boolean errorLoadingHistory = false;
+    private Boolean errorSavingHistory = false;
+
+    public HistoryService(Context context, HistoryRepositoryCollector historyRepositoryCollector, HistoryElementFactory historyElementFactory ){
         this.context = context;
-        this.historyDataManager = historyDataManager;
+        this.historyRepositoryCollector = historyRepositoryCollector;
         loadHistory();
         this.historyElementFactory = historyElementFactory;
     }
 
     public HistoryService(Context context){
         this.context = context;
-        historyDataManager = new LocalHistoryFile();
+        historyRepositoryCollector = new LocalHistoryFile();
         loadHistory();
         historyElementFactory = new HistoryElementFactory();
     }
@@ -56,11 +62,36 @@ public class HistoryService {
         return historyRepository.getLastSearchedProductId().toString();
     }
 
+    public boolean historyLoadProblemState(){
+        return errorLoadingHistory;
+    }
+
+    public void resetHistoryLoadingProblemState(){
+        errorLoadingHistory = false;
+    }
+
+    public boolean historySavingProblemState(){
+        return errorSavingHistory;
+    }
+
+    public void resetHistorySavingProblemState(){
+        errorSavingHistory = false;
+    }
+
     private void saveHistory(){
-       historyDataManager.saveHistory(historyRepository,context);
+        try {
+            historyRepositoryCollector.saveHistory(historyRepository,context);
+        } catch (HistorySavingException e){
+            errorSavingHistory = true;
+        }
     }
 
     private void loadHistory(){
-        historyRepository = historyDataManager.loadHistory(context);
+        try {
+            historyRepository = historyRepositoryCollector.loadHistory(context);
+        } catch (HistoryLoadingException e) {
+            errorLoadingHistory = true;
+            historyRepository = new HistoryRepositoryLocal();
+        }
     }
 }
