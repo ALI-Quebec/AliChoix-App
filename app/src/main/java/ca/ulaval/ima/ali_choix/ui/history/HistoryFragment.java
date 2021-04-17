@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.ListFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -20,8 +21,12 @@ import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 import ca.ulaval.ima.ali_choix.services.HistoryService;
 import ca.ulaval.ima.ali_choix.services.ServiceLocator;
+import ca.ulaval.ima.ali_choix.ui.dialog.DialogFromProductToScanFragment;
+import ca.ulaval.ima.ali_choix.ui.dialog.DialogInformationFragment;
 
-import static ca.ulaval.ima.ali_choix.domain.DomainConstant.PRODUCT_ID_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UiConstant.DIALOG_MESSAGE_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UiConstant.PRODUCT_ID_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UiConstant.PRODUCT_NOT_FOUND_MESSAGE;
 
 public class HistoryFragment extends ListFragment {
     private ArrayList<HistoryElement> historyItems;
@@ -63,6 +68,12 @@ public class HistoryFragment extends ListFragment {
                 historyItems);
         setListAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        DialogFragment dialog = new DialogInformationFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(DIALOG_MESSAGE_KEY, PRODUCT_NOT_FOUND_MESSAGE);
+        dialog.setArguments(bundle);
+        dialog.show(getFragmentManager(), "DialogInformationFragment");
 
         return root;
     }
