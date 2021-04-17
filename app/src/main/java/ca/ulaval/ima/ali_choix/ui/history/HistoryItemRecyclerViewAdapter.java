@@ -20,13 +20,13 @@ import java.util.List;
 import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 
-public class HistoryItemListAdapter extends ArrayAdapter<HistoryElement> {
+public class HistoryItemRecyclerViewAdapter extends ArrayAdapter<HistoryElement> {
 
     private Context context;
     private List<Boolean> checkboxStates;
     private boolean deleteMode;
 
-    public HistoryItemListAdapter(Context context, int resourceId, List<HistoryElement> items) {
+    public HistoryItemRecyclerViewAdapter(Context context, int resourceId, List<HistoryElement> items) {
         super(context, resourceId, items);
         this.context = context;
         this.checkboxStates = new ArrayList<>(Collections.nCopies(items.size(), false));
