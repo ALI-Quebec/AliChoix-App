@@ -14,7 +14,7 @@ public class HistoryEmptyExceptionTest {
     }
 
     @Test
-    public void whenGettingDescription_thenReturnHistoryEmptyExceptionExceptionDescription() {
+    public void whenGettingDescription_thenReturnHistoryEmptyExceptionDescription() {
         String expectedDescription = "Cannot get searched product because history is empty";
         String description = exception.getDescription();
 
