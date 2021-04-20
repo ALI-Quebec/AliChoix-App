@@ -30,7 +30,7 @@ import ca.ulaval.ima.ali_choix.domain.product.Nutriments;
 
 import ca.ulaval.ima.ali_choix.services.ProductService;
 import ca.ulaval.ima.ali_choix.services.ServiceLocator;
-import ca.ulaval.ima.ali_choix.ui.dialog.FireDialogFragment;
+import ca.ulaval.ima.ali_choix.ui.dialog.DialogFromProductToScanFragment;
 import ca.ulaval.ima.ali_choix.ui.UiConstant;
 import cz.msebera.android.httpclient.Header;
 
@@ -45,7 +45,10 @@ import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.product.Product;
 import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
 
-import static ca.ulaval.ima.ali_choix.domain.DomainConstant.PRODUCT_ID_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UiConstant.DIALOG_MESSAGE_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UiConstant.NO_PRODUCT_SCAN_YET_MESSAGE;
+import static ca.ulaval.ima.ali_choix.ui.UiConstant.PRODUCT_ID_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UiConstant.PRODUCT_NOT_FOUND_MESSAGE;
 
 public class ScannedProductFragment extends Fragment {
     private Product product;
@@ -126,7 +129,11 @@ public class ScannedProductFragment extends Fragment {
                 String productId = historyService.getLastSearchedProductId();
                 getInformationsWithOpenFoodFact(productId);
             } catch (HistoryEmptyException e) {
-                //TODO popup pour envoyer a la page de scan
+                DialogFragment dialog = new DialogFromProductToScanFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString(DIALOG_MESSAGE_KEY, NO_PRODUCT_SCAN_YET_MESSAGE);
+                dialog.setArguments(bundle);
+                dialog.show(getFragmentManager(), "DialogFromProductToScanFragment");
             }
         }
 
@@ -147,8 +154,11 @@ public class ScannedProductFragment extends Fragment {
                     historyService.addHistoryElement(productId,product.getImage(),product.getName());
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    DialogFragment dialog = new FireDialogFragment();
-                    dialog.show(getFragmentManager(), "FireDialogFragment");
+                    DialogFragment dialog = new DialogFromProductToScanFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(DIALOG_MESSAGE_KEY, PRODUCT_NOT_FOUND_MESSAGE);
+                    dialog.setArguments(bundle);
+                    dialog.show(getFragmentManager(), "DialogFromProductToScanFragment");
                 }
             }
         });

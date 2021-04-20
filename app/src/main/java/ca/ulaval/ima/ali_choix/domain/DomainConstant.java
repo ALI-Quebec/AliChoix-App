@@ -7,8 +7,5 @@ public class DomainConstant {
     public final static String SATURATED_FAT_NUTRIENT_LEVELS_QUANTITY= "saturatedFatNutrientLevelsQuantity";
     public final static String SUGARS_NUTRIENT_LEVELS_QUANTITY = "sugarsNutrientLevelsQuantity";
     public final static String SALT_NUTRIENT_LEVELS_QUANTITY= "saltNutrientLevelsQuantity";
-
     public final static String UNKNOWN = "Non connu";
-
-    public final static String PRODUCT_ID_KEY= "productId";
 }
