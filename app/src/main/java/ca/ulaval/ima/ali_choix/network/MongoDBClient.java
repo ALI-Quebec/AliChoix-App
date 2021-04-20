@@ -9,7 +9,6 @@ import org.bson.Document;
 import java.util.regex.Pattern;
 
 import ca.ulaval.ima.ali_choix.BuildConfig;
-import ca.ulaval.ima.ali_choix.network.exceptions.NotFoundException;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
@@ -23,20 +22,18 @@ public class MongoDBClient {
     private static final String MISSING_PRODUCTS_COLLECTION_NAME = "missingproducts";
     private static final String SCAN_COUNT_FIELD_NAME = "scanCount";
 
-    // For now, only used to compile history and missing products
-    public static String findProduct(String productID) {
+    public static void logScanInHistory(String productID) {
+        // Search the product first to know if it exists in the DB
         MongoClient mongoClient = new MongoClient(MONGODB_CONNECTION);
         MongoCollection<Document> productsCollection = mongoClient.getDatabase(DATABASE_NAME).getCollection(PRODUCTS_COLLECTION_NAME);
-        Pattern productRegex = Pattern.compile("\\d*"+productID);
+        Pattern productRegex = Pattern.compile("\\d*"+productID); // Regex to account for 12 digit codes (they have 13 in the DB)
         Document productSearch = productsCollection.find(regex("_id", productRegex)).first();
         if (productSearch == null) {
             addToMissingProducts(mongoClient, productID);
-            throw new NotFoundException();
         }
-        incrementHistoryCounter(mongoClient, productID);
-        String productJson = productSearch.toJson();
+        // Then increment the counter
+        incrementProductCounter(mongoClient, productID);
         mongoClient.close();
-        return productJson;
     }
 
     private static void addToMissingProducts(MongoClient mongoClient, String productID) {
@@ -49,7 +46,7 @@ public class MongoDBClient {
         mongoClient.close();
     }
 
-    private static void incrementHistoryCounter(MongoClient mongoClient, String productID) {
+    private static void incrementProductCounter(MongoClient mongoClient, String productID) {
         MongoCollection<Document> collection = mongoClient.getDatabase(DATABASE_NAME).getCollection(HISTORY_COLLECTION_NAME);
         Document productHistory = collection.findOneAndUpdate(eq("_id", productID), inc(SCAN_COUNT_FIELD_NAME, 1));
         if (productHistory == null) {

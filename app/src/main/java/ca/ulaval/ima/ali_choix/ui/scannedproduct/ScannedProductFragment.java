@@ -25,7 +25,6 @@ import ca.ulaval.ima.ali_choix.domain.DomainConstant;
 import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryEmptyException;
 import ca.ulaval.ima.ali_choix.network.MongoDBClient;
 import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
-import ca.ulaval.ima.ali_choix.network.exceptions.NotFoundException;
 import ca.ulaval.ima.ali_choix.services.HistoryService;
 
 import ca.ulaval.ima.ali_choix.domain.product.NutrientLevelsQuantity;
@@ -164,11 +163,7 @@ public class ScannedProductFragment extends Fragment {
 
         @Override
         public void run() {
-            try {
-                MongoDBClient.findProduct(productId);
-            } catch (NotFoundException e) {
-                // Do nothing because OFF has the info anyway
-            }
+            MongoDBClient.logScanInHistory(productId);
         }
     }
 
