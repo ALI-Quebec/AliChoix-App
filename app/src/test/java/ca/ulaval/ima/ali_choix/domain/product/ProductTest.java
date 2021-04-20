@@ -126,4 +126,18 @@ public class ProductTest{
 
         assertEquals(product.getNutriScoreGrade(), "a");
     }
+
+    @Test
+    public void givenEmptyEcoScoreGrade_whenGettingEcoScoreGrade_thenReturnUnknownEcoScoreGrade() {
+        product.setEcoScoreGrade(" ");
+
+        assertEquals(product.getEcoScoreGrade(), EcoScoreGrade.UNKNOWN.toString());
+    }
+
+    @Test
+    public void givenEcoScoreGrade_whenGettingEcoScoreGrade_thenReturnEcoScoreGrade() {
+        product.setEcoScoreGrade("a");
+
+        assertEquals(product.getEcoScoreGrade(), "a");
+    }
 }

@@ -9,14 +9,14 @@ import ca.ulaval.ima.ali_choix.domain.history.HistoryRepository;
 import ca.ulaval.ima.ali_choix.domain.product.ProductId;
 import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryEmptyException;
 
-public class HistoryRepositoryLocal implements HistoryRepository {
+public class LocalHistoryRepository implements HistoryRepository {
     private LinkedHashMap<ProductId, HistoryElement> history;
 
-    public HistoryRepositoryLocal(){
+    public LocalHistoryRepository(){
         history = new LinkedHashMap<>();
     }
 
-    public HistoryRepositoryLocal(List<HistoryElement> historyElements){
+    public LocalHistoryRepository(List<HistoryElement> historyElements){
         history = new LinkedHashMap<>();
 
         for (HistoryElement historyElement: historyElements) {
@@ -35,11 +35,6 @@ public class HistoryRepositoryLocal implements HistoryRepository {
     @Override
     public void removeElement(ProductId productId) {
         history.remove(productId);
-    }
-
-    @Override
-    public void removeAllElements() {
-        history.clear();
     }
 
     @Override

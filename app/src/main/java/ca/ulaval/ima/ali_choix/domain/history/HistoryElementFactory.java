@@ -5,7 +5,7 @@ import ca.ulaval.ima.ali_choix.domain.product.ProductId;
 public class HistoryElementFactory {
     public HistoryElement create(String productId, String image_front_url, String productName) {
         ProductId addedProductId = new ProductId(productId);
-//        LocalDateTime timeAddedToHistoric = LocalDateTime.now();
-        return new HistoryElement(addedProductId,image_front_url,productName,null);
+
+        return new HistoryElement(addedProductId,image_front_url,productName);
     }
 }

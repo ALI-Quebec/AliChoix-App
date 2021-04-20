@@ -200,10 +200,10 @@ public class ScannedProductFragment extends Fragment {
         ecoScoreDescription.setText(productService.getEcoScoreDescription(scannedProductEcoScoreGrade.toLowerCase()));
 
         HashMap nutrientLevels = productService.getNutrientLevelsQuantity(nutriments);
-        NutrientLevelsQuantity fatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(DomainConstant.FAT_NUTRIENT_LEVELS_QUANTITY);
-        NutrientLevelsQuantity saturatedFatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(DomainConstant.SATURATED_FAT_NUTRIENT_LEVELS_QUANTITY);
-        NutrientLevelsQuantity sugarsNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(DomainConstant.SUGARS_NUTRIENT_LEVELS_QUANTITY);
-        NutrientLevelsQuantity saltNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(DomainConstant.SALT_NUTRIENT_LEVELS_QUANTITY);
+        NutrientLevelsQuantity fatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(DomainConstant.FAT_NUTRIENT_LEVELS_QUANTITY_KEY);
+        NutrientLevelsQuantity saturatedFatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(DomainConstant.SATURATED_FAT_NUTRIENT_LEVELS_QUANTITY_KEY);
+        NutrientLevelsQuantity sugarsNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(DomainConstant.SUGARS_NUTRIENT_LEVELS_QUANTITY_KEY);
+        NutrientLevelsQuantity saltNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(DomainConstant.SALT_NUTRIENT_LEVELS_QUANTITY_KEY);
 
         fatQuantityIndicator.setBackground(getNutrientLevelsQuantityDrawable(fatNutrientLevelsQuantity.toString()));
         saturatedFatQuantityIndicator.setBackground(getNutrientLevelsQuantityDrawable(saturatedFatNutrientLevelsQuantity.toString()));

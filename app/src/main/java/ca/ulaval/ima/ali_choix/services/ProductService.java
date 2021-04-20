@@ -29,10 +29,10 @@ public abstract class ProductService extends Service {
     public HashMap getNutrientLevelsQuantity(Nutriments nutriments) {
         HashMap<String, NutrientLevelsQuantity> nutrientLevelsQuantity = new HashMap<>();
 
-        nutrientLevelsQuantity.put(DomainConstant.FAT_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsAlgorithms.evaluateFat(nutriments.getFat100g()));
-        nutrientLevelsQuantity.put(DomainConstant.SATURATED_FAT_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsAlgorithms.evaluateSaturatedFat(nutriments.getSaturatedFat100g()));
-        nutrientLevelsQuantity.put(DomainConstant.SUGARS_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsAlgorithms.evaluateSugars(nutriments.getSugars100g()));
-        nutrientLevelsQuantity.put(DomainConstant.SALT_NUTRIENT_LEVELS_QUANTITY, NutrientLevelsAlgorithms.evaluateSalt(nutriments.getSalt100g()));
+        nutrientLevelsQuantity.put(DomainConstant.FAT_NUTRIENT_LEVELS_QUANTITY_KEY, NutrientLevelsAlgorithms.evaluateFat(nutriments.getFat100g()));
+        nutrientLevelsQuantity.put(DomainConstant.SATURATED_FAT_NUTRIENT_LEVELS_QUANTITY_KEY, NutrientLevelsAlgorithms.evaluateSaturatedFat(nutriments.getSaturatedFat100g()));
+        nutrientLevelsQuantity.put(DomainConstant.SUGARS_NUTRIENT_LEVELS_QUANTITY_KEY, NutrientLevelsAlgorithms.evaluateSugars(nutriments.getSugars100g()));
+        nutrientLevelsQuantity.put(DomainConstant.SALT_NUTRIENT_LEVELS_QUANTITY_KEY, NutrientLevelsAlgorithms.evaluateSalt(nutriments.getSalt100g()));
 
         return nutrientLevelsQuantity;
     }

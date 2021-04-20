@@ -33,7 +33,7 @@ public class HistoryServiceTest {
 
     @Before
     public void setUp() {
-        historyElement = new HistoryElement(productId,IMAGE_URL,PRODUCT_NAME,null);
+        historyElement = new HistoryElement(productId,IMAGE_URL,PRODUCT_NAME);
 
         when(historyElementFactory.create(PRODUCT_ID,IMAGE_URL, PRODUCT_NAME)).thenReturn(historyElement);
         when(historyRepositoryCollector.loadHistory(context)).thenReturn(historyRepository);
@@ -66,20 +66,6 @@ public class HistoryServiceTest {
     @Test
     public void whenRemovingHistoryElement_thenHistoryIsSaved() {
         historyService.removeHistoryElement(PRODUCT_ID);
-
-        verify(historyRepositoryCollector).saveHistory(historyRepository,context);
-    }
-
-    @Test
-    public void whenRemovingAllHistory_thenAllElementAreRemovedFromRepository() {
-        historyService.removeAllHistory();
-
-        verify(historyRepository).removeAllElements();
-    }
-
-    @Test
-    public void whenRemovingAllHistory_thenHistoryIsSaved() {
-        historyService.removeAllHistory();
 
         verify(historyRepositoryCollector).saveHistory(historyRepository,context);
     }

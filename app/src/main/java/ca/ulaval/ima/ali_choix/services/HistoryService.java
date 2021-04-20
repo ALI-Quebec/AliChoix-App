@@ -6,8 +6,8 @@ import java.util.List;
 
 import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryLoadingException;
 import ca.ulaval.ima.ali_choix.domain.exceptions.HistorySavingException;
-import ca.ulaval.ima.ali_choix.Infrastructure.HistoryRepositoryLocal;
-import ca.ulaval.ima.ali_choix.Infrastructure.HistoryRepositoryCollectorLocal;
+import ca.ulaval.ima.ali_choix.Infrastructure.LocalHistoryRepository;
+import ca.ulaval.ima.ali_choix.Infrastructure.LocalHistoryRepositoryCollector;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryRepositoryCollector;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElementFactory;
@@ -32,7 +32,7 @@ public class HistoryService {
 
     public HistoryService(Context context){
         this.context = context;
-        historyRepositoryCollector = new HistoryRepositoryCollectorLocal();
+        historyRepositoryCollector = new LocalHistoryRepositoryCollector();
         loadHistory();
         historyElementFactory = new HistoryElementFactory();
     }
@@ -46,11 +46,6 @@ public class HistoryService {
     public void removeHistoryElement(String productId){
         ProductId removedProductId = new ProductId(productId);
         historyRepository.removeElement(removedProductId);
-        saveHistory();
-    }
-
-    public void removeAllHistory(){
-        historyRepository.removeAllElements();
         saveHistory();
     }
 
@@ -91,7 +86,7 @@ public class HistoryService {
             historyRepository = historyRepositoryCollector.loadHistory(context);
         } catch (HistoryLoadingException e) {
             errorLoadingHistory = true;
-            historyRepository = new HistoryRepositoryLocal();
+            historyRepository = new LocalHistoryRepository();
         }
     }
 }
