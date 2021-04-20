@@ -43,7 +43,6 @@ public class MongoDBClient {
         if (search == null) {
             collection.insertOne(new Document("_id", productID));
         }
-        mongoClient.close();
     }
 
     private static void incrementProductCounter(MongoClient mongoClient, String productID) {
