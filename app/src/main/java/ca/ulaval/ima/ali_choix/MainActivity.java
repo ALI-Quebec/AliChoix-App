@@ -1,5 +1,6 @@
 package ca.ulaval.ima.ali_choix;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setup(){
         ServiceLocator serviceLocator = ServiceLocator.getInstance();
-        serviceLocator.subscribeService(HistoryService.class, new HistoryService());
+        serviceLocator.subscribeService(HistoryService.class, new HistoryService(getApplicationContext()));
 
         HistoryService historyService = (HistoryService) serviceLocator.get(HistoryService.class);
         //TODO remove when testing is done
@@ -45,5 +46,7 @@ public class MainActivity extends AppCompatActivity {
         historyService.addHistoryElement("0011110844149",null,"Private selection, mukimame");
         historyService.addHistoryElement("3274080005003","https://static.openfoodfacts.org/images/products/327/408/000/5003/front_en.640.full.jpg","Spring water - Cristaline - 1,5 l");
         historyService.addHistoryElement("737628064502","https://static.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.full.jpg","Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning - Thai Kitchen - 155 g");
+        historyService.addHistoryElement("3501890002152", "https://static.openfoodfacts.org/images/products/324/227/400/0059/front_fr.200.full.jpg", "Salade & Compagnie - Manhattan -");
+
     }
 }

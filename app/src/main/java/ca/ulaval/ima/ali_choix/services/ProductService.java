@@ -5,6 +5,7 @@ import android.app.Service;
 import java.util.HashMap;
 
 import ca.ulaval.ima.ali_choix.domain.DomainConstant;
+import ca.ulaval.ima.ali_choix.domain.product.EcoScoreGrade;
 import ca.ulaval.ima.ali_choix.domain.product.NutriScoreGrade;
 import ca.ulaval.ima.ali_choix.domain.product.NutrientLevelsAlgorithms;
 import ca.ulaval.ima.ali_choix.domain.product.NutrientLevelsQuantity;
@@ -16,7 +17,13 @@ public abstract class ProductService extends Service {
 
     public String getNutriScoreDescription(String grade) {
         NutriScoreGrade nutriScoreGrade = NutriScoreGrade.get(grade);
+
         return nutriScoreGrade.getDescription();
+    }
+
+    public String getEcoScoreDescription(String grade) {
+        EcoScoreGrade ecoScoreGrade = EcoScoreGrade.get(grade);
+        return ecoScoreGrade.getDescription();
     }
 
     public HashMap getNutrientLevelsQuantity(Nutriments nutriments) {
@@ -32,6 +39,7 @@ public abstract class ProductService extends Service {
 
     public String getNutrientLevelsDescription(String level) {
         NutrientLevelsQuantity nutrientLevelsQuantity = NutrientLevelsQuantity.get(level);
+
         return nutrientLevelsQuantity.getDescription();
     }
 }

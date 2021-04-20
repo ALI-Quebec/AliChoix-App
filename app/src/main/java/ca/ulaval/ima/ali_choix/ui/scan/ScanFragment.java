@@ -22,8 +22,7 @@ import com.google.zxing.Result;
 
 import ca.ulaval.ima.ali_choix.R;
 
-import static ca.ulaval.ima.ali_choix.domain.DomainConstant.PRODUCT_ID_KEY;
-
+import static ca.ulaval.ima.ali_choix.ui.UiConstant.PRODUCT_ID_KEY;
 
 public class ScanFragment extends Fragment {
     private static final int CAMERA_PERMISSION_CODE = 5050;

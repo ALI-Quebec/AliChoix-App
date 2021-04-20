@@ -30,7 +30,7 @@ import ca.ulaval.ima.ali_choix.domain.product.Nutriments;
 
 import ca.ulaval.ima.ali_choix.services.ProductService;
 import ca.ulaval.ima.ali_choix.services.ServiceLocator;
-import ca.ulaval.ima.ali_choix.ui.dialog.FireDialogFragment;
+import ca.ulaval.ima.ali_choix.ui.dialog.DialogFromProductToScanFragment;
 import ca.ulaval.ima.ali_choix.ui.UiConstant;
 import cz.msebera.android.httpclient.Header;
 
@@ -45,7 +45,10 @@ import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.product.Product;
 import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
 
-import static ca.ulaval.ima.ali_choix.domain.DomainConstant.PRODUCT_ID_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UiConstant.DIALOG_MESSAGE_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UiConstant.NO_PRODUCT_SCAN_YET_MESSAGE;
+import static ca.ulaval.ima.ali_choix.ui.UiConstant.PRODUCT_ID_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UiConstant.PRODUCT_NOT_FOUND_MESSAGE;
 
 public class ScannedProductFragment extends Fragment {
     private Product product;
@@ -59,6 +62,7 @@ public class ScannedProductFragment extends Fragment {
     private RelativeLayout nutriScoreCollapsible;
     private RelativeLayout nutriScoreLayout;
     private ImageView nutriScoreDrawable;
+    private TextView nutriScoreDescription;
     private RelativeLayout ingredientsAnalysisCollapsible;
     private ImageView ingredientAnalysisDownArrow;
     private ImageView ingredientAnalysisUpArrow;
@@ -70,7 +74,6 @@ public class ScannedProductFragment extends Fragment {
     private RelativeLayout nutrientLevelsLayout;
     private ImageView nutrientLevelsDownArrow;
     private ImageView nutrientLevelsUpArrow;
-    private TextView nutriScoreDescription;
     private String scannedProductNutriScoreGrade;
     private ImageView fatQuantityIndicator;
     private ImageView saturatedFatQuantityIndicator;
@@ -97,8 +100,14 @@ public class ScannedProductFragment extends Fragment {
     private TextView nutritionFactsSodium;
     private TextView nutritionFactsAlcohol;
     private TextView nutritionFactsIron;
-
     private HistoryService historyService;
+    private RelativeLayout ecoScoreCollapsibleSection;
+    private RelativeLayout ecoScoreLayout;
+    private ImageView ecoScoreDownArrow;
+    private ImageView ecoScoreUpArrow;
+    private ImageView ecoScoreDrawable;
+    private TextView ecoScoreDescription;
+    private String scannedProductEcoScoreGrade;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -120,7 +129,11 @@ public class ScannedProductFragment extends Fragment {
                 String productId = historyService.getLastSearchedProductId();
                 getInformationsWithOpenFoodFact(productId);
             } catch (HistoryEmptyException e) {
-                //TODO popup pour envoyer a la page de scan
+                DialogFragment dialog = new DialogFromProductToScanFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString(DIALOG_MESSAGE_KEY, NO_PRODUCT_SCAN_YET_MESSAGE);
+                dialog.setArguments(bundle);
+                dialog.show(getFragmentManager(), "DialogFromProductToScanFragment");
             }
         }
 
@@ -141,8 +154,11 @@ public class ScannedProductFragment extends Fragment {
                     historyService.addHistoryElement(productId,product.getImage(),product.getName());
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    DialogFragment dialog = new FireDialogFragment();
-                    dialog.show(getFragmentManager(), "FireDialogFragment");
+                    DialogFragment dialog = new DialogFromProductToScanFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(DIALOG_MESSAGE_KEY, PRODUCT_NOT_FOUND_MESSAGE);
+                    dialog.setArguments(bundle);
+                    dialog.show(getFragmentManager(), "DialogFromProductToScanFragment");
                 }
             }
         });
@@ -157,31 +173,32 @@ public class ScannedProductFragment extends Fragment {
                 return null;
             }
         };
-        DecimalFormat decimalFormat = new DecimalFormat("#.#");
 
         String name = product.getName();
         String url_front = product.getImage();
-        String origin = product.getOrigin();
-        String countryImported = product.getCountryImported();
+        String origin = product.getOrigins();
+        String countryImported = product.getCountriesImported();
         String quantity = product.getQuantity();
         Nutriments nutriments = product.getNutriments();
 
         if (url_front != null) {
             Picasso.get().load(url_front).into(scannedProductImage);
         } else {
-            //TODO n'affiche pas l'image
-            scannedProductImage.setBackground(getResources().getDrawable(R.drawable.ic_picture_svgrepo_com));
+            scannedProductImage.setBackground(getResources().getDrawable(R.drawable.no_image_available));
         };
         scannedProductOrigin.setText(origin);
         scannedProductCountryImported.setText(countryImported);
-        scannedProductQuantity.setText(quantity);
+        scannedProductQuantity.setText(quantity.equals(UiConstant.UNKNOWN) ? quantity : quantity+ " g");
         scannedProductName.setText(name);
 
         scannedProductNutriScoreGrade = product.getNutriScoreGrade();
         nutriScoreDrawable.setBackground(getNutriScoreGradeDrawable(scannedProductNutriScoreGrade.toLowerCase()));
         nutriScoreDescription.setText(productService.getNutriScoreDescription(scannedProductNutriScoreGrade.toLowerCase()));
 
-        //TODO est-ce qu'il ne faudrait pas ici mettre un interface pour pas que le UI soit dépendant du naming dans le domaine ?
+        scannedProductEcoScoreGrade = product.getEcoScoreGrade();
+        ecoScoreDrawable.setBackground(getEcoScoreGradeDrawable(scannedProductEcoScoreGrade.toLowerCase()));
+        ecoScoreDescription.setText(productService.getEcoScoreDescription(scannedProductEcoScoreGrade.toLowerCase()));
+
         HashMap nutrientLevels = productService.getNutrientLevelsQuantity(nutriments);
         NutrientLevelsQuantity fatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(DomainConstant.FAT_NUTRIENT_LEVELS_QUANTITY);
         NutrientLevelsQuantity saturatedFatNutrientLevelsQuantity = (NutrientLevelsQuantity) nutrientLevels.get(DomainConstant.SATURATED_FAT_NUTRIENT_LEVELS_QUANTITY);
@@ -199,25 +216,39 @@ public class ScannedProductFragment extends Fragment {
         saltQuantityDescription.setText(productService.getNutrientLevelsDescription(saltNutrientLevelsQuantity.toString()));
 
         ArrayList<String> ingredientsAnalysisTags = product.getIngredientsAnalysisTags();
-        for (String tag: ingredientsAnalysisTags) {
-            if (tag.contains(UiConstant.PALM)) setIngredientsAnalysisTextView(isPalmOilFree, tag);
-            if (tag.contains(UiConstant.VEGAN)) setIngredientsAnalysisTextView(isVegan, tag);
-            if (tag.contains(UiConstant.VEGETARIAN)) setIngredientsAnalysisTextView(isVegetarian, tag);
+        if (ingredientsAnalysisTags != null) {
+            for (String tag : ingredientsAnalysisTags) {
+                if (tag.contains(UiConstant.PALM))
+                    setIngredientsAnalysisTextView(isPalmOilFree, tag);
+                if (tag.contains(UiConstant.VEGAN)) setIngredientsAnalysisTextView(isVegan, tag);
+                if (tag.contains(UiConstant.VEGETARIAN))
+                    setIngredientsAnalysisTextView(isVegetarian, tag);
+            }
         }
 
-        nutritionFactsEnergyKj.setText(decimalFormat.format(nutriments.getEnergyKj100g())+" kj");
-        nutritionFactsEnergyKcal.setText(decimalFormat.format(nutriments.getEnergyKcal100g())+" kcal");
-        nutritionFactsFat.setText(decimalFormat.format(nutriments.getFat100g())+" g");
-        nutritionFactsSaturatedFat.setText(decimalFormat.format(nutriments.getSaturatedFat100g())+" g");
-        nutritionFactsCarbohydrates.setText(decimalFormat.format(nutriments.getCarbohydrates100g())+" g");
-        nutritionFactsSugars.setText(decimalFormat.format(nutriments.getSugars100g())+" g");
-        nutritionFactsFibers.setText(decimalFormat.format(nutriments.getFibers100g())+" g");
-        nutritionFactsProteins.setText(decimalFormat.format(nutriments.getProteins100g())+" g");
-        nutritionFactsSalt.setText(decimalFormat.format(nutriments.getSalt100g())+" g");
-        nutritionFactsSodium.setText(decimalFormat.format(nutriments.getSodium100g())+" g");
-        nutritionFactsAlcohol.setText(decimalFormat.format(nutriments.getAlcohol100g())+" % vol");
-        nutritionFactsIron.setText(decimalFormat.format(nutriments.calculateToMilligram(nutriments.getIron100g()))+" mg");
-        nutritionFactsMagnesium.setText(decimalFormat.format(nutriments.calculateToMilligram(nutriments.getMagnesium100g()))+" mg");
+        setNutritionFactsText(nutritionFactsEnergyKj, nutriments.getEnergyKj100g(), " kj");
+        setNutritionFactsText(nutritionFactsEnergyKcal, nutriments.getEnergyKcal100g(), " kcal");
+        setNutritionFactsText(nutritionFactsFat, nutriments.getFat100g()," g");
+        setNutritionFactsText(nutritionFactsSaturatedFat, nutriments.getSaturatedFat100g(), " g");
+        setNutritionFactsText(nutritionFactsCarbohydrates, nutriments.getCarbohydrates100g()," g");
+        setNutritionFactsText(nutritionFactsSugars, nutriments.getSugars100g()," g");
+        setNutritionFactsText(nutritionFactsFibers, nutriments.getFibers100g()," g");
+        setNutritionFactsText(nutritionFactsProteins, nutriments.getProteins100g(), " g");
+        setNutritionFactsText(nutritionFactsSalt, nutriments.getSalt100g(), " g");
+        setNutritionFactsText(nutritionFactsSodium, nutriments.getSodium100g()," g");
+        setNutritionFactsText(nutritionFactsAlcohol, nutriments.getAlcohol100g(), " % vol");
+        setNutritionFactsText(nutritionFactsIron, nutriments.calculateToMilligram(nutriments.getIron100g()), " mg");
+        setNutritionFactsText(nutritionFactsMagnesium, nutriments.calculateToMilligram(nutriments.getMagnesium100g()), " mg");
+    }
+
+    private void setNutritionFactsText(TextView textView, Float value, String type){
+        DecimalFormat decimalFormat = new DecimalFormat("#.#");
+
+        if (value == null){
+            textView.setText(UiConstant.UNKNOWN);
+        } else {
+            textView.setText(decimalFormat.format(value)+type);
+        }
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -233,8 +264,27 @@ public class ScannedProductFragment extends Fragment {
                 return getResources().getDrawable(R.drawable.ic_nutriscore_d);
             case "e":
                 return getResources().getDrawable(R.drawable.ic_nutriscore_e);
+            case "unknown":
             default:
                 return getResources().getDrawable(R.drawable.ic_nutriscore_unknown);
+        }
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private Drawable getEcoScoreGradeDrawable(String grade) {
+        switch (grade) {
+            case "a":
+                return getResources().getDrawable(R.drawable.ic_ecoscore_a);
+            case "b":
+                return getResources().getDrawable(R.drawable.ic_ecoscore_b);
+            case "c":
+                return getResources().getDrawable(R.drawable.ic_ecoscore_c);
+            case "d":
+                return getResources().getDrawable(R.drawable.ic_ecoscore_d);
+            case "e":
+                return getResources().getDrawable(R.drawable.ic_ecoscore_e);
+            default:
+                return getResources().getDrawable(R.drawable.ic_ecoscore_unknown);
         }
     }
 
@@ -265,11 +315,10 @@ public class ScannedProductFragment extends Fragment {
                 return getResources().getDrawable(R.drawable.orange_circle);
             case "high":
                 return getResources().getDrawable(R.drawable.red_circle);
+            case "unknown":
             default:
-                break;
+                return getResources().getDrawable(R.drawable.gray_circle);
         }
-
-        return null;
     }
 
     private void toggleCollapsibleSection(View v, ImageView upArrow, ImageView downArrow, RelativeLayout relativeLayout) {
@@ -349,6 +398,16 @@ public class ScannedProductFragment extends Fragment {
         nutritionFactsAlcohol = root.findViewById(R.id.nutrition_facts_alcohol_value);
         nutritionFactsIron = root.findViewById(R.id.nutrition_facts_iron_value);
 
+        ecoScoreCollapsibleSection = root.findViewById(R.id.collapsible_eco_score_section);
+        ecoScoreLayout = root.findViewById(R.id.eco_score_layout);
+        ecoScoreDownArrow = root.findViewById(R.id.eco_score_down_arrow);
+        ecoScoreUpArrow = root.findViewById(R.id.eco_score_up_arrow);
+        ecoScoreDrawable = root.findViewById(R.id.eco_score_drawable);
+        ecoScoreDescription = root.findViewById(R.id.eco_score_description);
+
+        ecoScoreUpArrow.setVisibility(View.GONE);
+        ecoScoreLayout.setVisibility(View.GONE);
+
         nutriScoreCollapsible.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -374,6 +433,13 @@ public class ScannedProductFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 toggleCollapsibleSection(v, nutritionFactsUpArrow, nutritionFactsDownArrow, nutritionFactsLayout);
+            }
+        });
+
+        ecoScoreCollapsibleSection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleCollapsibleSection(v, ecoScoreUpArrow, ecoScoreDownArrow, ecoScoreLayout);
             }
         });
     }
