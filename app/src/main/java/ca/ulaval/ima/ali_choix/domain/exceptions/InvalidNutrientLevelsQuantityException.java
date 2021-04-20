@@ -18,7 +18,7 @@ public class InvalidNutrientLevelsQuantityException extends ApplicationException
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public String getDescription() {
-        return String.format(DESCRIPTION, enumerateValues(NutrientLevelsQuantity.class));
+        return String.format(DESCRIPTION);
 
     }
 }

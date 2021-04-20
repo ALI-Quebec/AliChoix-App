@@ -32,16 +32,6 @@ public abstract class ApplicationException extends RuntimeException {
         return code;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    protected <T extends Enum<?>> String enumerateValues(Class<T> enumToEnumerate) {
-        List<String> values =
-                Stream.of(enumToEnumerate.getEnumConstants())
-                        .map(Enum::toString)
-                        .collect(Collectors.toList());
-
-        return enumerateStrings(values);
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     protected String enumerateStrings(List<String> values) {
         int lastIndex = values.size() - 1;

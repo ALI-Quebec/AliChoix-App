@@ -18,6 +18,6 @@ public class InvalidNutriScoreGradeException extends ApplicationException {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public String getDescription() {
-        return String.format(DESCRIPTION, enumerateValues(NutriScoreGrade.class));
+        return String.format(DESCRIPTION);
     }
 }
