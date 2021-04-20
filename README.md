@@ -55,3 +55,19 @@ Le client a une vision éducative du projet de session. Il souhaite que les part
 - soient des intermédiaires consciencieux entre l’application et les utilisateurs;
 - sachent prioriser les besoins de l’application;
 - apportent des idées pour différencier l’application de la compétition.
+
+## Comment exécuter le code ?
+
+Prérequis avant toute exécution du code: Insérer un fichier `apikey.properties` à la racine du projet (au même niveau que ce `README.md`, le `.gitignore`, etc.), contenant la ligne `MONGODB_CONNECTION="<URI>"`, où "<URI>" est l'URI de connexion à votre base de données MongoDB.
+
+### Charger l'application directement d'Android Studio sur un appareil Android
+
+- Brancher l'appareil dans votre ordinateur.
+- Dans la barre de menu dans le haut de l'écran avec les boutons "Run", "Debug", "Stop", et autres, sélectionner votre appareil dans le deuxième menu déroulant en partant de la gauche.
+- Cliquer sur "Run".
+
+### Créer un APK prêt à être téléchargé et installé sur un/des appareil.s (procédure utilisant Android Studio)
+
+- Dans la barre de menu complètement dans le haut de l'écran, sélectionner Build > Build Bundle(s) / APK(s) > Build APK(s).
+- Une notification devrait apparaître dans le coin inférieur droit de l'écran, avec un lien cliquable `locate` pour trouver l'APK ainsi généré dans votre ordinateur.
+- Téléverser l'APK sur l'appareil Android de votre choix et l'installer.
