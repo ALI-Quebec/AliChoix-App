@@ -1,5 +1,6 @@
 package ca.ulaval.ima.ali_choix;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
