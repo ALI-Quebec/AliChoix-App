@@ -23,6 +23,8 @@ import com.squareup.picasso.Picasso;
 
 import ca.ulaval.ima.ali_choix.domain.DomainConstant;
 import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryEmptyException;
+import ca.ulaval.ima.ali_choix.network.MongoDBClient;
+import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
 import ca.ulaval.ima.ali_choix.services.HistoryService;
 
 import ca.ulaval.ima.ali_choix.domain.product.NutrientLevelsQuantity;
@@ -43,7 +45,6 @@ import java.util.HashMap;
 
 import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.product.Product;
-import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
 
 import static ca.ulaval.ima.ali_choix.ui.UiConstant.DIALOG_MESSAGE_KEY;
 import static ca.ulaval.ima.ali_choix.ui.UiConstant.NO_PRODUCT_SCAN_YET_MESSAGE;
@@ -140,6 +141,7 @@ public class ScannedProductFragment extends Fragment {
         return root;
     }
 
+    // TODO: rename and switch to MongoDB method
     private void getInformationsWithOpenFoodFact(String productId) {
         OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
         OFFClient.get(productId, null, new JsonHttpResponseHandler() {
@@ -162,6 +164,23 @@ public class ScannedProductFragment extends Fragment {
                 }
             }
         });
+        MongoDBThread mongo = new MongoDBThread(productId);
+        Thread thread = new Thread(mongo);
+        thread.start();
+    }
+
+    private class MongoDBThread implements Runnable {
+        private String productId;
+        private volatile boolean found = false;
+
+        MongoDBThread(String productId) {
+            this.productId = productId;
+        }
+
+        @Override
+        public void run() {
+            MongoDBClient.logScanInHistory(productId);
+        }
     }
 
     @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n", "DefaultLocale"})
