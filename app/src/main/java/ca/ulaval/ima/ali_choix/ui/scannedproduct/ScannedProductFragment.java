@@ -124,6 +124,7 @@ public class ScannedProductFragment extends Fragment {
             }
 
             getInformationsWithOpenFoodFact(getArguments().getString(PRODUCT_ID_KEY));
+            updateMongoDB(productId);
         } else {
             try {
                 String productId = historyService.getLastSearchedProductId();
@@ -140,7 +141,6 @@ public class ScannedProductFragment extends Fragment {
         return root;
     }
 
-    // TODO: rename and switch to MongoDB method
     private void getInformationsWithOpenFoodFact(String productId) {
         OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
         OFFClient.get(productId, null, new JsonHttpResponseHandler() {
@@ -162,6 +162,9 @@ public class ScannedProductFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void updateMongoDB(String productId) {
         MongoDBThread mongo = new MongoDBThread(productId);
         Thread thread = new Thread(mongo);
         thread.start();
@@ -177,7 +180,7 @@ public class ScannedProductFragment extends Fragment {
 
         @Override
         public void run() {
-            MongoDBClient.logScanInHistory(productId);
+            MongoDBClient.logProductScannedInHistory(productId);
         }
     }
 
