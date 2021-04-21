@@ -30,6 +30,6 @@
     <string name="home_page_bottom_text">Recherchez vos produits dès maintenant!</string>
 
     <!--    About fragment naming-->
-    <string name="about_text">Ce texte contiendra l\'information de l\'à propos</string>
-    <string name="about_hyperlink"><a href="https://www.aliquebec.org/">Tapez ici pour connaître nos collaborateurs</a></string>
+    <string name="about_text">Cet espace contiendra l\'information de l\'à propos</string>
+    <string name="about_hyperlink"><a href="https://www.aliquebec.org/">Suivez le lien pour connaître nos collaborateurs</a></string>
 </resources>
