@@ -32,7 +32,7 @@ public class LocalHistoryRepositoryTest {
     }
 
     @Test
-    public void givenPresentElement_whenAddingExistingProduct_thenAddedProductIsLast(){
+    public void givenNonExitingElement_whenAddingElement_thenAddedElementIsLast(){
         assertEquals(THIRD_PRODUCT_ID, historyRepository.getLastSearchedProductId());
 
         historyRepository.addElement(FOURTH_ELEMENT);
@@ -41,7 +41,7 @@ public class LocalHistoryRepositoryTest {
     }
 
     @Test
-    public void givenPresentElement_whenAddingExistingProduct_thenMoveProductAtTheEnd(){
+    public void givenExistingElement_whenAddingElement_thenMoveElementAtTheEnd(){
         assertEquals(THIRD_PRODUCT_ID, historyRepository.getLastSearchedProductId());
 
         historyRepository.addElement(FIRST_ELEMENT);
@@ -50,7 +50,7 @@ public class LocalHistoryRepositoryTest {
     }
 
     @Test
-    public void givenPresentElement_whenAddingExistingProduct_thenHistorySizeDoesNotChange(){
+    public void givenExistingElement_whenAddingElement_thenHistorySizeDoesNotChange(){
         int originalSize = historyRepository.getHistory().size();
 
         historyRepository.addElement(FIRST_ELEMENT);
@@ -60,7 +60,7 @@ public class LocalHistoryRepositoryTest {
     }
 
     @Test
-    public void givenPresentElement_whenRemoving_elementIsRemoved(){
+    public void givenExistingElement_whenRemovingElement_thenElementIsRemoved(){
         historyRepository.removeElement(FIRST_PRODUCT_ID);
 
         assertFalse(historyRepository.getHistory().contains(FIRST_ELEMENT));

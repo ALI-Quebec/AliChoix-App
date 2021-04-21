@@ -1,4 +1,4 @@
-package ca.ulaval.ima.ali_choix.domain;
+package ca.ulaval.ima.ali_choix.domain.product;
 
 import org.junit.Test;
 

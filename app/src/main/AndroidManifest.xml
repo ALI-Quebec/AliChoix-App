@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="ca.ulaval.ima.ali_choix">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,12 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service
-            android:name=".services.ProductService"
-            android:label="Product service"
-            tools:ignore="Instantiatable">
-        </service>
     </application>
 
 </manifest>

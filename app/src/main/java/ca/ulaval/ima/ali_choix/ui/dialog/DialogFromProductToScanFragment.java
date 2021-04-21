@@ -15,8 +15,8 @@ import androidx.navigation.Navigation;
 
 import ca.ulaval.ima.ali_choix.R;
 
-import static ca.ulaval.ima.ali_choix.ui.UiConstant.DIALOG_MESSAGE_KEY;
-import static ca.ulaval.ima.ali_choix.ui.UiConstant.GO_TO_SCAN_DIALOG_TEXT;
+import static ca.ulaval.ima.ali_choix.ui.UIConstant.DIALOG_MESSAGE_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UIConstant.GO_TO_SCAN_DIALOG_TEXT;
 
 public class DialogFromProductToScanFragment extends DialogFragment {
 
@@ -29,7 +29,6 @@ public class DialogFromProductToScanFragment extends DialogFragment {
         String message = getArguments().getString(DIALOG_MESSAGE_KEY, "");
         View dialogView = inflater.inflate(R.layout.missing_product_pop_up, null);
         builder.setView(dialogView)
-                // Add action buttons
                 .setPositiveButton(GO_TO_SCAN_DIALOG_TEXT, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
@@ -37,8 +36,8 @@ public class DialogFromProductToScanFragment extends DialogFragment {
                         Bundle bundle = new Bundle();
                         navController.navigate(R.id.action_navigation_scanned_product_to_navigation_scan, bundle);
                     }
-                })
-        ;
+                });
+
         TextView textView = (TextView) dialogView.findViewById(R.id.product_not_found_text_view);
         textView.setText(message);
 

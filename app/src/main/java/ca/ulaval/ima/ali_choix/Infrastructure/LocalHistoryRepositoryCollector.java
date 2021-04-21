@@ -25,7 +25,7 @@ public class LocalHistoryRepositoryCollector implements HistoryRepositoryCollect
     public void saveHistory(HistoryRepository historyRepository, Context context){
         List<HistoryElement> historyElements = historyRepository.getHistory();
         FileOutputStream fileOutputStream;
-        ObjectOutputStream objectOutputStream=null;
+        ObjectOutputStream objectOutputStream = null;
 
         try {
             fileOutputStream= context.openFileOutput(HISTORY_FILE_NAME, Activity.MODE_PRIVATE);

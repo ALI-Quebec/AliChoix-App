@@ -20,7 +20,7 @@ public class LocalHistoryRepository implements HistoryRepository {
         history = new LinkedHashMap<>();
 
         for (HistoryElement historyElement: historyElements) {
-            history.put(historyElement.getProductId(),historyElement);
+            history.put(historyElement.getProductId(), historyElement);
         }
     }
 
@@ -29,6 +29,7 @@ public class LocalHistoryRepository implements HistoryRepository {
         if(history.containsKey(historyElement.getProductId())){
             history.remove(historyElement.getProductId());
         }
+
         history.put(historyElement.getProductId(), historyElement);
     }
 
@@ -47,6 +48,7 @@ public class LocalHistoryRepository implements HistoryRepository {
         if(history.size() == 0){
             throw new HistoryEmptyException();
         }
+
         return new ArrayList<>(history.keySet()).get(history.size() - 1);
     }
 }

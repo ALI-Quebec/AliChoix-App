@@ -2,11 +2,6 @@ package ca.ulaval.ima.ali_choix.services;
 
 import static org.junit.Assert.*;
 
-import android.content.Intent;
-import android.os.IBinder;
-
-import androidx.annotation.Nullable;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,43 +21,37 @@ public class ProductServiceTest {
 
     @Before
     public void setUp() {
-        productService = new ProductService() {
-            @Nullable
-            @Override
-            public IBinder onBind(Intent intent) {
-                return null;
-            }
-        };
+        productService = new ProductService();
         nutriments = new Nutriments();
     }
 
     @Test
-    public void givenNutriScoreGradeA_whenGettingDescription_thenReturnNutriScoreGradeADescription() {
+    public void givenNutriScoreGradeA_whenGettingNutriScoreDescription_thenReturnNutriScoreGradeADescription() {
         assertEquals("Très bonne qualité nutritionnelle", productService.getNutriScoreDescription("a"));
     }
 
     @Test
-    public void givenNutriScoreGradeB_whenGettingDescription_thenReturnNutriScoreGradeBDescription() {
+    public void givenNutriScoreGradeB_whenGettingNutriScoreDescription_thenReturnNutriScoreGradeBDescription() {
         assertEquals("Bonne qualité nutritionnelle", productService.getNutriScoreDescription("b"));
     }
 
     @Test
-    public void givenNutriScoreGradeC_whenGettingDescription_thenReturnNutriScoreGradeCDescription() {
+    public void givenNutriScoreGradeC_whenGettingNutriScoreDescription_thenReturnNutriScoreGradeCDescription() {
         assertEquals("Qualité nutritionnelle moyenne", productService.getNutriScoreDescription("c"));
     }
 
     @Test
-    public void givenNutriScoreGradeD_whenGettingDescription_thenReturnNutriScoreGradeDDescription() {
+    public void givenNutriScoreGradeD_whenGettingNutriScoreDescription_thenReturnNutriScoreGradeDDescription() {
         assertEquals("Mauvaise qualité nutritionnelle", productService.getNutriScoreDescription("d"));
     }
 
     @Test
-    public void givenNutriScoreGradeE_whenGettingDescription_thenReturnNutriScoreGradeEDescription() {
+    public void givenNutriScoreGradeE_whenGettingNutriScoreDescription_thenReturnNutriScoreGradeEDescription() {
         assertEquals("Très mauvaise qualité nutritionnelle", productService.getNutriScoreDescription("e"));
     }
 
     @Test
-    public void givenNutriScoreGradeUnknown_whenGettingDescription_thenReturnNutriScoreGradeUnknownDescription() {
+    public void givenNutriScoreGradeUnknown_whenGettingNutriScoreDescription_thenReturnNutriScoreGradeUnknownDescription() {
         assertEquals("Nutri-Score non calculé\nQualité nutritionnelle inconnue", productService.getNutriScoreDescription("unknown"));
     }
 
@@ -104,7 +93,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void givenNutrimentsWithHighNutrientLevelsQuantity_whenGettingNutrientLevelsQuantity_thenReturnHashMapWithModerateNutrientLevelsQuantity() {
+    public void givenNutrimentsWithHighNutrientLevelsQuantity_whenGettingNutrientLevelsQuantity_thenReturnHashMapWithHighNutrientLevelsQuantity() {
         nutriments.setFat100g(21f);
         nutriments.setSaturatedFat100g(7f);
         nutriments.setSugars100g(22f);
@@ -130,7 +119,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void givenHigheNutrientLevelsQuantity_whenGettingNutrientLevelsDescription_thenReturnHighNutrientLevelsDescription() {
+    public void givenHighNutrientLevelsQuantity_whenGettingNutrientLevelsDescription_thenReturnHighNutrientLevelsDescription() {
         assertEquals("Quantité élevée", productService.getNutrientLevelsDescription("high"));
     }
 
@@ -140,37 +129,37 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void givenEcoScoreGradeA_whenGettingDescription_thenReturnEcoScoreGradeADescription() {
+    public void givenEcoScoreGradeA_whenGettingEcoScoreDescription_thenReturnEcoScoreGradeADescription() {
         assertEquals("Très faible impact environnemental", productService.getEcoScoreDescription("a"));
     }
 
     @Test
-    public void givenEcoScoreGradeB_whenGettingDescription_thenReturnEcoScoreGradeBDescription() {
+    public void givenEcoScoreGradeB_whenGettingEcoScoreDescription_thenReturnEcoScoreGradeBDescription() {
         assertEquals("Faible impact environnemental", productService.getEcoScoreDescription("b"));
     }
 
     @Test
-    public void givenEcoScoreGradeC_whenGettingDescription_thenReturnEcoScoreGradeCDescription() {
+    public void givenEcoScoreGradeC_whenGettingEcoScoreDescription_thenReturnEcoScoreGradeCDescription() {
         assertEquals("Impact modéré sur l'environnement", productService.getEcoScoreDescription("c"));
     }
 
     @Test
-    public void givenEcoScoreGradeD_whenGettingDescription_thenReturnEcoScoreGradeDDescription() {
+    public void givenEcoScoreGradeD_whenGettingEcoScoreDescription_thenReturnEcoScoreGradeDDescription() {
         assertEquals("Impact environnemental élevé", productService.getEcoScoreDescription("d"));
     }
 
     @Test
-    public void givenEcoScoreGradeE_whenGettingDescription_thenReturnEcoScoreGradeEDescription() {
+    public void givenEcoScoreGradeE_whenGettingEcoScoreDescription_thenReturnEcoScoreGradeEDescription() {
         assertEquals("Impact environnemental très élevé", productService.getEcoScoreDescription("e"));
     }
 
     @Test
-    public void givenEcoScoreGradeUnknown_whenGettingDescription_thenReturnEcoScoreGradeUnknownDescription() {
+    public void givenEcoScoreGradeUnknown_whenGettingEcoScoreDescription_thenReturnEcoScoreGradeUnknownDescription() {
         assertEquals("Impact environnemental inconnu", productService.getEcoScoreDescription("unknown"));
     }
 
     @Test(expected = InvalidEcoScoreGradeException.class)
-    public void givenWrongEcoScoreGrade_whenGettingNutriScoreDescription_thenThrowInvalidNutriScoreGradeException() {
+    public void givenWrongEcoScoreGrade_whenGettingEcoScoreDescription_thenThrowInvalidEcoScoreGradeExceptionException() {
         productService.getEcoScoreDescription("x");
     }
 

@@ -19,7 +19,6 @@ public class HistoryService {
     private HistoryElementFactory historyElementFactory;
     private HistoryRepositoryCollector historyRepositoryCollector;
     private Context context;
-
     private Boolean errorLoadingHistory = false;
     private Boolean errorSavingHistory = false;
 
@@ -38,14 +37,14 @@ public class HistoryService {
     }
 
     public void addHistoryElement(String productId, String image_front_url, String productName){
-        HistoryElement addedHistoryElement = historyElementFactory.create(productId,image_front_url,productName);
-        historyRepository.addElement(addedHistoryElement);
+        HistoryElement historyElement = historyElementFactory.create(productId, image_front_url, productName);
+        historyRepository.addElement(historyElement);
         saveHistory();
     }
 
     public void removeHistoryElement(String productId){
-        ProductId removedProductId = new ProductId(productId);
-        historyRepository.removeElement(removedProductId);
+        ProductId productIdToRemove = new ProductId(productId);
+        historyRepository.removeElement(productIdToRemove);
         saveHistory();
     }
 
@@ -75,7 +74,7 @@ public class HistoryService {
 
     private void saveHistory(){
         try {
-            historyRepositoryCollector.saveHistory(historyRepository,context);
+            historyRepositoryCollector.saveHistory(historyRepository, context);
         } catch (HistorySavingException e){
             errorSavingHistory = true;
         }

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ServiceLocator {
-
     private static ServiceLocator locator;
     private static final Map<String, Object> ServiceMap = new HashMap<>();
 
@@ -22,5 +21,4 @@ public class ServiceLocator {
     public Object get(Class<?> interfaceClass) {
         return ServiceMap.get(interfaceClass.getName());
     }
-
 }

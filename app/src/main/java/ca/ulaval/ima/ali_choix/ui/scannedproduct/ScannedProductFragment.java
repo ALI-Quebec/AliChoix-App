@@ -1,10 +1,8 @@
 package ca.ulaval.ima.ali_choix.ui.scannedproduct;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
@@ -31,7 +28,7 @@ import ca.ulaval.ima.ali_choix.domain.product.Nutriments;
 import ca.ulaval.ima.ali_choix.services.ProductService;
 import ca.ulaval.ima.ali_choix.services.ServiceLocator;
 import ca.ulaval.ima.ali_choix.ui.dialog.DialogFromProductToScanFragment;
-import ca.ulaval.ima.ali_choix.ui.UiConstant;
+import ca.ulaval.ima.ali_choix.ui.UIConstant;
 import cz.msebera.android.httpclient.Header;
 
 import org.json.JSONException;
@@ -45,10 +42,10 @@ import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.product.Product;
 import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
 
-import static ca.ulaval.ima.ali_choix.ui.UiConstant.DIALOG_MESSAGE_KEY;
-import static ca.ulaval.ima.ali_choix.ui.UiConstant.NO_PRODUCT_SCAN_YET_MESSAGE;
-import static ca.ulaval.ima.ali_choix.ui.UiConstant.PRODUCT_ID_KEY;
-import static ca.ulaval.ima.ali_choix.ui.UiConstant.PRODUCT_NOT_FOUND_MESSAGE;
+import static ca.ulaval.ima.ali_choix.ui.UIConstant.DIALOG_MESSAGE_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UIConstant.NO_PRODUCT_SCAN_YET_MESSAGE;
+import static ca.ulaval.ima.ali_choix.ui.UIConstant.PRODUCT_ID_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UIConstant.PRODUCT_NOT_FOUND_MESSAGE;
 
 public class ScannedProductFragment extends Fragment {
     private Product product;
@@ -60,21 +57,21 @@ public class ScannedProductFragment extends Fragment {
     private ImageView nutriScoreDownArrow;
     private ImageView nutriScoreUpArrow;
     private RelativeLayout nutriScoreCollapsible;
+    private String scannedProductNutriScoreGrade;
     private RelativeLayout nutriScoreLayout;
     private ImageView nutriScoreDrawable;
     private TextView nutriScoreDescription;
     private RelativeLayout ingredientsAnalysisCollapsible;
     private ImageView ingredientAnalysisDownArrow;
     private ImageView ingredientAnalysisUpArrow;
+    private RelativeLayout ingredientsAnalysisLayout;
     private TextView isVegetarian;
     private TextView isVegan;
-    private RelativeLayout ingredientsAnalysisLayout;
     private TextView isPalmOilFree;
     private RelativeLayout nutrientLevelsCollapsible;
     private RelativeLayout nutrientLevelsLayout;
     private ImageView nutrientLevelsDownArrow;
     private ImageView nutrientLevelsUpArrow;
-    private String scannedProductNutriScoreGrade;
     private ImageView fatQuantityIndicator;
     private ImageView saturatedFatQuantityIndicator;
     private ImageView sugarsQuantityIndicator;
@@ -120,9 +117,11 @@ public class ScannedProductFragment extends Fragment {
 
         if(getArguments() != null){
             String productId = getArguments().getString(PRODUCT_ID_KEY);
+
             if (productId == null){
                 productId = "";
             }
+
             getInformationsWithOpenFoodFact(getArguments().getString(PRODUCT_ID_KEY));
         } else {
             try {
@@ -143,7 +142,6 @@ public class ScannedProductFragment extends Fragment {
     private void getInformationsWithOpenFoodFact(String productId) {
         OpenFoodFactRestClient OFFClient = new OpenFoodFactRestClient();
         OFFClient.get(productId, null, new JsonHttpResponseHandler() {
-
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject dataObject) {
                 try {
@@ -166,30 +164,24 @@ public class ScannedProductFragment extends Fragment {
 
     @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n", "DefaultLocale"})
     private void showInformations() {
-        ProductService productService = new ProductService() {
-            @Nullable
-            @Override
-            public IBinder onBind(Intent intent) {
-                return null;
-            }
-        };
-
-        String name = product.getName();
-        String url_front = product.getImage();
+        ProductService productService = new ProductService();
+        String productName = product.getName();
+        String imageUrl = product.getImage();
         String origin = product.getOrigins();
         String countryImported = product.getCountriesImported();
         String quantity = product.getQuantity();
         Nutriments nutriments = product.getNutriments();
 
-        if (url_front != null) {
-            Picasso.get().load(url_front).into(scannedProductImage);
+        if (imageUrl != null) {
+            Picasso.get().load(imageUrl).into(scannedProductImage);
         } else {
             scannedProductImage.setBackground(getResources().getDrawable(R.drawable.no_image_available));
         };
+
         scannedProductOrigin.setText(origin);
         scannedProductCountryImported.setText(countryImported);
-        scannedProductQuantity.setText(quantity.equals(UiConstant.UNKNOWN) ? quantity : quantity+ " g");
-        scannedProductName.setText(name);
+        scannedProductQuantity.setText(quantity.equals(UIConstant.UNKNOWN) ? quantity : quantity+ " g");
+        scannedProductName.setText(productName);
 
         scannedProductNutriScoreGrade = product.getNutriScoreGrade();
         nutriScoreDrawable.setBackground(getNutriScoreGradeDrawable(scannedProductNutriScoreGrade.toLowerCase()));
@@ -218,10 +210,10 @@ public class ScannedProductFragment extends Fragment {
         ArrayList<String> ingredientsAnalysisTags = product.getIngredientsAnalysisTags();
         if (ingredientsAnalysisTags != null) {
             for (String tag : ingredientsAnalysisTags) {
-                if (tag.contains(UiConstant.PALM))
+                if (tag.contains(UIConstant.PALM))
                     setIngredientsAnalysisTextView(isPalmOilFree, tag);
-                if (tag.contains(UiConstant.VEGAN)) setIngredientsAnalysisTextView(isVegan, tag);
-                if (tag.contains(UiConstant.VEGETARIAN))
+                if (tag.contains(UIConstant.VEGAN)) setIngredientsAnalysisTextView(isVegan, tag);
+                if (tag.contains(UIConstant.VEGETARIAN))
                     setIngredientsAnalysisTextView(isVegetarian, tag);
             }
         }
@@ -245,7 +237,7 @@ public class ScannedProductFragment extends Fragment {
         DecimalFormat decimalFormat = new DecimalFormat("#.#");
 
         if (value == null){
-            textView.setText(UiConstant.UNKNOWN);
+            textView.setText(UIConstant.UNKNOWN);
         } else {
             textView.setText(decimalFormat.format(value)+type);
         }
@@ -298,7 +290,7 @@ public class ScannedProductFragment extends Fragment {
             case "en:palm-oil-content-unknown":
             case "en:vegan-status-unknown":
             case "en:vegetarian-status-unknown":
-                textView.setText(UiConstant.UNKNOWN);
+                textView.setText(UIConstant.UNKNOWN);
                 break;
             default:
                 textView.setText("Non");
@@ -345,8 +337,7 @@ public class ScannedProductFragment extends Fragment {
         nutriScoreDownArrow = root.findViewById(R.id.nutri_score_down_arrow);
         nutriScoreUpArrow = root.findViewById(R.id.nutri_score_up_arrow);
 
-        nutriScoreUpArrow.setVisibility(View.GONE);
-        nutriScoreLayout.setVisibility(View.GONE);
+        nutriScoreDownArrow.setVisibility(View.GONE);
 
         ingredientsAnalysisCollapsible = root.findViewById(R.id.collapsible_diet_section);
         ingredientsAnalysisLayout = root.findViewById(R.id.diet_type_layout);

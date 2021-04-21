@@ -13,23 +13,9 @@ import android.view.ViewGroup;
 
 import ca.ulaval.ima.ali_choix.R;
 
-/**
- * A fragment representing a list of Items.
- */
 public class OptionsFragment extends Fragment {
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public OptionsFragment() {
-    }
-
-    @SuppressWarnings("unused")
-    public static OptionsFragment newInstance(int columnCount) {
-        OptionsFragment fragment = new OptionsFragment();
-        return fragment;
-    }
+    public OptionsFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,11 +26,10 @@ public class OptionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_options, container, false);
-
         RecyclerView recyclerView = view.findViewById(R.id.option_recycler_view);
         Context context = view.getContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(new OptionsRecyclerViewAdapter(OptionsContent.ITEMS, getParentFragmentManager()));
+        recyclerView.setAdapter(new OptionsRecyclerViewAdapter(OptionsContent.OPTIONS_ITEMS, getParentFragmentManager()));
 
         return view;
     }

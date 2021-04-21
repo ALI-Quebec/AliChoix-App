@@ -9,15 +9,14 @@ import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.ui.about.AboutFragment;
 
 public class OptionsContent {
-
-    public static final List<OptionsItem> ITEMS = new ArrayList<OptionsItem>();
+    public static final List<OptionsItem> OPTIONS_ITEMS = new ArrayList<OptionsItem>();
 
     static {
         addItem(new OptionsItem(R.drawable.ali_choix_logo, "À propos", "Lien vers la page à propos", new AboutFragment()));
     }
 
     private static void addItem(OptionsItem item) {
-        ITEMS.add(item);
+        OPTIONS_ITEMS.add(item);
     }
 
     public static class OptionsItem {
