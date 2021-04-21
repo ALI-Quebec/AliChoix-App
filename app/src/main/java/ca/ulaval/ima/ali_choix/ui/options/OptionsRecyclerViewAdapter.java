@@ -17,12 +17,11 @@ import ca.ulaval.ima.ali_choix.ui.options.OptionsContent.OptionsItem;
 import java.util.List;
 
 public class OptionsRecyclerViewAdapter extends RecyclerView.Adapter<OptionsRecyclerViewAdapter.ViewHolder> {
-
-    private final List<OptionsItem> items;
+    private final List<OptionsItem> optionsItems;
     private final FragmentManager fragmentManager;
 
-    public OptionsRecyclerViewAdapter(List<OptionsItem> items, FragmentManager fragmentManager) {
-        this.items = items;
+    public OptionsRecyclerViewAdapter(List<OptionsItem> optionsItems, FragmentManager fragmentManager) {
+        this.optionsItems = optionsItems;
         this.fragmentManager = fragmentManager;
     }
 
@@ -30,37 +29,38 @@ public class OptionsRecyclerViewAdapter extends RecyclerView.Adapter<OptionsRecy
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_item, parent, false);
+
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.item = items.get(position);
-        holder.iconView.setImageResource(items.get(position).icon);
-        holder.textView.setText(items.get(position).content);
+        holder.item = optionsItems.get(position);
+        holder.iconView.setImageResource(optionsItems.get(position).icon);
+        holder.textView.setText(optionsItems.get(position).content);
         holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeFragment(items.get(position).target);
+                changeFragment(optionsItems.get(position).target);
             }
         });
         holder.iconView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeFragment(items.get(position).target);
+                changeFragment(optionsItems.get(position).target);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return optionsItems.size();
     }
 
     private void changeFragment(Fragment target) {
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.nav_host_fragment, target);
-        ft.commit();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.nav_host_fragment, target);
+        fragmentTransaction.commit();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

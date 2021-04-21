@@ -21,7 +21,6 @@ import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 
 public class HistoryItemRecyclerViewAdapter extends ArrayAdapter<HistoryElement> {
-
     private Context context;
     private List<Boolean> checkboxStates;
     private boolean deleteMode;
@@ -32,48 +31,47 @@ public class HistoryItemRecyclerViewAdapter extends ArrayAdapter<HistoryElement>
         this.checkboxStates = new ArrayList<>(Collections.nCopies(items.size(), false));
     }
 
-    private class ViewHolder {
-        ImageView historyProductImage;
-        TextView historyProductName;
-    }
-    
     public void setDeleteMode(boolean allowDelete){
         deleteMode = allowDelete;
     }
 
-    public List<Boolean> getCheckboxState(){
+    public List<Boolean> getCheckboxStates(){
         return checkboxStates;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
-        HistoryElement historyElement = getItem(position);
+    private class ViewHolder {
+        ImageView historyProductImage;
+        TextView historyProductName;
+    }
 
-        LayoutInflater mInflater = (LayoutInflater) context
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        HistoryElement historyElement = getItem(position);
+        LayoutInflater layoutInflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.history_item, null);
+            convertView = layoutInflater.inflate(R.layout.history_item, null);
             holder = new ViewHolder();
             holder.historyProductName = (TextView) convertView.findViewById(R.id.history_product_name);
             holder.historyProductImage = (ImageView) convertView.findViewById(R.id.history_product_image);
             convertView.setTag(holder);
-        } else
+        } else {
             holder = (ViewHolder) convertView.getTag();
+        }
 
         holder.historyProductName.setText(historyElement.getProductName());
         Picasso.get().load(historyElement.getImage_front_url()).into(holder.historyProductImage);
-
         CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.history_delete_item_checkbox);
+
         if(deleteMode) {
             checkBox.setVisibility(View.VISIBLE);
-
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                     setChecked(isChecked,position);
                 }
-            }
-            );
+            });
         } else {
             checkBox.setVisibility(View.GONE);
         }
@@ -81,8 +79,7 @@ public class HistoryItemRecyclerViewAdapter extends ArrayAdapter<HistoryElement>
         return convertView;
     }
 
-    public void setChecked(boolean state, int position)
-    {
+    private void setChecked(boolean state, int position) {
         checkboxStates.set(position, state);
     }
 }

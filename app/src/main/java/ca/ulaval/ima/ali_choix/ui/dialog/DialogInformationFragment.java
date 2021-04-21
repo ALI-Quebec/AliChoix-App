@@ -10,13 +10,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import ca.ulaval.ima.ali_choix.R;
 
-import static ca.ulaval.ima.ali_choix.ui.UiConstant.DIALOG_MESSAGE_KEY;
-import static ca.ulaval.ima.ali_choix.ui.UiConstant.GO_TO_SCAN_DIALOG_TEXT;
+import static ca.ulaval.ima.ali_choix.ui.UIConstant.DIALOG_MESSAGE_KEY;
 
 public class DialogInformationFragment extends DialogFragment {
 
@@ -34,6 +31,7 @@ public class DialogInformationFragment extends DialogFragment {
                 dialog.dismiss();
             }
         });
+
         TextView textView = (TextView) dialogView.findViewById(R.id.information_pop_up_text_view);
         textView.setText(message);
 

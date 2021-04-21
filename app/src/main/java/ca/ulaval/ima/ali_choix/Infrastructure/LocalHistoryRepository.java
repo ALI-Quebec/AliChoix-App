@@ -9,18 +9,18 @@ import ca.ulaval.ima.ali_choix.domain.history.HistoryRepository;
 import ca.ulaval.ima.ali_choix.domain.product.ProductId;
 import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryEmptyException;
 
-public class HistoryRepositoryLocal implements HistoryRepository {
+public class LocalHistoryRepository implements HistoryRepository {
     private LinkedHashMap<ProductId, HistoryElement> history;
 
-    public HistoryRepositoryLocal(){
+    public LocalHistoryRepository(){
         history = new LinkedHashMap<>();
     }
 
-    public HistoryRepositoryLocal(List<HistoryElement> historyElements){
+    public LocalHistoryRepository(List<HistoryElement> historyElements){
         history = new LinkedHashMap<>();
 
         for (HistoryElement historyElement: historyElements) {
-            history.put(historyElement.getProductId(),historyElement);
+            history.put(historyElement.getProductId(), historyElement);
         }
     }
 
@@ -29,17 +29,13 @@ public class HistoryRepositoryLocal implements HistoryRepository {
         if(history.containsKey(historyElement.getProductId())){
             history.remove(historyElement.getProductId());
         }
+
         history.put(historyElement.getProductId(), historyElement);
     }
 
     @Override
     public void removeElement(ProductId productId) {
         history.remove(productId);
-    }
-
-    @Override
-    public void removeAllElements() {
-        history.clear();
     }
 
     @Override
@@ -52,6 +48,7 @@ public class HistoryRepositoryLocal implements HistoryRepository {
         if(history.size() == 0){
             throw new HistoryEmptyException();
         }
+
         return new ArrayList<>(history.keySet()).get(history.size() - 1);
     }
 }

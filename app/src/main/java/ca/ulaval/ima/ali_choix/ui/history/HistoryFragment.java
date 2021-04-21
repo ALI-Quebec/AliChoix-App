@@ -21,23 +21,17 @@ import ca.ulaval.ima.ali_choix.R;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 import ca.ulaval.ima.ali_choix.services.HistoryService;
 import ca.ulaval.ima.ali_choix.services.ServiceLocator;
-import ca.ulaval.ima.ali_choix.ui.dialog.DialogFromProductToScanFragment;
 import ca.ulaval.ima.ali_choix.ui.dialog.DialogInformationFragment;
 
-
-import static ca.ulaval.ima.ali_choix.ui.UiConstant.DIALOG_MESSAGE_KEY;
-import static ca.ulaval.ima.ali_choix.ui.UiConstant.PRODUCT_ID_KEY;
-import static ca.ulaval.ima.ali_choix.ui.UiConstant.PRODUCT_NOT_FOUND_MESSAGE;
-
-import static ca.ulaval.ima.ali_choix.ui.UiConstant.HISTORY_LOAD_ERROR_MESSAGE;
-import static ca.ulaval.ima.ali_choix.ui.UiConstant.HISTORY_SAVE_ERROR_MESSAGE;
-
+import static ca.ulaval.ima.ali_choix.ui.UIConstant.DIALOG_MESSAGE_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UIConstant.PRODUCT_ID_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UIConstant.HISTORY_LOAD_ERROR_MESSAGE;
+import static ca.ulaval.ima.ali_choix.ui.UIConstant.HISTORY_SAVE_ERROR_MESSAGE;
 
 public class HistoryFragment extends ListFragment {
     private ArrayList<HistoryElement> historyItems;
     private HistoryItemRecyclerViewAdapter adapter;
     private HistoryService historyService;
-    
     private ImageButton deleteButton;
     private ImageButton completeDeletionButton;
 
@@ -48,81 +42,19 @@ public class HistoryFragment extends ListFragment {
 
         historyService = (HistoryService) ServiceLocator.getInstance().get(HistoryService.class);
 
-        deleteButton = root.findViewById(R.id.history_start_deletion_button);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startDeletionProcess();
-            }
-        });
-
-        completeDeletionButton = root.findViewById(R.id.history_complete_deletion_button);
-        completeDeletionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                completeDeletionProcess();
-            }
-        });
-
-        completeDeletionButton.setVisibility(View.GONE);
+        assignVisualElements(root);
 
         fillItemListFromHistory();
 
-        adapter=new HistoryItemRecyclerViewAdapter(getActivity(),
+        adapter = new HistoryItemRecyclerViewAdapter(getActivity(),
                 android.R.layout.activity_list_item,
                 historyItems);
         setListAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        if (historyService.historyLoadProblemState()){
-            DialogFragment dialog = new DialogInformationFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString(DIALOG_MESSAGE_KEY, HISTORY_LOAD_ERROR_MESSAGE);
-            dialog.setArguments(bundle);
-            dialog.show(getFragmentManager(), "DialogInformationFragment");
-
-            historyService.resetHistoryLoadingProblemState();
-        }
-
-        if (historyService.historySavingProblemState()){
-            DialogFragment dialog = new DialogInformationFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString(DIALOG_MESSAGE_KEY, HISTORY_SAVE_ERROR_MESSAGE);
-            dialog.setArguments(bundle);
-            dialog.show(getFragmentManager(), "DialogInformationFragment");
-
-            historyService.resetHistorySavingProblemState();
-        }
-
+        verifyHistoryProblemStates();
 
         return root;
-    }
-
-    private void startDeletionProcess() {
-        deleteButton.setVisibility(View.GONE);
-        completeDeletionButton.setVisibility(View.VISIBLE);
-
-        adapter.setDeleteMode(true);
-        adapter.notifyDataSetChanged();
-    }
-
-    private void completeDeletionProcess(){
-
-        ArrayList<Boolean> checkedItems = (ArrayList) adapter.getCheckboxState();
-        for(int i = 0; i < checkedItems.size(); i++){
-            if(checkedItems.get(i)){
-                historyService.removeHistoryElement(historyItems.get(i).getProductId().toString());
-            }
-        }
-        fillItemListFromHistory();
-
-        completeDeletionButton.setVisibility(View.GONE);
-        deleteButton.setVisibility(View.VISIBLE);
-
-        adapter=new HistoryItemRecyclerViewAdapter(getActivity(),
-                android.R.layout.activity_list_item,
-                historyItems);
-        setListAdapter(adapter);
     }
 
     @Override
@@ -146,5 +78,75 @@ public class HistoryFragment extends ListFragment {
             historyItems.add(historyIterator.previous());
         }
     }
-}
 
+    private void verifyHistoryProblemStates() {
+        if (historyService.historyLoadProblemState()){
+            DialogFragment dialog = new DialogInformationFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString(DIALOG_MESSAGE_KEY, HISTORY_LOAD_ERROR_MESSAGE);
+            dialog.setArguments(bundle);
+            dialog.show(getFragmentManager(), "DialogInformationFragment");
+
+            historyService.resetHistoryLoadingProblemState();
+        }
+
+        if (historyService.historySavingProblemState()){
+            DialogFragment dialog = new DialogInformationFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString(DIALOG_MESSAGE_KEY, HISTORY_SAVE_ERROR_MESSAGE);
+            dialog.setArguments(bundle);
+            dialog.show(getFragmentManager(), "DialogInformationFragment");
+
+            historyService.resetHistorySavingProblemState();
+        }
+    }
+
+    private void assignVisualElements(View root) {
+        deleteButton = root.findViewById(R.id.history_start_deletion_button);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startDeletionProcess();
+            }
+        });
+
+        completeDeletionButton = root.findViewById(R.id.history_complete_deletion_button);
+        completeDeletionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                completeDeletionProcess();
+            }
+        });
+
+        completeDeletionButton.setVisibility(View.GONE);
+    }
+
+    private void startDeletionProcess() {
+        deleteButton.setVisibility(View.GONE);
+        completeDeletionButton.setVisibility(View.VISIBLE);
+
+        adapter.setDeleteMode(true);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void completeDeletionProcess(){
+        ArrayList<Boolean> checkedItems = (ArrayList) adapter.getCheckboxStates();
+
+        for(int i = 0; i < checkedItems.size(); i++){
+            if(checkedItems.get(i)){
+                historyService.removeHistoryElement(historyItems.get(i).getProductId().toString());
+            }
+        }
+
+        fillItemListFromHistory();
+
+        completeDeletionButton.setVisibility(View.GONE);
+        deleteButton.setVisibility(View.VISIBLE);
+
+        adapter = new HistoryItemRecyclerViewAdapter(getActivity(),
+                android.R.layout.activity_list_item,
+                historyItems);
+
+        setListAdapter(adapter);
+    }
+}

@@ -5,25 +5,24 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class InvalidNutriScoreGradeExceptionTest {
-
+public class InvalidEcoScoreGradeExceptionTest {
     private ApplicationException exception;
 
     @Before
     public void setUp() {
-        exception = new InvalidNutriScoreGradeException();
+        exception = new InvalidEcoScoreGradeException();
     }
 
     @Test
-    public void whenGettingDescription_thenReturnInvalidNutriScoreGradeExceptionDescription() {
-        String expectedDescription = "Nutri score grade is not valid";
+    public void whenGettingDescription_thenReturnInvalidEcoScoreGradeExceptionDescription() {
+        String expectedDescription = "Eco score grade is not valid";
         String description = exception.getDescription();
 
         assertEquals(description, expectedDescription);
     }
 
     @Test
-    public void whenGettingCode_thenReturnInvalidNutriScoreGradeExceptionCode() {
+    public void whenGettingCode_thenReturnInvalidEcoScoreGradeExceptionCode() {
         ErrorCode expectedCode = ErrorCode.INVALID_REQUEST;
         ErrorCode code = exception.getCode();
 
@@ -31,8 +30,8 @@ public class InvalidNutriScoreGradeExceptionTest {
     }
 
     @Test
-    public void whenGettingError_thenReturnInvalidNutriScoreGradeExceptionError() {
-        String expectedError = "Invalid nutri score grade";
+    public void whenGettingError_thenReturnInvalidEcoScoreGradeExceptionError() {
+        String expectedError = "Invalid eco score grade";
         String error = exception.getError();
 
         assertEquals(error, expectedError);

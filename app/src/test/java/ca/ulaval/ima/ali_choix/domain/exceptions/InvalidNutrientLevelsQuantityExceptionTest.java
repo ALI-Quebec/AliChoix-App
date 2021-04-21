@@ -20,4 +20,20 @@ public class InvalidNutrientLevelsQuantityExceptionTest {
 
         assertEquals(description, expectedDescription);
     }
+
+    @Test
+    public void whenGettingCode_thenReturnInvalidNutrientLevelsQuantityExceptionCode() {
+        ErrorCode expectedCode = ErrorCode.INVALID_REQUEST;
+        ErrorCode code = exception.getCode();
+
+        assertEquals(code, expectedCode);
+    }
+
+    @Test
+    public void whenGettingError_thenReturnInvalidNutrientLevelsQuantityExceptionError() {
+        String expectedError = "Invalid nutrient levels quantity";
+        String error = exception.getError();
+
+        assertEquals(error, expectedError);
+    }
 }

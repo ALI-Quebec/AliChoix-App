@@ -29,6 +29,7 @@ public class AboutFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_about, container, false);
         TextView hyperlink = root.findViewById(R.id.about_hyperlink);
         hyperlink.setMovementMethod(LinkMovementMethod.getInstance());
+
         return root;
     }
 }

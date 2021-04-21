@@ -18,27 +18,22 @@ import ca.ulaval.ima.ali_choix.domain.history.HistoryRepositoryCollector;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryRepository;
 
-public class HistoryRepositoryCollectorLocal implements HistoryRepositoryCollector {
+public class LocalHistoryRepositoryCollector implements HistoryRepositoryCollector {
 
     private static final String HISTORY_FILE_NAME = "LocalHistory";
 
     public void saveHistory(HistoryRepository historyRepository, Context context){
         List<HistoryElement> historyElements = historyRepository.getHistory();
-
         FileOutputStream fileOutputStream;
-        ObjectOutputStream objectOutputStream=null;
+        ObjectOutputStream objectOutputStream = null;
+
         try {
             fileOutputStream= context.openFileOutput(HISTORY_FILE_NAME, Activity.MODE_PRIVATE);
-            objectOutputStream=new ObjectOutputStream(fileOutputStream);
+            objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(historyElements);
-        }
-
-        catch(IOException e)
-        {
+        } catch(IOException e) {
             throw new HistorySavingException();
-        }
-        finally
-        {
+        } finally {
             try {
                 objectOutputStream.close();
             } catch (IOException e) {
@@ -48,26 +43,21 @@ public class HistoryRepositoryCollectorLocal implements HistoryRepositoryCollect
     }
 
     public HistoryRepository loadHistory(Context context){
-        List<HistoryElement> historyElements = null;
-
+        List<HistoryElement> historyElements;
         FileInputStream fileInputStream;
-        ObjectInputStream objectInputStream=null;
+        ObjectInputStream objectInputStream = null;
+
         try {
             fileInputStream= context.openFileInput(HISTORY_FILE_NAME);
-            objectInputStream=new ObjectInputStream(fileInputStream);
-            historyElements =(ArrayList<HistoryElement>)objectInputStream.readObject();
-        }
-        catch(FileNotFoundException ex)
-        {
-            historyElements=new ArrayList<>();
-        }
-        catch(IOException e)
-        {
+            objectInputStream = new ObjectInputStream(fileInputStream);
+            historyElements = (ArrayList<HistoryElement>)objectInputStream.readObject();
+        } catch(FileNotFoundException e) {
+            historyElements = new ArrayList<>();
+        } catch(IOException e) {
             throw new HistoryLoadingException();
         } catch (ClassNotFoundException e) {
             throw new HistoryLoadingException();
-        } finally
-        {
+        } finally {
             try {
                 if(objectInputStream != null) {
                     objectInputStream.close();
@@ -77,10 +67,10 @@ public class HistoryRepositoryCollectorLocal implements HistoryRepositoryCollect
             }
         }
 
-        if(historyElements==null){
-            historyElements=new ArrayList<>();
+        if(historyElements == null){
+            historyElements = new ArrayList<>();
         }
 
-        return new HistoryRepositoryLocal(historyElements);
+        return new LocalHistoryRepository(historyElements);
     }
 }

@@ -1,11 +1,10 @@
 package ca.ulaval.ima.ali_choix.ui;
 
-public class UiConstant {
+public class UIConstant {
     public final static String PALM = "palm";
     public final static String VEGAN = "vegan";
     public final static String VEGETARIAN = "vegetarian";
     public final static String UNKNOWN = "Non connu";
-
 
     public final static String PRODUCT_ID_KEY= "productId";
     public final static String DIALOG_MESSAGE_KEY= "dialogMessage";

@@ -20,4 +20,20 @@ public class HistoryEmptyExceptionTest {
 
         assertEquals(description, expectedDescription);
     }
+
+    @Test
+    public void whenGettingCode_thenReturnHistoryEmptyExceptionCode() {
+        ErrorCode expectedCode = ErrorCode.INVALID_REQUEST;
+        ErrorCode code = exception.getCode();
+
+        assertEquals(code, expectedCode);
+    }
+
+    @Test
+    public void whenGettingError_thenReturnHistoryEmptyExceptionError() {
+        String expectedError = "History is empty";
+        String error = exception.getError();
+
+        assertEquals(error, expectedError);
+    }
 }
