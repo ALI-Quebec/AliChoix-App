@@ -4,7 +4,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-public class HistorySavingException extends ApplicationException{
+public class HistorySavingException extends ApplicationException {
     private static final String ERROR = "Error while saving history";
     private static final String DESCRIPTION = "There was an error when trying to save history";
     private static final ErrorCode CODE = ErrorCode.APPLICATION_FAILURE;

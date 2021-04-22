@@ -24,9 +24,9 @@ import ca.ulaval.ima.ali_choix.services.ServiceLocator;
 import ca.ulaval.ima.ali_choix.ui.dialog.DialogInformationFragment;
 
 import static ca.ulaval.ima.ali_choix.ui.UIConstant.DIALOG_MESSAGE_KEY;
-import static ca.ulaval.ima.ali_choix.ui.UIConstant.PRODUCT_ID_KEY;
 import static ca.ulaval.ima.ali_choix.ui.UIConstant.HISTORY_LOAD_ERROR_MESSAGE;
 import static ca.ulaval.ima.ali_choix.ui.UIConstant.HISTORY_SAVE_ERROR_MESSAGE;
+import static ca.ulaval.ima.ali_choix.ui.UIConstant.PRODUCT_ID_KEY;
 
 public class HistoryFragment extends ListFragment {
     private ArrayList<HistoryElement> historyItems;
@@ -66,21 +66,21 @@ public class HistoryFragment extends ListFragment {
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         Bundle bundle = new Bundle();
         bundle.putString(PRODUCT_ID_KEY, clickedItem.getProductId().toString());
-        navController.navigate(R.id.action_navigation_history_to_navigation_scanned_product,bundle);
+        navController.navigate(R.id.action_navigation_history_to_navigation_scanned_product, bundle);
     }
 
-    private void fillItemListFromHistory(){
+    private void fillItemListFromHistory() {
         List history = historyService.getHistory();
         ListIterator<HistoryElement> historyIterator = history.listIterator(history.size());
 
         historyItems = new ArrayList<>();
-        while(historyIterator.hasPrevious()) {
+        while (historyIterator.hasPrevious()) {
             historyItems.add(historyIterator.previous());
         }
     }
 
     private void verifyHistoryProblemStates() {
-        if (historyService.historyLoadProblemState()){
+        if (historyService.historyLoadProblemState()) {
             DialogFragment dialog = new DialogInformationFragment();
             Bundle bundle = new Bundle();
             bundle.putString(DIALOG_MESSAGE_KEY, HISTORY_LOAD_ERROR_MESSAGE);
@@ -90,7 +90,7 @@ public class HistoryFragment extends ListFragment {
             historyService.resetHistoryLoadingProblemState();
         }
 
-        if (historyService.historySavingProblemState()){
+        if (historyService.historySavingProblemState()) {
             DialogFragment dialog = new DialogInformationFragment();
             Bundle bundle = new Bundle();
             bundle.putString(DIALOG_MESSAGE_KEY, HISTORY_SAVE_ERROR_MESSAGE);
@@ -129,11 +129,11 @@ public class HistoryFragment extends ListFragment {
         adapter.notifyDataSetChanged();
     }
 
-    private void completeDeletionProcess(){
+    private void completeDeletionProcess() {
         ArrayList<Boolean> checkedItems = (ArrayList) adapter.getCheckboxStates();
 
-        for(int i = 0; i < checkedItems.size(); i++){
-            if(checkedItems.get(i)){
+        for (int i = 0; i < checkedItems.size(); i++) {
+            if (checkedItems.get(i)) {
                 historyService.removeHistoryElement(historyItems.get(i).getProductId().toString());
             }
         }

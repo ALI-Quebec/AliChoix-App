@@ -31,11 +31,11 @@ public class HistoryItemRecyclerViewAdapter extends ArrayAdapter<HistoryElement>
         this.checkboxStates = new ArrayList<>(Collections.nCopies(items.size(), false));
     }
 
-    public void setDeleteMode(boolean allowDelete){
+    public void setDeleteMode(boolean allowDelete) {
         deleteMode = allowDelete;
     }
 
-    public List<Boolean> getCheckboxStates(){
+    public List<Boolean> getCheckboxStates() {
         return checkboxStates;
     }
 
@@ -64,12 +64,12 @@ public class HistoryItemRecyclerViewAdapter extends ArrayAdapter<HistoryElement>
         Picasso.get().load(historyElement.getImage_front_url()).into(holder.historyProductImage);
         CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.history_delete_item_checkbox);
 
-        if(deleteMode) {
+        if (deleteMode) {
             checkBox.setVisibility(View.VISIBLE);
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                    setChecked(isChecked,position);
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    setChecked(isChecked, position);
                 }
             });
         } else {

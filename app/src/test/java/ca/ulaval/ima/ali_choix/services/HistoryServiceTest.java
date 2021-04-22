@@ -13,10 +13,10 @@ import java.util.List;
 
 import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryLoadingException;
 import ca.ulaval.ima.ali_choix.domain.exceptions.HistorySavingException;
-import ca.ulaval.ima.ali_choix.domain.history.HistoryRepositoryCollector;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElement;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryElementFactory;
 import ca.ulaval.ima.ali_choix.domain.history.HistoryRepository;
+import ca.ulaval.ima.ali_choix.domain.history.HistoryRepositoryCollector;
 import ca.ulaval.ima.ali_choix.domain.product.ProductId;
 
 import static org.junit.Assert.assertEquals;
@@ -34,33 +34,37 @@ public class HistoryServiceTest {
     private static final List<HistoryElement> HISTORY_ELEMENTS = new ArrayList<>();
     private HistoryElement historyElement;
     private HistoryService historyService;
-    @Mock private Context context;
-    @Mock private HistoryRepositoryCollector historyRepositoryCollector;
-    @Mock private HistoryRepository historyRepository;
-    @Mock private HistoryElementFactory historyElementFactory;
+    @Mock
+    private Context context;
+    @Mock
+    private HistoryRepositoryCollector historyRepositoryCollector;
+    @Mock
+    private HistoryRepository historyRepository;
+    @Mock
+    private HistoryElementFactory historyElementFactory;
 
     @Before
     public void setUp() {
-        historyElement = new HistoryElement(productId,IMAGE_URL,PRODUCT_NAME);
+        historyElement = new HistoryElement(productId, IMAGE_URL, PRODUCT_NAME);
 
-        when(historyElementFactory.create(PRODUCT_ID,IMAGE_URL, PRODUCT_NAME)).thenReturn(historyElement);
+        when(historyElementFactory.create(PRODUCT_ID, IMAGE_URL, PRODUCT_NAME)).thenReturn(historyElement);
         when(historyRepositoryCollector.loadHistory(context)).thenReturn(historyRepository);
 
-        historyService = new HistoryService(context, historyRepositoryCollector,historyElementFactory);
+        historyService = new HistoryService(context, historyRepositoryCollector, historyElementFactory);
     }
 
     @Test
     public void whenAddingHistoryElement_thenElementIsAddedToRepository() {
-        historyService.addHistoryElement(PRODUCT_ID,IMAGE_URL, PRODUCT_NAME);
+        historyService.addHistoryElement(PRODUCT_ID, IMAGE_URL, PRODUCT_NAME);
 
         verify(historyRepository).addElement(historyElement);
     }
 
     @Test
     public void whenAddingHistoryElement_thenHistoryIsSaved() {
-        historyService.addHistoryElement(PRODUCT_ID,IMAGE_URL, PRODUCT_NAME);
+        historyService.addHistoryElement(PRODUCT_ID, IMAGE_URL, PRODUCT_NAME);
 
-        verify(historyRepositoryCollector).saveHistory(historyRepository,context);
+        verify(historyRepositoryCollector).saveHistory(historyRepository, context);
     }
 
     @Test
@@ -74,7 +78,7 @@ public class HistoryServiceTest {
     public void whenRemovingHistoryElement_thenHistoryIsSaved() {
         historyService.removeHistoryElement(PRODUCT_ID);
 
-        verify(historyRepositoryCollector).saveHistory(historyRepository,context);
+        verify(historyRepositoryCollector).saveHistory(historyRepository, context);
     }
 
     @Test
@@ -99,7 +103,7 @@ public class HistoryServiceTest {
                 .when(historyRepositoryCollector)
                 .saveHistory(historyRepository, context);
 
-        historyService.addHistoryElement(PRODUCT_ID,IMAGE_URL, PRODUCT_NAME);
+        historyService.addHistoryElement(PRODUCT_ID, IMAGE_URL, PRODUCT_NAME);
 
         assertEquals(historyService.historySavingProblemState(), true);
     }
@@ -109,7 +113,7 @@ public class HistoryServiceTest {
         doThrow(new HistorySavingException())
                 .when(historyRepositoryCollector)
                 .saveHistory(historyRepository, context);
-        historyService.addHistoryElement(PRODUCT_ID,IMAGE_URL, PRODUCT_NAME);
+        historyService.addHistoryElement(PRODUCT_ID, IMAGE_URL, PRODUCT_NAME);
         assertEquals(historyService.historySavingProblemState(), true);
 
         historyService.resetHistorySavingProblemState();
@@ -123,7 +127,7 @@ public class HistoryServiceTest {
                 .when(historyRepositoryCollector)
                 .loadHistory(context);
 
-        historyService = new HistoryService(context, historyRepositoryCollector,historyElementFactory);
+        historyService = new HistoryService(context, historyRepositoryCollector, historyElementFactory);
 
         assertEquals(historyService.historyLoadProblemState(), true);
     }
@@ -133,7 +137,7 @@ public class HistoryServiceTest {
         doThrow(new HistoryLoadingException())
                 .when(historyRepositoryCollector)
                 .loadHistory(context);
-        historyService = new HistoryService(context, historyRepositoryCollector,historyElementFactory);
+        historyService = new HistoryService(context, historyRepositoryCollector, historyElementFactory);
         assertEquals(historyService.historyLoadProblemState(), true);
 
         historyService.resetHistoryLoadingProblemState();

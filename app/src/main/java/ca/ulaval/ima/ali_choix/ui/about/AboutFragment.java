@@ -1,14 +1,13 @@
 package ca.ulaval.ima.ali_choix.ui.about;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import ca.ulaval.ima.ali_choix.R;
 

@@ -26,7 +26,9 @@ public enum EcoScoreGrade {
     EcoScoreGrade(String grade, String description) {
         this.grade = grade;
         this.description = description;
-    };
+    }
+
+    ;
 
     @Override
     public String toString() {
@@ -43,5 +45,7 @@ public enum EcoScoreGrade {
         return ecoScoreGrade;
     }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 }

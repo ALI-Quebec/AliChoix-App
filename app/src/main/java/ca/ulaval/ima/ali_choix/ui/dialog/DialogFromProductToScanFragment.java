@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -45,7 +44,7 @@ public class DialogFromProductToScanFragment extends DialogFragment {
     }
 
     @Override
-    public void onDismiss (DialogInterface dialog){
+    public void onDismiss(DialogInterface dialog) {
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         Bundle bundle = new Bundle();
         navController.navigate(R.id.action_navigation_scanned_product_to_navigation_scan, bundle);
