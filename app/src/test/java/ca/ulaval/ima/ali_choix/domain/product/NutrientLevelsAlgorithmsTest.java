@@ -2,10 +2,7 @@ package ca.ulaval.ima.ali_choix.domain.product;
 
 import org.junit.Test;
 
-import ca.ulaval.ima.ali_choix.domain.product.NutrientLevelsAlgorithms;
-import ca.ulaval.ima.ali_choix.domain.product.NutrientLevelsQuantity;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class NutrientLevelsAlgorithmsTest {
     @Test

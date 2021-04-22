@@ -41,5 +41,7 @@ public enum NutrientLevelsQuantity {
         return nutrientLevelsQuantity;
     }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 }

@@ -3,6 +3,7 @@ package ca.ulaval.ima.ali_choix.ui.scannedproduct;
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,21 +19,6 @@ import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
-import ca.ulaval.ima.ali_choix.domain.DomainConstant;
-import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryEmptyException;
-import ca.ulaval.ima.ali_choix.network.MongoDBClient;
-import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
-import ca.ulaval.ima.ali_choix.services.HistoryService;
-
-import ca.ulaval.ima.ali_choix.domain.product.NutrientLevelsQuantity;
-import ca.ulaval.ima.ali_choix.domain.product.Nutriments;
-
-import ca.ulaval.ima.ali_choix.services.ProductService;
-import ca.ulaval.ima.ali_choix.services.ServiceLocator;
-import ca.ulaval.ima.ali_choix.ui.dialog.DialogFromProductToScanFragment;
-import ca.ulaval.ima.ali_choix.ui.UIConstant;
-import cz.msebera.android.httpclient.Header;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,9 +27,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import ca.ulaval.ima.ali_choix.R;
+import ca.ulaval.ima.ali_choix.domain.DomainConstant;
+import ca.ulaval.ima.ali_choix.domain.exceptions.HistoryEmptyException;
+import ca.ulaval.ima.ali_choix.domain.product.NutrientLevelsQuantity;
+import ca.ulaval.ima.ali_choix.domain.product.Nutriments;
 import ca.ulaval.ima.ali_choix.domain.product.Product;
+import ca.ulaval.ima.ali_choix.network.MongoDBClient;
+import ca.ulaval.ima.ali_choix.network.MongoDBClientException;
+import ca.ulaval.ima.ali_choix.network.OpenFoodFactRestClient;
+import ca.ulaval.ima.ali_choix.services.HistoryService;
+import ca.ulaval.ima.ali_choix.services.ProductService;
+import ca.ulaval.ima.ali_choix.services.ServiceLocator;
+import ca.ulaval.ima.ali_choix.ui.UIConstant;
+import ca.ulaval.ima.ali_choix.ui.dialog.DialogFromProductToScanFragment;
+import cz.msebera.android.httpclient.Header;
 
 import static ca.ulaval.ima.ali_choix.ui.UIConstant.DIALOG_MESSAGE_KEY;
+import static ca.ulaval.ima.ali_choix.ui.UIConstant.IS_FROM_SCAN_KEY;
 import static ca.ulaval.ima.ali_choix.ui.UIConstant.NO_PRODUCT_SCAN_YET_MESSAGE;
 import static ca.ulaval.ima.ali_choix.ui.UIConstant.PRODUCT_ID_KEY;
 import static ca.ulaval.ima.ali_choix.ui.UIConstant.PRODUCT_NOT_FOUND_MESSAGE;
@@ -116,15 +116,20 @@ public class ScannedProductFragment extends Fragment {
 
         assignVisualElements(root);
 
-        if(getArguments() != null){
+        if (getArguments() != null) {
             String productId = getArguments().getString(PRODUCT_ID_KEY);
 
-            if (productId == null){
+            if (productId == null) {
                 productId = "";
             }
 
             getInformationsWithOpenFoodFact(getArguments().getString(PRODUCT_ID_KEY));
-            updateMongoDB(productId);
+
+            Boolean isFromScan = getArguments().getBoolean(IS_FROM_SCAN_KEY);
+
+            if (isFromScan) {
+                updateMongoDB(productId);
+            }
         } else {
             try {
                 String productId = historyService.getLastSearchedProductId();
@@ -151,7 +156,7 @@ public class ScannedProductFragment extends Fragment {
                     Gson gson = new Gson();
                     product = gson.fromJson(String.valueOf(productJson), Product.class);
                     showInformations();
-                    historyService.addHistoryElement(productId,product.getImage(),product.getName());
+                    historyService.addHistoryElement(productId, product.getImage(), product.getName());
                 } catch (JSONException e) {
                     e.printStackTrace();
                     DialogFragment dialog = new DialogFromProductToScanFragment();
@@ -180,7 +185,11 @@ public class ScannedProductFragment extends Fragment {
 
         @Override
         public void run() {
-            MongoDBClient.logProductScannedInHistory(productId);
+            try {
+                MongoDBClient.logProductScannedInHistory(productId);
+            } catch (MongoDBClientException e) {
+                Log.e("MongoDBClientException", e.getMessage());
+            }
         }
     }
 
@@ -198,11 +207,12 @@ public class ScannedProductFragment extends Fragment {
             Picasso.get().load(imageUrl).into(scannedProductImage);
         } else {
             scannedProductImage.setBackground(getResources().getDrawable(R.drawable.no_image_available));
-        };
+        }
+        ;
 
         scannedProductOrigin.setText(origin);
         scannedProductCountryImported.setText(countryImported);
-        scannedProductQuantity.setText(quantity.equals(UIConstant.UNKNOWN) ? quantity : quantity+ " g");
+        scannedProductQuantity.setText(quantity.equals(UIConstant.UNKNOWN) ? quantity : quantity + " g");
         scannedProductName.setText(productName);
 
         scannedProductNutriScoreGrade = product.getNutriScoreGrade();
@@ -242,26 +252,26 @@ public class ScannedProductFragment extends Fragment {
 
         setNutritionFactsText(nutritionFactsEnergyKj, nutriments.getEnergyKj100g(), " kj");
         setNutritionFactsText(nutritionFactsEnergyKcal, nutriments.getEnergyKcal100g(), " kcal");
-        setNutritionFactsText(nutritionFactsFat, nutriments.getFat100g()," g");
+        setNutritionFactsText(nutritionFactsFat, nutriments.getFat100g(), " g");
         setNutritionFactsText(nutritionFactsSaturatedFat, nutriments.getSaturatedFat100g(), " g");
-        setNutritionFactsText(nutritionFactsCarbohydrates, nutriments.getCarbohydrates100g()," g");
-        setNutritionFactsText(nutritionFactsSugars, nutriments.getSugars100g()," g");
-        setNutritionFactsText(nutritionFactsFibers, nutriments.getFibers100g()," g");
+        setNutritionFactsText(nutritionFactsCarbohydrates, nutriments.getCarbohydrates100g(), " g");
+        setNutritionFactsText(nutritionFactsSugars, nutriments.getSugars100g(), " g");
+        setNutritionFactsText(nutritionFactsFibers, nutriments.getFibers100g(), " g");
         setNutritionFactsText(nutritionFactsProteins, nutriments.getProteins100g(), " g");
         setNutritionFactsText(nutritionFactsSalt, nutriments.getSalt100g(), " g");
-        setNutritionFactsText(nutritionFactsSodium, nutriments.getSodium100g()," g");
+        setNutritionFactsText(nutritionFactsSodium, nutriments.getSodium100g(), " g");
         setNutritionFactsText(nutritionFactsAlcohol, nutriments.getAlcohol100g(), " % vol");
         setNutritionFactsText(nutritionFactsIron, nutriments.calculateToMilligram(nutriments.getIron100g()), " mg");
         setNutritionFactsText(nutritionFactsMagnesium, nutriments.calculateToMilligram(nutriments.getMagnesium100g()), " mg");
     }
 
-    private void setNutritionFactsText(TextView textView, Float value, String type){
+    private void setNutritionFactsText(TextView textView, Float value, String type) {
         DecimalFormat decimalFormat = new DecimalFormat("#.#");
 
-        if (value == null){
+        if (value == null) {
             textView.setText(UIConstant.UNKNOWN);
         } else {
-            textView.setText(decimalFormat.format(value)+type);
+            textView.setText(decimalFormat.format(value) + type);
         }
     }
 

@@ -1,20 +1,20 @@
 package ca.ulaval.ima.ali_choix.ui.options;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import ca.ulaval.ima.ali_choix.R;
-import ca.ulaval.ima.ali_choix.ui.options.OptionsContent.OptionsItem;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import ca.ulaval.ima.ali_choix.R;
+import ca.ulaval.ima.ali_choix.ui.options.OptionsContent.OptionsItem;
 
 public class OptionsRecyclerViewAdapter extends RecyclerView.Adapter<OptionsRecyclerViewAdapter.ViewHolder> {
     private final List<OptionsItem> optionsItems;

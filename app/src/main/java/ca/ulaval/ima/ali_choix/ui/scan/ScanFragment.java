@@ -22,6 +22,7 @@ import com.google.zxing.Result;
 
 import ca.ulaval.ima.ali_choix.R;
 
+import static ca.ulaval.ima.ali_choix.ui.UIConstant.IS_FROM_SCAN_KEY;
 import static ca.ulaval.ima.ali_choix.ui.UIConstant.PRODUCT_ID_KEY;
 
 public class ScanFragment extends Fragment {
@@ -71,7 +72,8 @@ public class ScanFragment extends Fragment {
                         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
                         Bundle bundle = new Bundle();
                         bundle.putString(PRODUCT_ID_KEY, result.getText());
-                        navController.navigate(R.id.action_navigation_scan_to_navigation_scanned_product,bundle);
+                        bundle.putBoolean(IS_FROM_SCAN_KEY, true);
+                        navController.navigate(R.id.action_navigation_scan_to_navigation_scanned_product, bundle);
                     }
                 });
             }
