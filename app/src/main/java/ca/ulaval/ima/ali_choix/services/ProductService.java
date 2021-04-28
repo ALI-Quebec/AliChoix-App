@@ -3,6 +3,9 @@ package ca.ulaval.ima.ali_choix.services;
 import java.util.HashMap;
 
 import ca.ulaval.ima.ali_choix.domain.DomainConstant;
+import ca.ulaval.ima.ali_choix.domain.exceptions.InvalidEcoScoreGradeException;
+import ca.ulaval.ima.ali_choix.domain.exceptions.InvalidNutriScoreGradeException;
+import ca.ulaval.ima.ali_choix.domain.exceptions.InvalidNutrientLevelsQuantityException;
 import ca.ulaval.ima.ali_choix.domain.product.EcoScoreGrade;
 import ca.ulaval.ima.ali_choix.domain.product.NutriScoreGrade;
 import ca.ulaval.ima.ali_choix.domain.product.NutrientLevelsAlgorithms;
@@ -14,15 +17,23 @@ public class ProductService {
     public ProductService(){}
 
     public String getNutriScoreDescription(String grade) {
-        NutriScoreGrade nutriScoreGrade = NutriScoreGrade.get(grade);
+        try {
+            NutriScoreGrade nutriScoreGrade = NutriScoreGrade.get(grade);
 
-        return nutriScoreGrade.getDescription();
+            return nutriScoreGrade.getDescription();
+        } catch (InvalidNutriScoreGradeException e) {
+            return NutriScoreGrade.UNKNOWN.getDescription();
+        }
     }
 
     public String getEcoScoreDescription(String grade) {
-        EcoScoreGrade ecoScoreGrade = EcoScoreGrade.get(grade);
+        try {
+            EcoScoreGrade ecoScoreGrade = EcoScoreGrade.get(grade);
 
-        return ecoScoreGrade.getDescription();
+            return ecoScoreGrade.getDescription();
+        } catch (InvalidEcoScoreGradeException e) {
+            return EcoScoreGrade.UNKNOWN.getDescription();
+        }
     }
 
     public HashMap getNutrientLevelsQuantity(Nutriments nutriments) {
@@ -36,8 +47,12 @@ public class ProductService {
     }
 
     public String getNutrientLevelsDescription(String level) {
-        NutrientLevelsQuantity nutrientLevelsQuantity = NutrientLevelsQuantity.get(level);
+        try {
+            NutrientLevelsQuantity nutrientLevelsQuantity = NutrientLevelsQuantity.get(level);
 
-        return nutrientLevelsQuantity.getDescription();
+            return nutrientLevelsQuantity.getDescription();
+        } catch (InvalidNutrientLevelsQuantityException e) {
+            return NutrientLevelsQuantity.UNKNOWN.getDescription();
+        }
     }
 }
