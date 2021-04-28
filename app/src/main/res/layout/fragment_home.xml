@@ -17,30 +17,34 @@
 
     <ImageView
         android:id="@+id/ali_choix_logo"
-        android:layout_width="133dp"
+        android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/ali_choix_logo"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ali_choix_logo" />
 
     <TextView
         android:id="@+id/home_middle_text"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="8dp"
-        android:gravity="center"
+        android:text="@string/home_page_middle_text"
         android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="@string/home_page_middle_text"/>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/home_bottom_text"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="60dp"
         android:layout_marginBottom="8dp"
-        android:gravity="center"
+        android:layout_gravity="center"
+        android:textAlignment="center"
         android:textSize="20sp"
         android:text="@string/home_page_bottom_text"/>
+
+
 </LinearLayout>

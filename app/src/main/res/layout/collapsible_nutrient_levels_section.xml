@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="24dp"
+    android:layout_marginLeft="24dp"
+    android:layout_marginBottom="12dp"
+    android:layout_marginTop="0dp"
+    android:padding="16dp"
+    android:background="@color/item_collapsible_header"
+    android:id="@+id/collapsible_nutrient_levels_section"
+    >
+
+    <TextView
+        android:id="@+id/nutrient_levels_collapsible_header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/naming_nutrient_levels_collapsible_header_section"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_font_size"
+        android:textStyle="bold" />
+
+    <!--    Hide when not collapsed -->
+    <ImageView
+        android:id="@+id/nutrient_levels_down_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+        android:layout_alignParentRight="true" />
+
+    <!--    Content to hide and show -->
+    <RelativeLayout
+        android:id="@+id/nutrient_levels_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nutrient_levels_collapsible_header_title"
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            android:id="@+id/fat_quantity_indicator"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:id="@+id/naming_fat_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/naming_fat_quantity"
+            android:layout_toEndOf="@id/fat_quantity_indicator"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/fat_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/naming_saturated_fat_quantity"
+            android:layout_marginLeft="30dp"
+            android:text="Quantité modérée"/>
+
+        <ImageView
+            android:id="@+id/saturated_fat_quantity_indicator"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/fat_quantity_indicator"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/naming_saturated_fat_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/naming_saturated_fat_quantity"
+            android:layout_below="@id/naming_fat_quantity"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/saturated_fat_quantity_indicator"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/saturated_fat_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/naming_saturated_fat_quantity"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@id/fat_quantity"
+            android:layout_marginTop="20dp"
+            android:text="Quantité faible"/>
+
+        <ImageView
+            android:id="@+id/sugars_indicator"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/saturated_fat_quantity_indicator"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/naming_sugars_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/naming_saturated_fat_quantity"
+            android:layout_marginTop="20dp"
+            android:text="@string/naming_sugars_quantity"
+            android:layout_toEndOf="@id/sugars_indicator"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/sugars_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/saturated_fat_quantity"
+            android:text="Quantité modérée"
+            android:layout_toEndOf="@id/naming_saturated_fat_quantity"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp" />
+
+        <ImageView
+            android:id="@+id/salt_indicator"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/sugars_indicator"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/naming_salt_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/naming_sugars_quantity"
+            android:layout_marginTop="20dp"
+            android:text="@string/naming_salt_quantity"
+            android:layout_toEndOf="@id/salt_indicator"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/salt_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sugars_quantity"
+            android:text="Quantité modérée"
+            android:layout_toEndOf="@id/naming_saturated_fat_quantity"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/nutrient_levels_up_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>
+

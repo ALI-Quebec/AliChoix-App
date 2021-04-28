@@ -3,17 +3,27 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_home_svgrepo_com__1_"
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:id="@+id/navigation_scanned_product"
+        android:icon="@drawable/ic_food_svgrepo_com"
+        android:title="@string/title_scanned_product" />
 
     <item
-        android:id="@+id/navigation_scanned_product"
-        android:icon="@drawable/ic_baseline_food_bank_24"
-        android:title="@string/title_scanned_product" />
+        android:id="@+id/navigation_scan"
+        android:icon="@drawable/ic_barcode_svgrepo_com"
+        android:title="@string/title_scan" />
+
+    <item
+        android:id="@+id/navigation_history"
+        android:icon="@drawable/ic_baseline_history_24"
+        android:title="@string/title_history" />
+
+    <item
+            android:id="@+id/navigation_options"
+            android:icon="@drawable/ic_baseline_more_horiz_24"
+            android:title="@string/title_options" />
 
 </menu>

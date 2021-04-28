@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="24dp"
+    android:layout_marginLeft="24dp"
+    android:layout_marginBottom="12dp"
+    android:layout_marginTop="0dp"
+    android:padding="16dp"
+    android:background="@color/item_collapsible_header"
+    android:id="@+id/collapsible_diet_section"
+    >
+
+    <TextView
+        android:id="@+id/diet_collapsible_header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/naming_ingredients_analysis_collapsible_header_section"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_font_size"
+        android:textStyle="bold" />
+
+    <!--    Hide when not collapsed -->
+    <ImageView
+        android:id="@+id/diet_down_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+        android:layout_alignParentRight="true" />
+
+    <!--    Content to hide and show -->
+    <RelativeLayout
+        android:id="@+id/diet_type_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/diet_collapsible_header_title"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/naming_vegeterian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/naming_vegeterian" />
+
+        <TextView
+            android:id="@+id/is_vegeterian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/naming_vegeterian"
+            android:layout_marginLeft="30dp"
+            android:text="Oui"/>
+
+        <TextView
+            android:id="@+id/naming_vegan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/naming_vegan"
+            android:layout_below="@id/naming_vegeterian"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/is_vegan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/naming_vegeterian"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@id/is_vegeterian"
+            android:layout_marginTop="20dp"
+            android:text="Oui"/>
+
+        <TextView
+            android:id="@+id/naming_palm_oil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/naming_vegan"
+            android:layout_marginTop="20dp"
+            android:text="@string/naming_palm_oil"/>
+
+        <TextView
+            android:id="@+id/is_palm_oil_free"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/is_vegan"
+            android:text="Oui"
+            android:layout_toEndOf="@id/naming_vegeterian"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/diet_up_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>
+

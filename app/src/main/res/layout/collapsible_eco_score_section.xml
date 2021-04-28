@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="0dp"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp"
+    android:layout_marginBottom="12dp"
+    android:padding="16dp"
+    android:background="@color/item_collapsible_header"
+    android:id="@+id/collapsible_eco_score_section">
+
+    <TextView
+        android:id="@+id/eco_score_collapsible_header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/naming_eco_score_collapsible_header_section"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_font_size"
+        android:textStyle="bold" />
+
+    <!--    Hide when not collapsed -->
+    <ImageView
+        android:id="@+id/eco_score_down_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+        android:layout_alignParentRight="true" />
+
+    <!--    Content to hide and show -->
+    <ImageView
+        android:id="@+id/eco_score_up_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+        android:layout_alignParentRight="true"/>
+
+    <RelativeLayout
+        android:id="@+id/eco_score_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eco_score_collapsible_header_title">
+
+        <ImageView
+            android:id="@+id/eco_score_drawable"
+            android:layout_width="152dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:focusable="true"
+            android:gravity="center|clip_vertical"
+            android:textColor="#FFFFFF"
+            android:textSize="42sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:id="@+id/eco_score_description"
+            android:layout_width="152dp"
+            android:layout_height="100dp"
+            android:layout_toEndOf="@id/eco_score_drawable"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:textAlignment="center"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
