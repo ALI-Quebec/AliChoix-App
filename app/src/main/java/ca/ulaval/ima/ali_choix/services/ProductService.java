@@ -14,7 +14,8 @@ import ca.ulaval.ima.ali_choix.domain.product.Nutriments;
 
 public class ProductService {
 
-    public ProductService(){}
+    public ProductService() {
+    }
 
     public String getNutriScoreDescription(String grade) {
         try {

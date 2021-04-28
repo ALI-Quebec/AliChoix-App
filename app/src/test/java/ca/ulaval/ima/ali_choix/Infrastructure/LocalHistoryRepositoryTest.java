@@ -16,10 +16,10 @@ public class LocalHistoryRepositoryTest {
     ProductId THIRD_PRODUCT_ID = new ProductId("3");
     ProductId FOURTH_PRODUCT_ID = new ProductId("4");
 
-    HistoryElement FIRST_ELEMENT = new HistoryElement(FIRST_PRODUCT_ID,null,null);
-    HistoryElement SECOND_ELEMENT = new HistoryElement(SECOND_PRODUCT_ID,null,null);
-    HistoryElement THIRD_ELEMENT = new HistoryElement(THIRD_PRODUCT_ID,null,null);
-    HistoryElement FOURTH_ELEMENT = new HistoryElement(FOURTH_PRODUCT_ID,null,null);
+    HistoryElement FIRST_ELEMENT = new HistoryElement(FIRST_PRODUCT_ID, null, null);
+    HistoryElement SECOND_ELEMENT = new HistoryElement(SECOND_PRODUCT_ID, null, null);
+    HistoryElement THIRD_ELEMENT = new HistoryElement(THIRD_PRODUCT_ID, null, null);
+    HistoryElement FOURTH_ELEMENT = new HistoryElement(FOURTH_PRODUCT_ID, null, null);
 
     HistoryRepository historyRepository;
 
@@ -32,7 +32,7 @@ public class LocalHistoryRepositoryTest {
     }
 
     @Test
-    public void givenNonExitingElement_whenAddingElement_thenAddedElementIsLast(){
+    public void givenNonExitingElement_whenAddingElement_thenAddedElementIsLast() {
         assertEquals(THIRD_PRODUCT_ID, historyRepository.getLastSearchedProductId());
 
         historyRepository.addElement(FOURTH_ELEMENT);
@@ -41,7 +41,7 @@ public class LocalHistoryRepositoryTest {
     }
 
     @Test
-    public void givenExistingElement_whenAddingElement_thenMoveElementAtTheEnd(){
+    public void givenExistingElement_whenAddingElement_thenMoveElementAtTheEnd() {
         assertEquals(THIRD_PRODUCT_ID, historyRepository.getLastSearchedProductId());
 
         historyRepository.addElement(FIRST_ELEMENT);
@@ -50,7 +50,7 @@ public class LocalHistoryRepositoryTest {
     }
 
     @Test
-    public void givenExistingElement_whenAddingElement_thenHistorySizeDoesNotChange(){
+    public void givenExistingElement_whenAddingElement_thenHistorySizeDoesNotChange() {
         int originalSize = historyRepository.getHistory().size();
 
         historyRepository.addElement(FIRST_ELEMENT);
@@ -60,7 +60,7 @@ public class LocalHistoryRepositoryTest {
     }
 
     @Test
-    public void givenExistingElement_whenRemovingElement_thenElementIsRemoved(){
+    public void givenExistingElement_whenRemovingElement_thenElementIsRemoved() {
         historyRepository.removeElement(FIRST_PRODUCT_ID);
 
         assertFalse(historyRepository.getHistory().contains(FIRST_ELEMENT));

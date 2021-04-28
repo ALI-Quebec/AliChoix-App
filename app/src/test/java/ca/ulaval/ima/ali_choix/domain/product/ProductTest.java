@@ -7,7 +7,7 @@ import ca.ulaval.ima.ali_choix.domain.DomainConstant;
 
 import static org.junit.Assert.assertEquals;
 
-public class ProductTest{
+public class ProductTest {
     private Product product;
 
     @Before
@@ -102,7 +102,7 @@ public class ProductTest{
 
     @Test
     public void givenEmptyFrenchNameAndAnEnglishName_whenGettingName_thenReturnEnglishName() {
-       product.setFrenchName("");
+        product.setFrenchName("");
         product.setEnglishName("English name");
 
         assertEquals(product.getName(), "English name");
@@ -116,7 +116,7 @@ public class ProductTest{
     @Test
     public void givenEmptyNutriScoreGrade_whenGettingNutriScoreGrade_thenReturnUnknownNutriScoreGrade() {
         product.setNutriScoreGrade("");
-        
+
         assertEquals(product.getNutriScoreGrade(), NutriScoreGrade.UNKNOWN.toString());
     }
 

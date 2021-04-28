@@ -35,7 +35,8 @@ public class Product {
     }
 
     public String getCountriesImported() {
-        if (countries_imported != null && !countries_imported.trim().equals("")) return countries_imported;
+        if (countries_imported != null && !countries_imported.trim().equals(""))
+            return countries_imported;
 
         return DomainConstant.UNKNOWN;
     }
@@ -45,7 +46,8 @@ public class Product {
     }
 
     public String getQuantity() {
-        if (product_quantity != null && !product_quantity.trim().equals("")) return product_quantity;
+        if (product_quantity != null && !product_quantity.trim().equals(""))
+            return product_quantity;
 
         return DomainConstant.UNKNOWN;
     }
@@ -64,26 +66,41 @@ public class Product {
     public void setEnglishName(String product_name_en) {
         this.product_name_en = product_name_en;
     }
-    
-    public void setFrenchName(String product_name_fr) { this.product_name_fr = product_name_fr; }
+
+    public void setFrenchName(String product_name_fr) {
+        this.product_name_fr = product_name_fr;
+    }
 
     public String getNutriScoreGrade() {
-        if (nutriscore_grade != null && !nutriscore_grade.trim().equals("")) return nutriscore_grade;
+        if (nutriscore_grade != null && !nutriscore_grade.trim().equals(""))
+            return nutriscore_grade;
 
         return NutriScoreGrade.UNKNOWN.toString();
     }
 
-    public void setNutriScoreGrade(String nutriscore_grade) { this.nutriscore_grade = nutriscore_grade; }
+    public void setNutriScoreGrade(String nutriscore_grade) {
+        this.nutriscore_grade = nutriscore_grade;
+    }
 
-    public Nutriments getNutriments() { return nutriments; }
+    public Nutriments getNutriments() {
+        return nutriments;
+    }
 
-    public void setNutriments(Nutriments nutriments) {  this.nutriments = nutriments; }
+    public void setNutriments(Nutriments nutriments) {
+        this.nutriments = nutriments;
+    }
 
-    public ArrayList<String> getIngredientsAnalysisTags() { return ingredients_analysis_tags; }
+    public ArrayList<String> getIngredientsAnalysisTags() {
+        return ingredients_analysis_tags;
+    }
 
-    public void setIngredientsAnalysisTags(ArrayList<String> ingredients_analysis_tags) { this.ingredients_analysis_tags = ingredients_analysis_tags; }
+    public void setIngredientsAnalysisTags(ArrayList<String> ingredients_analysis_tags) {
+        this.ingredients_analysis_tags = ingredients_analysis_tags;
+    }
 
-    public void setEcoScoreGrade(String ecoscore_grade) { this.ecoscore_grade = ecoscore_grade; }
+    public void setEcoScoreGrade(String ecoscore_grade) {
+        this.ecoscore_grade = ecoscore_grade;
+    }
 
     public String getEcoScoreGrade() {
         if (ecoscore_grade != null && !ecoscore_grade.trim().equals("")) return ecoscore_grade;

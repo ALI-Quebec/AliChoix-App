@@ -1,7 +1,5 @@
 package ca.ulaval.ima.ali_choix.services;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,10 +7,12 @@ import java.util.HashMap;
 
 import ca.ulaval.ima.ali_choix.domain.DomainConstant;
 import ca.ulaval.ima.ali_choix.domain.exceptions.InvalidEcoScoreGradeException;
-import ca.ulaval.ima.ali_choix.domain.product.NutrientLevelsQuantity;
-import ca.ulaval.ima.ali_choix.domain.product.Nutriments;
 import ca.ulaval.ima.ali_choix.domain.exceptions.InvalidNutriScoreGradeException;
 import ca.ulaval.ima.ali_choix.domain.exceptions.InvalidNutrientLevelsQuantityException;
+import ca.ulaval.ima.ali_choix.domain.product.NutrientLevelsQuantity;
+import ca.ulaval.ima.ali_choix.domain.product.Nutriments;
+
+import static org.junit.Assert.assertEquals;
 
 public class ProductServiceTest {
     private static final String EXCEPTION_THROWING_GRADE = "this will throws an invalid grade exception";

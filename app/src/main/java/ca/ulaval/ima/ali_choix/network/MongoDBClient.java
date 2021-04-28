@@ -1,7 +1,7 @@
 package ca.ulaval.ima.ali_choix.network;
 
-import com.mongodb.MongoClientURI;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 
 import org.bson.Document;
@@ -15,7 +15,6 @@ import static com.mongodb.client.model.Filters.regex;
 import static com.mongodb.client.model.Updates.inc;
 
 public class MongoDBClient {
-    private static final MongoClientURI MONGODB_CONNECTION = new MongoClientURI(BuildConfig.MONGODB_CONNECTION);
     private static final String DATABASE_NAME = "aliChoix";
     private static final String PRODUCTS_COLLECTION_NAME = "products";
     private static final String HISTORY_COLLECTION_NAME = "history";
@@ -23,17 +22,23 @@ public class MongoDBClient {
     private static final String SCAN_COUNT_FIELD_NAME = "scanCount";
 
     public static void logProductScannedInHistory(String productID) {
-        MongoClient mongoClient = new MongoClient(MONGODB_CONNECTION);
-        MongoCollection<Document> productsCollection = mongoClient.getDatabase(DATABASE_NAME).getCollection(PRODUCTS_COLLECTION_NAME);
-        Pattern productRegex = Pattern.compile("\\d*"+productID); // Regex to account for 12 digit codes (they have 13 in the DB)
-        Document product = productsCollection.find(regex("_id", productRegex)).first();
+        try {
+            MongoClientURI mongoClientURI = new MongoClientURI(BuildConfig.MONGODB_CONNECTION);
+            MongoClient mongoClient = new MongoClient(mongoClientURI);
+            MongoCollection<Document> productsCollection = mongoClient.getDatabase(DATABASE_NAME).getCollection(PRODUCTS_COLLECTION_NAME);
+            Pattern productRegex = Pattern.compile("\\d*" + productID); // Regex to account for 12 digit codes (they have 13 in the DB)
+            Document product = productsCollection.find(regex("_id", productRegex)).first();
 
-        if (product == null) {
-            addToMissingProductsCollection(mongoClient, productID);
+            if (product == null) {
+                addToMissingProductsCollection(mongoClient, productID);
+            }
+
+            incrementProductCounter(mongoClient, productID);
+            mongoClient.close();
+        } catch (Exception e) {
+            throw new MongoDBClientException(e);
         }
 
-        incrementProductCounter(mongoClient, productID);
-        mongoClient.close();
     }
 
     private static void addToMissingProductsCollection(MongoClient mongoClient, String productID) {
