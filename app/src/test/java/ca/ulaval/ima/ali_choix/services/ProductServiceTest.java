@@ -15,6 +15,8 @@ import ca.ulaval.ima.ali_choix.domain.product.Nutriments;
 import static org.junit.Assert.assertEquals;
 
 public class ProductServiceTest {
+    private static final String EXCEPTION_THROWING_GRADE = "this will throws an invalid grade exception";
+    private static final String EXCEPTION_THROWING_NUTRIMENT = "this will throws an invalid nutriment exception";
     private ProductService productService;
     private Nutriments nutriments;
 
@@ -55,9 +57,9 @@ public class ProductServiceTest {
         assertEquals("Nutri-Score non calculé\nQualité nutritionnelle inconnue", productService.getNutriScoreDescription("unknown"));
     }
 
-    @Test(expected = InvalidNutriScoreGradeException.class)
-    public void givenWrongNutriScoreGrade_whenGettingNutriScoreDescription_thenThrowInvalidNutriScoreGradeException() {
-        productService.getNutriScoreDescription("x");
+    @Test
+    public void givenInvalidNutriScoreGradeException_whenGettingNutriScoreDescription_thenReturnNutriScoreGradeUnknownDescription() {
+        assertEquals("Nutri-Score non calculé\nQualité nutritionnelle inconnue", productService.getNutriScoreDescription(EXCEPTION_THROWING_GRADE));
     }
 
     @Test
@@ -123,9 +125,9 @@ public class ProductServiceTest {
         assertEquals("Quantité élevée", productService.getNutrientLevelsDescription("high"));
     }
 
-    @Test(expected = InvalidNutrientLevelsQuantityException.class)
-    public void givenWrongNutrientLevelsQuantity_whenGettingNutrientLevelsDescription_thenThrowInvalidNutrientLevelsQuantityException() {
-        productService.getNutrientLevelsDescription("x");
+    @Test
+    public void givenInvalidNutrientLevelsQuantityException_whenGettingNutrientLevelsDescription_thenReturnUnknownNutrientLevelsDescription() {
+        assertEquals("Quantité inconnue", productService.getNutrientLevelsDescription(EXCEPTION_THROWING_NUTRIMENT));
     }
 
     @Test
@@ -158,9 +160,9 @@ public class ProductServiceTest {
         assertEquals("Impact environnemental inconnu", productService.getEcoScoreDescription("unknown"));
     }
 
-    @Test(expected = InvalidEcoScoreGradeException.class)
-    public void givenWrongEcoScoreGrade_whenGettingEcoScoreDescription_thenThrowInvalidEcoScoreGradeExceptionException() {
-        productService.getEcoScoreDescription("x");
+    @Test
+    public void givenInvalidEcoScoreGradeException_whenGettingEcoScoreDescription_thenReturnEcoScoreGradeUnknownDescription() {
+        assertEquals("Impact environnemental inconnu", productService.getEcoScoreDescription(EXCEPTION_THROWING_GRADE));
     }
 
 }

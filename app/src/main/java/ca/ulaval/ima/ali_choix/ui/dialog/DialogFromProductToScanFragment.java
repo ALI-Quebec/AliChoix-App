@@ -28,14 +28,7 @@ public class DialogFromProductToScanFragment extends DialogFragment {
         String message = getArguments().getString(DIALOG_MESSAGE_KEY, "");
         View dialogView = inflater.inflate(R.layout.missing_product_pop_up, null);
         builder.setView(dialogView)
-                .setPositiveButton(GO_TO_SCAN_DIALOG_TEXT, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-                        Bundle bundle = new Bundle();
-                        navController.navigate(R.id.action_navigation_scanned_product_to_navigation_scan, bundle);
-                    }
-                });
+                .setPositiveButton(GO_TO_SCAN_DIALOG_TEXT, (dialog, id) -> dialog.dismiss());
 
         TextView textView = (TextView) dialogView.findViewById(R.id.product_not_found_text_view);
         textView.setText(message);
