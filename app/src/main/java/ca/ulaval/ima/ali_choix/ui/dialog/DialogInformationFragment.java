@@ -2,7 +2,6 @@ package ca.ulaval.ima.ali_choix.ui.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,12 +23,7 @@ public class DialogInformationFragment extends DialogFragment {
 
         String message = getArguments().getString(DIALOG_MESSAGE_KEY, "");
         View dialogView = inflater.inflate(R.layout.information_pop_up, null);
-        builder.setView(dialogView).setPositiveButton("ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.dismiss();
-            }
-        });
+        builder.setView(dialogView).setPositiveButton("ok", (dialog, id) -> dialog.dismiss());
 
         TextView textView = (TextView) dialogView.findViewById(R.id.information_pop_up_text_view);
         textView.setText(message);
